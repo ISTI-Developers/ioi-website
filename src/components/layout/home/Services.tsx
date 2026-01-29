@@ -12,7 +12,7 @@ export default function Services() {
   ];
 
   return (
-    <div className="w-full ">
+    <div className="w-full">
       <h2 className="text-primary text-sm uppercase">//Services</h2>
       <p className="text-white text-3xl w-full max-w-[90vw] md:max-w-[20rem] lg:max-w-140">
         By harnessing both creativity and strategy, we turn visions into actuality!

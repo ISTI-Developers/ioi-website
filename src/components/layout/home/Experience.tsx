@@ -19,8 +19,8 @@ export default function Experience() {
     <div className="w-full">
       <h2 className="text-primary lg:text-sm uppercase">//Experience</h2>
 
-      <p className="text-white font-bold text-2xl lg:text-3xl max-w-[95%] md:max-w-[20rem] lg:max-w-160 mb-5">
-        Located in the <br className="lg:hidden" /> Makati, Philippines, <br className="lg:hidden" /> our Agency is dedicated to<br className="lg:hidden" />  crafting
+      <p className="text-white font-bold text-2xl lg:text-3xl max-w-[96%] md:max-w-[22rem] lg:max-w-160 mb-5">
+        Located in the  Makati, Philippines, our Agency is dedicated to crafting
         robust and renowned brands.
       </p>
 

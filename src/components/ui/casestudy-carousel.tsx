@@ -50,20 +50,20 @@ export function CaseStudyCarousel() {
       <div className="overflow-hidden" ref={emblaRef}>
         <div className="flex">
           {slides.map((slide) => (
-            <div key={slide.id} className="relative flex-[0_0_100%] min-w-0 px-6 grid grid-cols-1 md:grid-cols-12 gap-10 items-stretch">
+            <div key={slide.id} className="relative flex-[0_0_100%] min-w-0 lg:px-6 grid grid-cols-1 md:grid-cols-12 gap-10 items-stretch">
 
-              <div className="flex flex-col h-full py-2 md:col-span-5">
+              <div className="flex flex-col h-full py-2 md:col-span-5 ">
                 <div className="space-y-1">
                   <p className="text-orange-500 text-sm font-bold uppercase tracking-widest">// {slide.category}</p>
                   <h2 className="text-white text-6xl md:text-7xl lg:text-8xl font-bold leading-[0.8] tracking-tighter">
                     Case <br /> Study:
                   </h2>
-                  <p className="text-white text-2xl font-medium pt-20">
+                  <p className="text-white text-2xl font-medium pt-20 hidden">
                     {slide.title} <br /> {slide.subtitle}
                   </p>
                 </div>
 
-                <div className="flex items-center justify-between mt-auto pb-6">
+                <div className="flex items-center justify-between mt-15 lg:mt-auto lg:pb-10">
 
                   <span className="text-white/20 text-4xl font-serif font-semibold tracking-tighter">Forbes</span>
 
@@ -80,19 +80,19 @@ export function CaseStudyCarousel() {
 
               </div>
 
-              <div className="flex flex-col space-y-8 md:col-span-7">
+              <div className="flex flex-col space-y-8  md:col-span-7">
                 <div className="relative overflow-hidden rounded-2xl">
                   <img
                     src={slide.image}
-                    className="rounded-2xl w-full object-cover aspect-[4/5] max-h-screen"
+                    className="rounded-2xl w-full object-cover aspect-4/5 max-h-screen"
                     alt={slide.title}
                   />
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 w-full ">
                   <div>
-                    <p className="text-white text-xl leading-tight">{slide.statMain}</p>
-                    <p className="text-gray-400 text-sm">{slide.statSub}</p>
+                    <p className="text-white text-xs lg:text-xl  leading-tight">{slide.statMain}</p>
+                    <p className="text-white text-xs text-md lg:text-xl leading-tight">{slide.statSub}</p>
                   </div>
 
                   <div className="relative pr-14">

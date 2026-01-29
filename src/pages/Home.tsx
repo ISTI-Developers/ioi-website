@@ -11,8 +11,8 @@ import { Clients } from "../components/layout/home/Clients";
 
 function Home() {
   return (
-    <div className="w-full overflow-x-hidden px-2  lg:px-25 flex flex-col space-y-14 lg:space-y-42">
-      
+    <div className="w-full overflow-x-hidden px-2 lg:px-25 flex flex-col space-y-12 lg:space-y-42">
+
       <div>
         <Hero />
       </div>
@@ -23,12 +23,15 @@ function Home() {
           <span className="text-sm">More +500</span>
         </div>
 
-        <div className="-mx-2 sm:-mx-8 lg:-mx-40">
+        <div className="-m-2 sm:-mx-8 lg:-mx-40">
           <HomeCarousel />
         </div>
       </div>
 
-      <Services />
+      <div>
+        <Services />
+      </div>
+      
       <Experience />
 
       <div className="-mt-20">
