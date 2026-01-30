@@ -1,7 +1,7 @@
 
 import test from "@/assets/test.jpg";
 
-export function ImageCard() {
+export function FeaturedImage() {
     return (
         <div className="h-auto w-full py-30 flex items-center justify-center lg:py-10">
             <div className="relative w-full lg:max-w-7xl 

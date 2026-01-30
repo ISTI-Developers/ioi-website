@@ -1,12 +1,11 @@
 import { CaseStudyCarousel } from "../components/ui/casestudy-carousel";
 import Services from "../components/layout/home/Services";
 import Experience from "../components/layout/home/Experience";
-import Hero from "../components/layout/home/Hero";
 import { HomeCarousel } from "../components/ui/home-carousel";
-import { ImageCard } from "../components/ui/image-card";
+import { FeaturedImage } from "../components/ui/featured-image";
 import { ContactForm } from "../components/pages/forms/contact";
 import { Clients } from "../components/layout/home/Clients";
-
+import Hero from "../components/ui/hero";
 
 
 function Home() {
@@ -14,7 +13,11 @@ function Home() {
     <div className="w-full overflow-x-hidden px-2 lg:px-25 flex flex-col space-y-12 lg:space-y-42">
 
       <div>
-        <Hero />
+        <Hero
+          isHome={true}
+          title={<>We Create Campaigns That <br className="hidden lg:block" /> Matter.</>}
+          description="Located in Makati, Philippines, our Agency is dedicated to crafting robust and renowned brands."
+        />
       </div>
 
       <div>
@@ -31,11 +34,11 @@ function Home() {
       <div>
         <Services />
       </div>
-      
+
       <Experience />
 
       <div className="-mt-20">
-        <ImageCard />
+        <FeaturedImage />
       </div>
 
       <Clients />

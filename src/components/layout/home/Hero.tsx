@@ -11,7 +11,7 @@ export default function Hero() {
         </h1>
 
         <div className="lg:col-span-4 flex lg:justify-end">
-          <p className="text-gray-400 text-md lg:text-lg  max-w-[20rem] lgtext-left">
+          <p className="text-gray-400 text-md lg:text-lg  max-w-[20rem] lg:text-left">
             Located in Makati, Philippines, our Agency is dedicated to crafting robust and renowned brands.
           </p>
         </div>

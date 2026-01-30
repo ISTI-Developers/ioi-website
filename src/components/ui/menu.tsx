@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
 
-interface FullScreenNavProps {
+interface MenuProps {
   open: boolean;
   setOpen: (open: boolean) => void;
 }
 
-export default function FullScreenNav({ open, setOpen }: FullScreenNavProps) {
+export default function Menu({ open, setOpen }: MenuProps) {
   const links = [
     { name: "Home", path: "/" },
     { name: "Projects", path: "/projects" },

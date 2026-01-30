@@ -1,7 +1,7 @@
 
 import { useState } from "react";
 import type { ReactNode } from "react";
-import FullScreenNav from "../ui/FullScreenMenu";
+import Menu from "../ui/menu";
 
 interface NavbarProps {
   children?: ReactNode;
@@ -24,7 +24,7 @@ export default function Navbar({ children }: NavbarProps) {
         </button>
       </header>
 
-      <FullScreenNav open={open} setOpen={setOpen} />
+      <Menu open={open} setOpen={setOpen} />
 
       <main className="flex-1 w-full">
         {children}
