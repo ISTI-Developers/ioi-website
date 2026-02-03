@@ -30,21 +30,8 @@ export function AppNavbar({open, setOpen }: { open: boolean; setOpen: (open:bool
                             {link.name}
                         </Link>
                     ))}
-
-
-                    {/* 
-      <Link to="/" className="nav-link" onClick={() => setOpen(false)}>Homes</Link>
-      <Link to="/projects" className="nav-link"  onClick={() => setOpen(false)}>Projects</Link>
-      <Link to="/career" className="nav-link"  onClick={() => setOpen(false)}>Careers</Link>
-      <Link to="/about" className="nav-link"  onClick={() => setOpen(false)}>About</Link>
-      <Link to="/contact" className="nav-link"  onClick={() => setOpen(false)}>Contact</Link> */}
                 </div>
-
-
-
             </div>
-
-
         </>
     );
 }

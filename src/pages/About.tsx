@@ -1,4 +1,4 @@
-import TeamMembers from "../components/layout/about-us/TeamMember";
+import TeamMembers from "../components/layout/about/TeamMember";
 import Hero from "../components/ui/hero";
 import { Clients } from "../components/layout/home/Clients";
 import Experience from "../components/layout/home/Experience";

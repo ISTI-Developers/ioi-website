@@ -26,7 +26,7 @@ export default function Hero({
                 `}>
 
                     {description && (
-                    <p className="text-gray-400 text-md lg:text-sm max-w-[20rem] items-end  ">
+                    <p className="text-gray-400 text-md lg:text-sm max-w-[20rem] ml-auto text-left">
                         {description}
                     </p>
                     )}
