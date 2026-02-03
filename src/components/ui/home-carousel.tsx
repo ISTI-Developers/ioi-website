@@ -19,11 +19,11 @@ const CAMPAIGNS: Campaign[] = [
 const SimpleCarousel: React.FC<{ activeIndex: number; onIndexChange: (idx: number) => void }> = ({ activeIndex, onIndexChange }) => {
   const n = CAMPAIGNS.length;
   
-  // 1. Add state to track if we are on a small screen
+  // 1. small screen
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 640); // 640px is Tailwind's 'sm'
+    const checkMobile = () => setIsMobile(window.innerWidth < 640); // 640px is Tailwind sm
     checkMobile();
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
