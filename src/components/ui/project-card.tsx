@@ -30,16 +30,30 @@ interface Project {
         "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1200&h=700&fit=crop",
     },
     {
-      slug: "royal-duty-free-shop-social-media-management",
+      slug: "royal-duty-free-social-media",
       date: "OCTOBER 2024",
-      title: "ROYAL DUTY FREE SHOP SOCIAL MEDIA MANAGEMENT",
+      title: "ROYAL DUTY FREE SOCIAL MEDIA",
       image:
         "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=1200&h=700&fit=crop",
     },
     {
-      slug: "kubota-smm-awareness",
+      slug: "kubota-social-media-awareness",
       date: "SEPTEMBER 2024",
-      title: "KUBOTA SMM AWARENESS",
+      title: "KUBOTA SOCIAL MEDIA AWARENESS",
+      image:
+        "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=1200&h=700&fit=crop",
+    },
+    {
+      slug: "kalbe-influencer-marketing",
+      date: "SEPTEMBER 2024",
+      title: "KALBE INFLUENCER MARKETING",
+      image:
+        "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=1200&h=700&fit=crop",
+    },
+    {
+      slug: "haier-production-launch",
+      date: "SEPTEMBER 2024",
+      title: "HAIER PRODUCTION LAUNCH",
       image:
         "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=1200&h=700&fit=crop",
     },

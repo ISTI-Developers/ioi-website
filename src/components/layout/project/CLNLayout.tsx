@@ -1,6 +1,6 @@
-import OmronImageGrid from "./OmronGrid";
+import CLNImageGrid from "./CLNGrid";
 
-export function OmronLayout() {
+export function CLNLayout() {
     return (
       <section className="min-h-screen bg-black text-white px-4 sm:px-8 lg:px-20 py-12 sm:py-16">
   
@@ -8,7 +8,7 @@ export function OmronLayout() {
         <header className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-12 sm:mb-16">
           <div className="sm:col-span-2">
             <h1 className="text-3xl sm:text-5xl lg:text-6xl font-semibold leading-tight">
-              OMRON Celebrity <br /> Endorser
+              CLN KOL <br /> Campaign
             </h1>
           </div>
   
@@ -150,7 +150,7 @@ export function OmronLayout() {
       </ol>
     </div>
   </div>
-  <OmronImageGrid />
+          <CLNImageGrid />
       </section>
     );
   }

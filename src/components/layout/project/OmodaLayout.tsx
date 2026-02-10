@@ -1,4 +1,4 @@
-import OmronImageGrid from "./OmronGrid";
+import OmodaImageGrid from "./OmodaGrid";
 
 export function OmodaLayout() {
     return (
@@ -112,7 +112,7 @@ export function OmodaLayout() {
             </ol>
           </div>
       </div>
-      <OmronImageGrid />
+      <OmodaImageGrid />
       </section>
     );
   }
