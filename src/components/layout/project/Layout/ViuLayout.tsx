@@ -1,4 +1,4 @@
-import ViuImageGrid from "./ViuGrid";
+import ViuImageGrid from "../Grid/ViuGrid";
 
 export function ViuLayout() {
     return (
@@ -77,8 +77,8 @@ export function ViuLayout() {
             <br></br>
             Interested in learn more? Want to know more opportunities? 
             <br></br>
-            Contact: <a href="tel:09171120767" className="hover:underline">09171120767</a> or{' '}
-            <a href="mailto:jquinajon@innovationone.com.ph" className="hover:underline">
+            Contact: <a href="tel:09171120767" className="hover:underline text-orange-500">09171120767</a> or{' '}
+            <a href="mailto:jquinajon@innovationone.com.ph" className="hover:underline text-orange-500">
             jquinajon@innovationone.com.ph
             </a>
         </p>

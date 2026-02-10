@@ -1,6 +1,6 @@
-import CLNImageGrid from "./CLNGrid";
+import KalbeImageGrid from "../Grid/KalbeGrid";
 
-export function CLNLayout() {
+export function KalbeLayout() {
     return (
       <section className="min-h-screen bg-black text-white px-4 sm:px-8 lg:px-20 py-12 sm:py-16">
   
@@ -8,7 +8,7 @@ export function CLNLayout() {
         <header className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-12 sm:mb-16">
           <div className="sm:col-span-2">
             <h1 className="text-3xl sm:text-5xl lg:text-6xl font-semibold leading-tight">
-              CLN KOL <br /> Campaign
+              Kalbe Inluencer <br /> Marketing
             </h1>
           </div>
   
@@ -150,7 +150,7 @@ export function CLNLayout() {
       </ol>
     </div>
   </div>
-          <CLNImageGrid />
+          <KalbeImageGrid />
       </section>
     );
   }

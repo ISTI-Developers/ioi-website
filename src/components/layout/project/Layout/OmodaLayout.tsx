@@ -1,4 +1,4 @@
-import OmodaImageGrid from "./OmodaGrid";
+import OmodaImageGrid from "../Grid/OmodaGrid";
 
 export function OmodaLayout() {
     return (

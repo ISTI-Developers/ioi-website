@@ -1,6 +1,6 @@
-import KubotaImageGrid from "./KubotaGrid";
+import HaierImageGrid from "../Grid/HaierGrid";
 
-export function KubotaLayout() {
+export function HaierLayout() {
     return (
       <section className="min-h-screen bg-black text-white px-4 sm:px-8 lg:px-20 py-12 sm:py-16">
   
@@ -8,7 +8,7 @@ export function KubotaLayout() {
         <header className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-12 sm:mb-16">
           <div className="sm:col-span-2">
             <h1 className="text-3xl sm:text-5xl lg:text-6xl font-semibold leading-tight">
-              Kubota Social <br /> Media Awareness
+              Haier Product <br /> Launch
             </h1>
           </div>
   
@@ -150,7 +150,7 @@ export function KubotaLayout() {
       </ol>
     </div>
   </div>
-          <KubotaImageGrid />
+         <HaierImageGrid />
       </section>
     );
   }

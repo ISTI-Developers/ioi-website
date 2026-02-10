@@ -1,16 +1,22 @@
 import { useParams } from "react-router-dom";
-import { OmronLayout } from "../components/layout/project/OmronLayout";
-import { OmodaLayout } from "../components/layout/project/OmodaLayout";
-import { CLNLayout } from "../components/layout/project/CLNLayout";
-import { RoyalLayout } from "../components/layout/project/RoyalLayout";
-import { KubotaLayout } from "../components/layout/project/KubotaLayout";
-import { HaierLayout } from "../components/layout/project/HaierLayout";
-import { ViuLayout } from "../components/layout/project/ViuLayout";
+import { OmronLayout } from "../components/layout/project/Layout/OmronLayout";
+import { OmodaLayout } from "../components/layout/project/Layout/OmodaLayout";
+import { CLNLayout } from "../components/layout/project/Layout/CLNLayout";
+import { RoyalLayout } from "../components/layout/project/Layout/RoyalLayout";
+import { KubotaLayout } from "../components/layout/project/Layout/KubotaLayout";
+import { HaierLayout } from "../components/layout/project/Layout/HaierLayout";
+import { ViuLayout } from "../components/layout/project/Layout/ViuLayout";
 import { Clients } from "../components/layout/home/Clients";
 import { ContactForm } from "../components/pages/forms/contact";
+import { useEffect } from "react";
 
 export default function ProjectDetails() {
   const { title } = useParams<{ title: string }>();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [title]);
+
 
   const content = (() => {
     switch (title) {

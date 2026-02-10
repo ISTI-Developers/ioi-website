@@ -1,6 +1,6 @@
-import HaierImageGrid from "./HaierGrid";
+import CLNImageGrid from "../Grid/CLNGrid";
 
-export function HaierLayout() {
+export function CLNLayout() {
     return (
       <section className="min-h-screen bg-black text-white px-4 sm:px-8 lg:px-20 py-12 sm:py-16">
   
@@ -8,7 +8,7 @@ export function HaierLayout() {
         <header className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-12 sm:mb-16">
           <div className="sm:col-span-2">
             <h1 className="text-3xl sm:text-5xl lg:text-6xl font-semibold leading-tight">
-              Haier Product <br /> Launch
+              CLN KOL <br /> Campaign
             </h1>
           </div>
   
@@ -150,7 +150,7 @@ export function HaierLayout() {
       </ol>
     </div>
   </div>
-         <HaierImageGrid />
+          <CLNImageGrid />
       </section>
     );
   }

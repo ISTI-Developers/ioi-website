@@ -1,4 +1,4 @@
-import OmronImageGrid from "./OmronGrid";
+import OmronImageGrid from "../Grid/OmronGrid";
 
 export function OmronLayout() {
     return (

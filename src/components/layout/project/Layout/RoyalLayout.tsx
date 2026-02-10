@@ -1,4 +1,4 @@
-import RoyalImageGrid from "./RoyalGrid";
+import RoyalImageGrid from "../Grid/RoyalGrid";
 
 export function RoyalLayout() {
     return (
