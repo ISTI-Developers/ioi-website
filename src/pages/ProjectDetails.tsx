@@ -4,9 +4,10 @@ import { OmodaLayout } from "../components/layout/project/OmodaLayout";
 import { CLNLayout } from "../components/layout/project/CLNLayout";
 import { RoyalLayout } from "../components/layout/project/RoyalLayout";
 import { KubotaLayout } from "../components/layout/project/KubotaLayout";
+import { HaierLayout } from "../components/layout/project/HaierLayout";
+import { ViuLayout } from "../components/layout/project/ViuLayout";
 import { Clients } from "../components/layout/home/Clients";
 import { ContactForm } from "../components/pages/forms/contact";
-import { HaierLayout } from "../components/layout/project/HaierLayout";
 
 export default function ProjectDetails() {
   const { title } = useParams<{ title: string }>();
@@ -30,6 +31,9 @@ export default function ProjectDetails() {
 
       case "haier-production-launch":
         return <HaierLayout />
+      
+      case "viu-x-innovation-one-partnership":
+        return <ViuLayout />
 
       default:
         return (
@@ -41,7 +45,7 @@ export default function ProjectDetails() {
   })();
 
   return (
-    <div className="flex flex-col min-h-screen px-4 sm:px-6 md:px-8 lg:px-12 py-2 sm:py-4 md:py-6">
+    <div className="flex flex-col min-h-screen px-4 sm:px-6 md:px-8 lg:px-12 py-2 sm:py-4 md:py-6 space-y-12 md:space-y-16 lg:space-y-20">
       {content}
       <Clients />
       <ContactForm />
