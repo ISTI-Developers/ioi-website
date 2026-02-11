@@ -1,0 +1,43 @@
+
+import axios, { AxiosError } from "axios";
+import { toast } from "sonner";
+
+const url = import.meta.env.VITE_SERVER;
+const api = axios.create({ baseURL: url, timeout: 60000});
+
+
+api.interceptors.response.use(
+    (res) => res,
+    (error: AxiosError) => {
+        toast.error(
+            error.message === "Network Error"
+            ? "Cannot connect to the server."
+            : error.message
+        );
+
+        return Promise.reject(error.message);
+    }
+);
+
+
+
+const unmg_server = import.meta.env.VITE_UN_API;
+export const unmg_api = axios.create({ baseURL: unmg_server, timeout: 60000 });
+
+unmg_api.interceptors.response.use(
+  (res) => res,
+  (error: AxiosError) => {
+    toast.error(
+      error.message === "Network Error"
+        ? "The host cannot connect to the server ..."
+        : error.message
+    );
+
+    return Promise.reject(error.message);
+  }
+);
+
+
+export default api;
+
+

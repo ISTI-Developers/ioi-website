@@ -6,7 +6,6 @@ interface SectionHeaderProps {
 }
 
 
-
 export default function SectionHeader({
     category,
     description

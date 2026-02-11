@@ -17,7 +17,7 @@ export default function Footer() {
         <footer className="w-full bg-black text-white pt-30 pb-6 lg:pt-20 lg:pb-10">
             <div className="px-2 lg:px-24">
                 <div className="lg:mb-10 flex justify-center items-center w-full">
-                    <p className="whitespace-nowrap overflow-hidden text-ellipsis text-[2rem] lg:text-[8.2rem] text-center font-bold bg-linear-to-l from-dark to-light bg-clip-text text-transparent">
+                    <p className="whitespace-nowrap text-ellipsis text-[2rem] lg:text-[8.2rem] text-center font-bold bg-linear-to-l from-dark to-light bg-clip-text text-transparent">
                         InnovationOne Inc
                     </p>
                 </div>

@@ -1,7 +1,6 @@
-import TestImage from "../../../assets/test.jpg";
 
 const photos = [
-    { id: 1, src:  TestImage, col: "md:col-span-3", row: "md:row-span-2" },
+    { id: 1, src:  "https://picsum.photos/600/600?2", col: "md:col-span-3", row: "md:row-span-2" },
     { id: 2, src: "https://picsum.photos/600/600?2", col: "md:col-span-3", row: "md:row-span-2" },
     { id: 3, src: "https://picsum.photos/600/600?3", col: "md:col-span-3", row: "md:row-span-2" },
     { id: 4, src: "https://picsum.photos/1200/700?4", col: "md:col-span-3", row: "md:row-span-2" },

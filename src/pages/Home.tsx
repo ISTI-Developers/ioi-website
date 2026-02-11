@@ -22,7 +22,7 @@ function Home() {
 
       <div>
         <div className='flex w-full items-center justify-between text-white'>
-          <h2 className='text-white text-lg sm:text-2xl lg:text-4xl'>Projects</h2>
+          <h2 className='text-white text-lg sm:text-2xl lg:text-3xl py-2'>Projects</h2>
           <span className="text-sm">More +500</span>
         </div>
 
