@@ -159,7 +159,7 @@ export function DataTable<TData, TValue>({
   });
 
   return (
-    <div>
+    <div className="w-full">
       <div className="flex items-center pb-1">
         <div className="space-y-1 w-full">
           <div className="flex justify-between gap-4 w-full">
@@ -171,11 +171,11 @@ export function DataTable<TData, TValue>({
               className="max-w-60 mr-auto"
             />
             <DropdownMenu>
-              <DropdownMenuTrigger asChild>
+              {/* <DropdownMenuTrigger asChild>
                 <Button variant="outline" className="ml-auto">
                   Columns
                 </Button>
-              </DropdownMenuTrigger>
+              </DropdownMenuTrigger> */}
               <DropdownMenuContent align="end">
                 {table
                   .getAllColumns()

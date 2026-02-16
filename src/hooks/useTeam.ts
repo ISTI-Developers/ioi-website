@@ -5,6 +5,7 @@ import api from "./api/config";
 import { toast } from "sonner";
 
 const TEAM = "team";
+const ROLES = "roles";
 
 export const useTeams = () => {
   return useQuery({
@@ -13,8 +14,16 @@ export const useTeams = () => {
     select: (data) =>
       data.map((member) => ({
         ...member,
-        file: member.file ? member.file.split(",").map((img) => img.trim()) : [],
+        file: member.file || [], 
       })),
+    staleTime: 60 * 10 * 1000,
+  });
+};
+
+export const useRoles = () => {
+  return useQuery({
+    queryKey: [ROLES],
+    queryFn: () => getAll<{ role_id: number; role_name: string }[]>(ROLES),
     staleTime: 60 * 10 * 1000,
   });
 };
@@ -32,19 +41,17 @@ export const useAddTeam = <TData = unknown>() => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: async ({ data, file }: { data: TData; file?: File[] }) => {
+    mutationFn: async ({ data, file }: { data: TData; file: File[] }) => {
       const formData = new FormData();
       formData.append("data", JSON.stringify(data));
 
-      if (file) {
-        file.forEach((f) => formData.append("file[]", f));
-      }
+      file.forEach((f) => formData.append("file[]", f));
 
       const response = await api.post(`index.php?resource=team`, formData);
       return response.data;
     },
-    onSuccess: () => {
-      queryClient.refetchQueries({ queryKey: [TEAM] });
+    onSuccess: (data) => {
+      queryClient.refetchQueries({ queryKey: ["TEAM"] });
       toast.success("Successfully added new Team Member");
     },
     onError: catchError,

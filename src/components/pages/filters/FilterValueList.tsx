@@ -2,11 +2,6 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
-import {
-  formatColumnName,
-  getActualColumnName,
-  getColumnIcon,
-} from "@/lib/columnNameUtils";
 import { ArrowLeft, Plus } from "lucide-react";
 import { useState } from "react";
 import { useLookupFunctions } from "@/hooks/useLookupFunctions";
@@ -16,6 +11,7 @@ interface FilterValueListProps {
   selectedColumn: string;
   setCurrentScreen: (type: string) => void;
   onFiltersChange?: (columnName: string, values: string[]) => void;
+  teamId: number;
 }
 
 function FilterValueList({
@@ -23,48 +19,50 @@ function FilterValueList({
   selectedColumn,
   setCurrentScreen,
   onFiltersChange,
+  teamId,
 }: FilterValueListProps) {
-  const { getDisplayNameForColumn } = useLookupFunctions();
+  // Using your centralized team lookup
+  const {
+    getTeamMemberName,
+  } = useLookupFunctions(teamId);
+
   const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
   const [amountMin, setAmountMin] = useState<string>("");
   const [amountMax, setAmountMax] = useState<string>("");
   const [dateFrom, setDateFrom] = useState<string>("");
   const [dateTo, setDateTo] = useState<string>("");
 
+  // Get unique values for this column
   const getUniqueValues = (columnName: string) => {
-    if (!data || data.length === 0) return;
+    if (!data || data.length === 0) return [];
 
-    // Map columnNames to proper attributes of the data
-    const actualColumnName = getActualColumnName(columnName);
-    const valuesID = data
-      .map((row) => row[actualColumnName])
-      .filter((value) => value != null)
-      .filter((value, index, self) => self.indexOf(value) === index)
-      .sort((a, b) => a - b);
+    // For now, if the column is "team_id", use the lookup
+    if (columnName === "team_id") {
+      const ids = data
+        .map((row) => row[columnName])
+        .filter((v) => v != null)
+        .filter((v, i, arr) => arr.indexOf(v) === i);
 
-    // Return to presentable names
-    const valuesName = valuesID.map((id) =>
-      getDisplayNameForColumn(actualColumnName, id)
-    );
-    return valuesName;
+      return ids.map((id) => getTeamMemberName(id));
+    }
+
+    // Fallback: just show raw unique values
+    return Array.from(new Set(data.map((row) => row[columnName]))).map(String);
   };
 
-  const actualColumnName = getActualColumnName(selectedColumn);
   const isAmountColumn =
-    actualColumnName && String(actualColumnName).toLowerCase().includes("amount");
+    selectedColumn && String(selectedColumn).toLowerCase().includes("amount");
   const isDateColumn =
-    actualColumnName && String(actualColumnName).toLowerCase().includes("date");
+    selectedColumn && String(selectedColumn).toLowerCase().includes("date");
 
   const handleApply = () => {
     if (!onFiltersChange) return;
 
     if (isAmountColumn) {
-      // send [min, max] (empty string allowed)
       onFiltersChange(selectedColumn, [amountMin ?? "", amountMax ?? ""]);
       setAmountMin("");
       setAmountMax("");
     } else if (isDateColumn) {
-      // require both dates for range
       onFiltersChange(selectedColumn, [dateFrom, dateTo]);
       setDateFrom("");
       setDateTo("");
@@ -82,14 +80,7 @@ function FilterValueList({
   return (
     <div className="flex flex-col gap-3">
       <div className="flex items-center justify-between opacity-60">
-        <p className="flex items-center gap-1">
-          {(() => {
-            const IconComponent = getColumnIcon(selectedColumn);
-            return <IconComponent className="h-4 w-4" />;
-          })()}
-          {formatColumnName(selectedColumn)}{" "}
-          <span className="font-semibold">is</span>
-        </p>
+        <p className="font-semibold">{selectedColumn} is</p>
         <Button
           size="sm"
           variant="ghost"
@@ -148,38 +139,34 @@ function FilterValueList({
         </div>
       ) : (
         <div className="max-h-48 overflow-y-auto space-y-1">
-          {getUniqueValues(selectedColumn)?.map((value, index) => {
-            return (
-              <div
-                key={index}
-                className="flex items-center space-x-3 py-1.5 px-2 hover:bg-gray-50 rounded-md cursor-pointer group transition-colors duration-150"
+          {getUniqueValues(selectedColumn).map((value, index) => (
+            <div
+              key={index}
+              className="flex items-center space-x-3 py-1.5 px-2 hover:bg-gray-50 rounded-md cursor-pointer transition-colors duration-150"
+            >
+              <Checkbox
+                id={`filter-${selectedColumn}-${index}`}
+                checked={selectedFilters.includes(value)}
+                onCheckedChange={(checked) => {
+                  if (checked) {
+                    setSelectedFilters((prev) =>
+                      prev.includes(value) ? prev : [...prev, value]
+                    );
+                  } else {
+                    setSelectedFilters((prev) =>
+                      prev.filter((item) => item !== value)
+                    );
+                  }
+                }}
+              />
+              <Label
+                htmlFor={`filter-${selectedColumn}-${index}`}
+                className="text-sm text-gray-700 cursor-pointer select-none"
               >
-                <Checkbox
-                  id={`filter-${selectedColumn}-${index}`}
-                  checked={selectedFilters.includes(value)}
-                  onCheckedChange={(checked) => {
-                    if (checked) {
-                      // Add to selected filters (avoid duplicates)
-                      setSelectedFilters((prev) =>
-                        prev.includes(value) ? prev : [...prev, value]
-                      );
-                    } else {
-                      // Remove from selected filters
-                      setSelectedFilters((prev) =>
-                        prev.filter((item) => item !== value)
-                      );
-                    }
-                  }}
-                />
-                <Label
-                  htmlFor={`filter-${selectedColumn}-${index}`}
-                  className="text-sm text-gray-700 cursor-pointer select-none flex-1 group-hover:text-gray-900 transition-colors duration-150"
-                >
-                  {value}
-                </Label>
-              </div>
-            );
-          })}
+                {value}
+              </Label>
+            </div>
+          ))}
         </div>
       )}
 
@@ -202,32 +189,23 @@ function FilterValueList({
             : "default"
         }
       >
-        {isAmountColumn ? (
-          amountValid ? (
-            <>
-              <Plus />
-              {`Apply range`}
-            </>
-          ) : (
-            "Enter range"
-          )
-        ) : isDateColumn ? (
-          dateValid ? (
-            <>
-              <Plus />
-              Apply range
-            </>
-          ) : (
-            "Select dates"
-          )
-        ) : selectedFilters.length === 0 ? (
-          "Select filters"
-        ) : (
-          <>
-            <Plus />
-            {`Apply ${selectedFilters.length} filter${selectedFilters.length === 1 ? "" : "s"}`}
-          </>
-        )}
+        {isAmountColumn
+          ? amountValid
+            ? <>
+                <Plus /> Apply range
+              </>
+            : "Enter range"
+          : isDateColumn
+          ? dateValid
+            ? <>
+                <Plus /> Apply range
+              </>
+            : "Select dates"
+          : selectedFilters.length === 0
+          ? "Select filters"
+          : <>
+              <Plus /> Apply {selectedFilters.length} filter{selectedFilters.length > 1 ? "s" : ""}
+            </>}
       </Button>
     </div>
   );

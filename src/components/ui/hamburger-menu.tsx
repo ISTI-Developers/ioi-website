@@ -29,7 +29,7 @@ export default function Hamburger({ active, setActive }: HamburgerProps) {
                         x: "-50%",
                         y: "-50%",
                     }}
-                    className="absolute h-8 w-0.5 bg-primary"
+                    className="absolute h-8 w-0.5 bg-orange-500"
                     variants={{
                         open: {
                             rotate: ["0deg", "0deg", "50deg"],
@@ -50,7 +50,7 @@ export default function Hamburger({ active, setActive }: HamburgerProps) {
                         x: "-50%",
                         y: "-50%",
                     }}
-                    className="absolute h-8 w-0.5 bg-primary"
+                    className="absolute h-8 w-0.5 bg-orange-500"
                     variants={{
                         open: {
                             rotate: ["0deg", "0deg", "50deg"],
@@ -71,7 +71,7 @@ export default function Hamburger({ active, setActive }: HamburgerProps) {
                         x: "-50%",
                         y: "-50%",
                     }}
-                    className="absolute h-8 w-0.5  bg-primary"
+                    className="absolute h-8 w-0.5  bg-orange-500"
                     variants={{
                         open: {
                             rotate: ["0deg", "0deg", "50deg"],
@@ -91,7 +91,7 @@ export default function Hamburger({ active, setActive }: HamburgerProps) {
                         x: "-50%",
                         y: "-50%",
                     }}
-                    className="absolute h-8 w-0.5  bg-primary"
+                    className="absolute h-8 w-0.5  bg-orange-500"
                     variants={{
                         open: {
                             rotate: ["0deg", "0deg", "-50deg"],
@@ -113,7 +113,7 @@ export default function Hamburger({ active, setActive }: HamburgerProps) {
                         x: "-50%",
                         y: "-50%",
                     }}
-                    className="absolute h-8 w-0.5  bg-primary"
+                    className="absolute h-8 w-0.5  bg-orange-500"
                     variants={{
                         open: {
                             rotate: ["0deg", "0deg", "-50deg"],

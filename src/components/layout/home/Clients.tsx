@@ -7,7 +7,7 @@ export function Clients() {
             <div className="w-full max-w-2xl text-left">
                 
                 <span className="text-orange-500 text-xs sm:text-sm tracking-widest block mb-4">
-                    /// CLIENTS & PARTNERS
+                    // CLIENTS & PARTNERS
                 </span>
 
                 <div className="leading-[1.1] lg:leading-none flex flex-col">

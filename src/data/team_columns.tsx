@@ -1,16 +1,21 @@
 import type { ColumnDef } from "@tanstack/react-table";
 import { Badge } from "@/components/ui/badge";
-import { CircleX, Edit, Trash2 } from "lucide-react";
+import { EllipsisVertical } from "lucide-react";
+import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover";
+import {
+  Command,
+  CommandGroup,
+  CommandItem,
+} from "@/components/ui/command";
+import { Button } from "@/components/ui/button";
 
 export type Team = {
   team_id?: number;
   employee_id: number;
   first_name: string;
   last_name: string;
-  middle_name?: string | null;
-  alias?: string | null;
   position: string;
-  quote?: string | null;
+  role_name?: string;
   file?: string[];
 };
 
@@ -31,42 +36,40 @@ export function useTeamColumns(
       accessorKey: "last_name",
       header: "Last Name",
     },
-    {
-      accessorKey: "middle_name",
-      header: "Middle Name",
-    },
-    {
-      accessorKey: "alias",
-      header: "Alias",
-    },
+
     {
       accessorKey: "position",
       header: "Position",
     },
+
     {
-      accessorKey: "quote",
-      header: "Quote",
+      accessorKey: "role_name",
+      header: "Role",
     },
+
+
     {
       id: "actions",
       header: "Actions",
       cell: ({ row }) => {
         const team = row.original;
+
         return (
-          <div className="flex gap-2">
-            <button
-              className="p-1 rounded bg-blue-100 text-blue-700 hover:bg-blue-200"
-              onClick={() => onEdit?.(team)}
-            >
-              <Edit className="w-4 h-4" />
-            </button>
-            <button
-              className="p-1 rounded bg-red-100 text-red-700 hover:bg-red-200"
-              onClick={() => onDelete?.(team)}
-            >
-              <Trash2 className="w-4 h-4" />
-            </button>
-          </div>
+          <Popover>
+            <PopoverTrigger asChild>
+              <Button variant="outline" size="icon">
+                <EllipsisVertical className="w-4 h-4" />
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent className="w-36 p-0">
+              <Command>
+                <CommandGroup>
+                  <CommandItem onSelect={() => onEdit?.(team)}>Edit</CommandItem>
+                  <CommandItem onSelect={() => onDelete?.(team)}>Delete</CommandItem>
+                </CommandGroup>
+              </Command>
+            </PopoverContent>
+          </Popover>
         );
       },
     },
@@ -77,11 +80,10 @@ export const def_team_columns = [
   "employee_id",
   "first_name",
   "last_name",
-  "middle_name",
-  "alias",
   "position",
+  "role",
   "quote",
-  "actions", 
+  "actions",
 ];
 
 export const team_filters = ["position", "alias"];

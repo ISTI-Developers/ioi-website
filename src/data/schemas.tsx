@@ -7,10 +7,13 @@ export const TeamSchema = z.object({
     employee_id: z.number(),
     first_name: z.string({message: "First name is required"}),
     last_name: z.string({ message: "last name is required"}),
-    middle_name: z.string().optional().nullable(),
-    alias: z.string().optional().nullable(),
     position: z.string({message: "Position is required"}),
     quote: z.string({ message: "Quote is required" }).optional().nullable(),
-    file: z.string().optional(), 
+    role_id: z.number(),
+    role_name: z.string(),
+    file: z.array(z.string()).optional(), 
+    is_mancomm: z.number(),
 
 });
+
+

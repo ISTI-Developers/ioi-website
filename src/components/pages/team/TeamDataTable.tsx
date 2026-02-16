@@ -2,6 +2,7 @@ import { useMemo } from "react";
 import { DataTable } from "@/components/ui/data-table";
 import { useColumnVisibility } from "@/hooks/useColumnVisibility";
 import type { Team } from "@/data/team_columns";
+import TeamForm from "../forms/create/TeamForm";
 import { useTeamColumns, def_team_columns, team_filters } from "@/data/team_columns";
 
 interface TeamDataTableProps {
@@ -27,6 +28,8 @@ export default function TeamDataTable({ teams }: TeamDataTableProps) {
       defaultVisibleColumns={dynamicDefaultColumns}
       filterableColumns={filterable}
       type="Team"
+      form={<TeamForm />}
+
       columnVisibility={columnVisibility}
       onColumnVisibilityChange={setColumnVisibility}
     />

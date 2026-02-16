@@ -6,12 +6,21 @@ import api from "./api/config";
 
 const SETTINGS = "settings"
 
-export const useSettings = () => {
-    return useQuery({
-        queryKey: [SETTINGS],
-        queryFn: () => getAll<Settings[]>(SETTINGS),
-        staleTime: 60 * 10 * 1000,
-    })
+export function useSettings(mock = true) {
+  return useQuery({
+    queryKey: ["settings"],
+    queryFn: async () => {
+      if (mock) {
+        return [
+          { settings_key: "max_images_per_item", value: "5" },
+          { settings_key: "currency", value: "PHP" },
+        ];
+      }
+      const res = await fetch("/ioi-api/index.php?resource=settings");
+      if (!res.ok) throw new Error("Failed to fetch settings");
+      return res.json();
+    },
+  });
 }
 
 export const useUpdateSetting = <TData extends {}>() => {
