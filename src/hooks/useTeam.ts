@@ -93,3 +93,4 @@ export const useDeleteTeam = () => {
     onError: catchError,
   });
 };
+

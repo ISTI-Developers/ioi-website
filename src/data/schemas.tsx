@@ -17,3 +17,14 @@ export const TeamSchema = z.object({
 });
 
 
+export const ClientSchema = z.object({
+    client_id: z.number().optional(),
+    client_name: z.string({message: "Client name is required"}),
+    client_description: z.string({message: "Client description is required"}),
+    file: z.array(z.string()).optional(),
+})
+
+
+
+
+

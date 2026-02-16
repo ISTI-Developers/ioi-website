@@ -86,4 +86,4 @@ export const def_team_columns = [
   "actions",
 ];
 
-export const team_filters = ["position", "alias"];
+export const team_filters = ["position"];

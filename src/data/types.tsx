@@ -1,8 +1,8 @@
 import type z from "zod";
-import type { TeamSchema } from "./schemas";
+import type { TeamSchema, ClientSchema } from "./schemas";
 
 export type TeamMember = z.infer<typeof TeamSchema>;
-
+export type ClientMember = z.infer<typeof ClientSchema>;
 
 
 
