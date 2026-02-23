@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import company_logo from "@/assets/ioi_LogoDesign_MainLogo.png"
 import Hamburger from "../../ui/hamburger-menu";
 
 interface MenuProps {
@@ -20,7 +21,7 @@ export default function Menu({ open, setOpen }: MenuProps) {
   return (
     <div className="fixed inset-0 z-50 w-full h-screen flex flex-col items-start bg-linear-to-b from-dark to-light">
       <header className="flex justify-between w-full px-2 sm:px-8 lg:px-24 py-5 items-center">
-        <h1 className="text-md font-bold uppercase text-white tracking-widest">Innovation One</h1>
+        <img src={company_logo} className="h-10 w-60" alt="Innovation One Inc Logo" />
         <Hamburger active={open} setActive={setOpen} />
       </header>
 
@@ -29,7 +30,7 @@ export default function Menu({ open, setOpen }: MenuProps) {
           <Link
             key={link.path}
             to={link.path}
-            className="text-[15vw] md:text-[80px] lg:text-[136px] leading-[0.90] hover:text-white transition-colors"
+            className="font-heading text-[15vw] md:text-[80px] lg:text-[136px] leading-[0.90] hover:text-white transition-colors"
             onClick={() => setOpen(false)}
           >
             {link.name}

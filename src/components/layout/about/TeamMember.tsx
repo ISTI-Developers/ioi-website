@@ -87,8 +87,8 @@ export default function TeamMembers() {
           </h1>
         </header>
 
-        <div className="flex items-end relative lg:gap-x-12 w-full">
-          <div className="flex items-end">
+        <div className="flex items-start relative lg:gap-x-12 w-full">
+          <div className="flex items-start">
             <span className="invisible hidden lg:block uppercase whitespace-nowrap [writing-mode:vertical-rl] rotate-180 text-[12rem] font-bold">
               Mancomm
             </span>
@@ -109,8 +109,8 @@ export default function TeamMembers() {
           </h1>
         </header>
 
-        <div className="flex items-end relative lg:gap-x-12 w-full">
-          <div className="flex items-end">
+        <div className="flex items-start relative lg:gap-x-12 w-full">
+          <div className="flex items-start">
             <span className="invisible hidden lg:block uppercase whitespace-nowrap [writing-mode:vertical-rl] rotate-180 text-[12rem] font-bold">
               Mancomm
             </span>
@@ -133,8 +133,8 @@ export default function TeamMembers() {
           </h1>
         </header>
 
-        <div className="flex items-end relative lg:gap-x-12 w-full">
-          <div className="flex items-end">
+        <div className="flex items-start relative lg:gap-x-12 w-full">
+          <div className="flex items-start">
             <span className="invisible hidden lg:block uppercase whitespace-nowrap [writing-mode:vertical-rl] rotate-180 text-[12rem] font-bold">
               Mancomm
             </span>

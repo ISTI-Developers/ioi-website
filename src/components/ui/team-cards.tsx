@@ -25,14 +25,13 @@ if (!members) return null;
             <img
               src={`${baseUrl}/${member.file}`}
               alt={`${member.first_name} ${member.last_name}`}
-              className="w-180 h-80 object-cover rounded-3xl "
+              className="w-80 h-80 object-cover rounded-3xl shrink-0"
             />
 
             <div className="flex flex-col mt-6 text-left">
-              <p className="text-sm text-gray-300 mb-8">{member.quote}</p>
+              <p className="text-sm text-gray-300 mb-8 min-h-20">{member.quote}</p>
               <h3 className="font-semibold">{member.first_name} {member.last_name}</h3>
               <p className="text-sm text-gray-400">{member.position}</p>
-              <p className="text-sm text-gray-400">{member.role_name}</p>
 
             </div>
           </article>

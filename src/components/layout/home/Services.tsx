@@ -13,8 +13,8 @@ export default function Services() {
 
   return (
     <div className="w-full">
-      <h2 className="text-primary text-sm uppercase">//Services</h2>
-      <p className="text-white text-3xl w-full font-semibold  max-w-[90vw] md:max-w-[20rem] lg:max-w-140">
+      <h2 className="text-primary text-md uppercase">//Services</h2>
+      <p className="text-white text-5xl w-full font-bold  max-w-[90vw] md:max-w-[20rem] lg:max-w-140">
         By harnessing both creativity and strategy, we turn visions into actuality!
       </p>
 
@@ -23,16 +23,16 @@ export default function Services() {
           <div className="grid grid-cols-1 md:grid-cols-2 
           lg:grid-cols-3 gap-x-12 gap-y-10
           lg:gap-y-40 max-w-7xl">
-            {services.map((item) => (
-              <div key={item.id} className="flex flex-col gap-4 w-full">
+            {services.map((item, index) => (
+              <div  className="flex flex-col gap-4 w-full">
                 <div>
-                  <span className="text-xl text-gray  ">{item.id}</span>
-                  <h2 className="text-3xl text-white mb-30 lg:mb-40">{item.category}</h2>
+                  <span className="text-2xl text-gray">/{(index + 1).toString().padStart(2, "0")}</span>
+                  <h2 className="text-5xl text-white mb-30 lg:mb-40 font-bold">{item.category}</h2>
                 </div>
 
-                <h3 className="text-xl text-white">{item.title}</h3>
+                <h3 className="text-2xl text-white font-semibold">{item.title}</h3>
 
-                <p className="text-md text-[#777777] leading-relaxed sm:w-full lg:w-68">{item.desc}</p>
+                <p className="text-xl text-[#777777] leading-relaxed sm:w-full lg:w-68 font-semibold">{item.desc}</p>
 
                 <hr className="border-t border-white/20 sm:hidden w-full" />
 

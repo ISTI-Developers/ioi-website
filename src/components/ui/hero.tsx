@@ -13,7 +13,7 @@ export default function Hero({
     return (
         <div className="w-full text-white">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-30 items-end py-10">
-                <h1 className={`font-semibold lg:col-span-8
+                <h1 className={`font-heading font-semibold lg:col-span-8
                     ${isHome ? 
                         "text-4xl lg:text-[5.5rem] lg:leading-[0.9] lg-tracking-tighter lg:justify-start" : 
                         "text-4xl lg:text-[5.5rem] justify-end lg:justify-end"}
@@ -26,7 +26,7 @@ export default function Hero({
                 `}>
 
                     {description && (
-                    <p className="text-gray-400 text-md lg:text-sm max-w-[20rem] ml-auto text-left">
+                    <p className="whitespace-pre-line text-gray-400 text-md lg:text-xl max-w-80 ml-auto text-left font-semibold">
                         {description}
                     </p>
                     )}

@@ -1,11 +1,16 @@
-@import url("https://fonts.googleapis.com/css2?family=Goldman:wght@400;700&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Goldman:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Darker+Grotesque:wght@400;500;600;700&display=swap');
+
+
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
 @custom-variant dark (&:is(.dark *));
+
 @theme {
-  --default-font-family: "Goldman", ui-serif;
+  --font-heading: "Darker Grotesque", sans-serif;
+  --font-body: "Goldman", serif;
   --font-secondary: "Nunito Sans";
   --color-primary: #ff6014;
   --color-dark: #982005;
@@ -63,6 +68,8 @@ body {
 }
 
 :root {
+  --font-heading: "Goldman", serif;
+  --font-body: "Darker Grotesque", sans-serif;
   --radius: 0.625rem;
   --background: oklch(1 0 0);
   --foreground: oklch(0.129 0.042 264.695);
@@ -133,14 +140,21 @@ body {
 
 }
 
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
-
   }
+
   body {
-    @apply bg-background text-foreground;
-
+  font-family: var(--font-body);
   }
 
+  .font-serif {
+    font-family: "Goldman", serif;
+  }
+
+  .font-sans {
+    font-family: "Darker Grotesque", sans-serif;
+  }
 }

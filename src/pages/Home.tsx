@@ -16,14 +16,14 @@ function Home() {
         <Hero
           isHome={true}
           title={<>We Create Campaigns That <br className="hidden lg:block" /> Matter.</>}
-          description="Located in Makati, Philippines, our Agency is dedicated to crafting robust and renowned brands."
+          description={`Located in Makati, Philippines,\nour Agency is dedicated to crafting\nrobust and renowned brands.`}
         />
       </div>
 
       <div>
         <div className='flex w-full items-center justify-between text-white'>
-          <h2 className='text-white text-lg sm:text-2xl lg:text-3xl py-2'>Projects</h2>
-          <span className="text-sm">More +500</span>
+          <h2 className='text-white text-lg sm:text-2xl lg:text-3xl py-2 font-bold'>Projects</h2>
+          <span className="text-md">More +500</span>
         </div>
 
         <div className="-m-2 sm:-mx-8 lg:-mx-40">

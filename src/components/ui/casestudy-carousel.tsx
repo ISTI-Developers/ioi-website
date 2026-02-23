@@ -32,6 +32,8 @@ const slides = [
     id: 3,
     category: "BRAND INNOVATION",
     pub_name: "Vogue",
+    client: "IDK",
+
     title: "GLOBAL AMBASSADOR",
     subtitle: "Innovation One 2024",
     image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085",
@@ -61,13 +63,13 @@ export function CaseStudyCarousel() {
                     Case <br /> Study:
                   </h1>
 
-                  <h2 className="hidden lg:block text-white mt-20 text-md lg:text-2xl">
+                  <h2 className="hidden lg:block text-white mt-20 text-md lg:text-4xl font-semibold">
                     {slide.client} : {slide.title} {slide.subtitle}
                   </h2>
 
-                  <p className="text-white text-2xl font-medium pt-20 hidden">
+                  {/* <p className="text-white text-9xl font-medium pt-20 hidden">
                     {slide.title} <br /> {slide.subtitle}
-                  </p>
+                  </p> */}
 
                 </div>
 
@@ -76,8 +78,19 @@ export function CaseStudyCarousel() {
                   <span className="text-white/20 text-4xl font-serif font-semibold tracking-tighter">{slide.pub_name}</span>
 
                   <div className="flex gap-2">
-                    <button onClick={scrollPrev} className="border border-white/20 px-2 py-1 hover:bg-white/10 transition text-white text-[20px] rounded-md">←</button>
-                    <button onClick={scrollNext} className="border border-white/20 px-2 py-1 hover:bg-white/10 transition text-white text-[20px] rounded-md">→</button>
+                    <button
+                      onClick={scrollPrev}
+                      className="flex items-center justify-center w-10 h-10 border border-white/20 hover:bg-white/10 transition text-white text-[20px] rounded-md"
+                    >
+                      ←
+                    </button>
+
+                    <button
+                      onClick={scrollNext}
+                      className="flex items-center justify-center w-10 h-10 border border-white/20 hover:bg-white/10 transition text-white text-[20px] rounded-md"
+                    >
+                      →
+                    </button>
 
                   </div>
 

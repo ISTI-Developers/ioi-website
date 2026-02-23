@@ -29,7 +29,7 @@ export function ContactForm() {
                         name="message"
                         placeholder="Message"
                         rows={1}
-                        className="w-full bg-transparent border-b border-gray-700 py-2 px-4 sm:text-xs lg:text-lg  text-white placeholder-text-darkgray focus:outline-none focus:border-orange-500 transition-colors resize-none mt-24"
+                        className="w-full bg-transparent border-b border-gray-700 py-2 px-4 sm:text-xs lg:text-lg  text-white placeholder-text-darkgray focus:outline-none focus:border-orange-500 transition-colors resize-none h-40"
                     />
                     
                 </div>
