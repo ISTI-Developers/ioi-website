@@ -12,3 +12,9 @@ export type ActiveFilter = {
   values: string[];
   displayLabel: string;
 };
+
+export type Settings = {
+  id: number;
+  settings_key: string;
+  value: string;
+};

@@ -15,12 +15,14 @@ function About() {
                 description="Located in Makati, Philippines, our Agency is dedicated to crafting robust and renowned brands."
             />
 
-            <FeaturedImage />
+            <div className="-mt-20 lg:-mt-32">
+                <FeaturedImage />
+            </div>
 
             <Experience />
 
             <Clients />
-          
+
             <TeamMembers />
 
             <ContactForm />

@@ -3,7 +3,7 @@ import test from "@/assets/test.jpg";
 
 export function FeaturedImage() {
     return (
-        <div className="h-auto w-full mt-25 flex items-center justify-center lg:py-10">
+        <div className="h-auto w-full flex items-center justify-center">
             <div className="relative w-full lg:max-w-7xl 
                 h-112.5 lg:h-auto 
                 lg:aspect-video 

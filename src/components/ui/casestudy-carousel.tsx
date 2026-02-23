@@ -7,8 +7,9 @@ const slides = [
   {
     id: 1,
     category: "DIGITAL PLATFORM",
-    client: "Forbes",
-    title: "OMRON: BE SURE",
+    pub_name: "Forbes",
+    client: "OMRON",
+    title: "BE SURE",
     subtitle: "Campaign 2024/2025",
     image: test,
     statMain: "70% Increase in High Quality",
@@ -18,7 +19,8 @@ const slides = [
   {
     id: 2,
     category: "INFLUENCER STRATEGY",
-    client: "Vogue",
+    pub_name: "Vogue",
+    client: "CLN",
     title: "CLN LUXURY",
     subtitle: "KOL Collaboration 2025",
     image: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee",
@@ -29,7 +31,7 @@ const slides = [
   {
     id: 3,
     category: "BRAND INNOVATION",
-    client: "TechCrunch",
+    pub_name: "Vogue",
     title: "GLOBAL AMBASSADOR",
     subtitle: "Innovation One 2024",
     image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085",
@@ -55,17 +57,23 @@ export function CaseStudyCarousel() {
               <div className="flex flex-col h-full py-2 md:col-span-5 ">
                 <div className="space-y-1">
                   <p className="text-orange-500 text-sm font-bold uppercase tracking-widest">// {slide.category}</p>
-                  <h2 className="text-white text-6xl md:text-7xl lg:text-8xl font-bold leading-[0.8] tracking-tighter">
+                  <h1 className="text-white text-6xl md:text-7xl lg:text-8xl font-bold leading-[0.8] ">
                     Case <br /> Study:
+                  </h1>
+
+                  <h2 className="hidden lg:block text-white mt-20 text-md lg:text-2xl">
+                    {slide.client} : {slide.title} {slide.subtitle}
                   </h2>
+
                   <p className="text-white text-2xl font-medium pt-20 hidden">
                     {slide.title} <br /> {slide.subtitle}
                   </p>
+
                 </div>
 
                 <div className="flex items-center justify-between mt-15 lg:mt-auto lg:pb-10">
 
-                  <span className="text-white/20 text-4xl font-serif font-semibold tracking-tighter">Forbes</span>
+                  <span className="text-white/20 text-4xl font-serif font-semibold tracking-tighter">{slide.pub_name}</span>
 
                   <div className="flex gap-2">
                     <button onClick={scrollPrev} className="border border-white/20 px-2 py-1 hover:bg-white/10 transition text-white text-[20px] rounded-md">←</button>

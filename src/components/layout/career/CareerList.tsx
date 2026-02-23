@@ -34,8 +34,12 @@ export default function CareerList() {
                     />
 
                     {jobs.map((job, index) => (
-                        <section key={index} className="text-white flex flex-col py-10 border-b border-white/50">
-                            <span className="block">{job.location} – {job.type}</span>
+                        <section key={index} className="text-white flex flex-col py-16 border-b border-white/50">
+                            <span className="block">
+                                <span className="text-primary mr-2"> {(index + 1 ).toString().padStart(2, "0")} /</span> 
+                                
+
+                                {job.location} – {job.type}</span>
 
                             <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-y-15  mt-2">
                                 <h2 className="text-5xl">{job.title}</h2>

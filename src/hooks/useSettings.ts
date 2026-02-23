@@ -7,7 +7,7 @@ import api from "./api/config";
 const SETTINGS = "settings"
 
 export function useSettings(mock = true) {
-  return useQuery({
+  return useQuery<Settings[]>({
     queryKey: ["settings"],
     queryFn: async () => {
       if (mock) {
