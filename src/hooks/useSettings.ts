@@ -16,7 +16,7 @@ export function useSettings(mock = true) {
           { settings_key: "currency", value: "PHP" },
         ];
       }
-      const res = await fetch("/ioi-api/index.php?resource=settings");
+      const res = await fetch("/ioi-website-api/index.php?resource=settings");
       if (!res.ok) throw new Error("Failed to fetch settings");
       return res.json();
     },
