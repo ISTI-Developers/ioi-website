@@ -53,21 +53,21 @@ export default function TeamMembers() {
 
   return (
     <section className="py-20 text-white overflow-x-hidden">
-      <div className="max-w-6xl px-2 sm:px-8 lg:px-24">
+      <div className="max-w-7xl px-2 sm:px-8 lg:px-24">
 
 
-        <header className="ml-auto w-full lg:w-2/3 mb-20">
-          <span className="block text-sm text-primary mb-2">
+        <header className="ml-80 w-full lg:w-2/3 mb-30">
+          <span className="block text-sm lg:text-2xl text-primary mb-2">
             // Our awesome team
           </span>
-          <h1 className="text-5xl lg:text-7xl font-bold max-w-xl">
+          <h1 className="font-heading text-5xl lg:text-8xl font-bold max-w-xl ">
             Team members
           </h1>
         </header>
 
-        <div className="flex items-end relative lg:gap-x-12 w-full">
+        <div className="flex items-end relative w-full ml-30">
           <div className="flex items-end">
-            <span className="hidden lg:block uppercase whitespace-nowrap [writing-mode:vertical-rl] rotate-180 text-[12rem] font-bold">
+            <span className="hidden lg:block uppercase whitespace-nowrap [writing-mode:vertical-rl] rotate-180 text-[12rem] lg:text-[18rem] font-bold">
               Mancomm
             </span>
           </div>

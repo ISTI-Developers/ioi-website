@@ -17,14 +17,14 @@ export default function Experience() {
 
   return (
     <div className="w-full">
-      <h2 className="text-primary lg:text-sm uppercase">//Experience</h2>
+      <h2 className="text-primary lg:text-xl uppercase">//Experience</h2>
 
-      <p className="text-white font-bold text-2xl lg:text-3xl max-w-[96%] md:max-w-[22rem] lg:max-w-160 mb-5">
+      <p className="text-white text-5xl w-full font-bold  max-w-[90vw] md:max-w-[20rem] lg:max-w-180 mb-10">
         Located in the  Makati, Philippines, our Agency is dedicated to crafting
         robust and renowned brands.
       </p>
 
-      <p className="text-lightgray text-[0.95rem] lg:text-[1rem] max-w-120">
+      <p className="text-lightgray text-[0.95rem] lg:text-[1.5rem] max-w-120">
         We are a dedicated bunch of professionals with many years of experience
         within the creative industry.
       </p>
@@ -70,11 +70,11 @@ function StatRow({
       ref={ref}
       className="flex flex-col-reverse md:flex-row md:justify-between md:items-center items-start justify-between border-b border-white/20 py-8 lg:py-10"
     >
-      <h3 className="text-primary text-sm  tracking-widest font-medium py-4">
+      <h3 className="text-primary lg:text-2xl  tracking-widest font-medium py-4 lg:mt-36">
         {stat.label}
       </h3>
 
-      <motion.span className="text-white text-[8rem] lg:text-[12rem] font-bold leading-none">
+      <motion.span className="text-white text-[12rem] lg:text-[20rem] font-bold leading-none">
         {stat.suffix}
         {displayValue}
 

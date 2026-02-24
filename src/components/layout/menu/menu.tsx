@@ -20,7 +20,7 @@ export default function Menu({ open, setOpen }: MenuProps) {
 
   return (
     <div className="fixed inset-0 z-50 w-full h-screen flex flex-col items-start bg-linear-to-b from-dark to-light">
-      <header className="flex justify-between w-full px-2 sm:px-8 lg:px-24 py-5 items-center">
+        <header className="flex justify-between w-full px-2  lg:px-24 py-5 items-center sticky top-0 z-40">
         <img src={company_logo} className="h-10 w-60" alt="Innovation One Inc Logo" />
         <Hamburger active={open} setActive={setOpen} />
       </header>

@@ -23,7 +23,9 @@ function About() {
 
             <Clients />
 
-            <TeamMembers />
+            <div className="ml-25">
+                <TeamMembers />
+            </div>
 
             <ContactForm />
         </div>

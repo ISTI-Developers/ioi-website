@@ -37,7 +37,7 @@ function Home() {
 
       <Experience />
 
-      <div className="-mt-20">
+      <div className="mt-20 mb-30">
         <FeaturedImage />
       </div>
 

@@ -86,7 +86,7 @@ interface Project {
               />
             </div>
           <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 text-xs sm:text-sm text-gray-400">
-            <p>Located in the United States, our studio is dedicated to <br></br> crafting robust and renowned brands.</p>
+            <p>Located in the Makati, our studio is dedicated to <br></br> crafting robust and renowned brands.</p>
             <p className="sm:text-right">24 Jan 2024</p>
           </div>
         </div>

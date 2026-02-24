@@ -58,12 +58,12 @@ export function CaseStudyCarousel() {
 
               <div className="flex flex-col h-full py-2 md:col-span-5 ">
                 <div className="space-y-1">
-                  <p className="text-orange-500 text-sm font-bold uppercase tracking-widest">// {slide.category}</p>
-                  <h1 className="text-white text-6xl md:text-7xl lg:text-8xl font-bold leading-[0.8] ">
+                  <p className="text-orange-500 lg:text-xl font-bold uppercase tracking-widest">// {slide.category}</p>
+                  <h1 className="font-heading text-white text-6xl md:text-7xl lg:text-[8rem] font-bold leading-[0.8] ">
                     Case <br /> Study:
                   </h1>
 
-                  <h2 className="hidden lg:block text-white mt-20 text-md lg:text-4xl font-semibold">
+                  <h2 className=" font-heading hidden lg:block text-white mt-24 text-md lg:text-[3rem]/14  ">
                     {slide.client} : {slide.title} {slide.subtitle}
                   </h2>
 

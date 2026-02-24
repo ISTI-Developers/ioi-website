@@ -15,7 +15,7 @@ export default function Hero({
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-30 items-end py-10">
                 <h1 className={`font-heading font-semibold lg:col-span-8
                     ${isHome ? 
-                        "text-4xl lg:text-[5.5rem] lg:leading-[0.9] lg-tracking-tighter lg:justify-start" : 
+                        "text-[2.4rem]/12 lg:text-[7.2rem] lg:leading-[0.9] lg-tracking-tighter lg:justify-start" : 
                         "text-4xl lg:text-[5.5rem] justify-end lg:justify-end"}
                 `}>
                     {title}

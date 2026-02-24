@@ -17,20 +17,20 @@ if (!members) return null;
   return (
 
 
-    <div className="flex flex-col">
+    <div className="flex flex-col ">
       {members?.map((member) => (
 
-        <div key={member.team_id}>
-          <article className="flex flex-col lg:flex-row gap-6 items-end">
+        <div key={member.team_id} >
+          <article className="flex flex-col lg:flex-row gap-6 items-end ">
             <img
               src={`${baseUrl}/${member.file}`}
               alt={`${member.first_name} ${member.last_name}`}
-              className="w-80 h-80 object-cover rounded-3xl shrink-0"
+              className="w-100 h-100 object-cover rounded-3xl shrink-0"
             />
 
             <div className="flex flex-col mt-6 text-left">
-              <p className="text-sm text-gray-300 mb-8 min-h-20">{member.quote}</p>
-              <h3 className="font-semibold">{member.first_name} {member.last_name}</h3>
+              <p className="lg:text-[1.2rem] text-gray-300 mb-8 min-h-20">{member.quote}</p>
+              <h3 className="lg:text-[1.6rem] font-semibold">{member.first_name} {member.last_name}</h3>
               <p className="text-sm text-gray-400">{member.position}</p>
 
             </div>
