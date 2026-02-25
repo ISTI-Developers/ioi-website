@@ -17,10 +17,10 @@ if (!members) return null;
 
 
     <div className="flex flex-col ">
-      {members?.map((member) => (
+      {members?.map((member, index) => (
 
         <div key={member.team_id} >
-          <article className="flex flex-col lg:flex-row gap-6 items-end ">
+          <article className="flex flex-col lg:flex-row gap-6 items-end mb-4 ">
             <img
               src={`${baseUrl}/${member.file}`}
               alt={`${member.first_name} ${member.last_name}`}
@@ -34,7 +34,10 @@ if (!members) return null;
 
             </div>
           </article>
+
+          {index !== members.length -1 && ((
           <div className="my-12 w-full border-b border-white/20" />
+          ))}
         </div>
       ))}
     </div>
