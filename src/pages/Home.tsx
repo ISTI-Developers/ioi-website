@@ -14,9 +14,15 @@ function Home() {
 
       <div>
         <Hero
-          isHome={true}
-          title={<>We Create Campaigns That <br className="hidden lg:block" /> Matter.</>}
-          description={`Located in Makati, Philippines,\nour Agency is dedicated to crafting\nrobust and renowned brands.`}
+          isHome
+          title={
+            <>
+              <span className="block">We Create</span>
+              <span className="block tracking-[4.5]">Campaigns&nbsp;That</span>
+              <span className="block">Matter.</span>
+            </>
+          }
+          description="Located in Makati, Philippines, our Agency is dedicated to crafting robust and renowned brands."
         />
       </div>
 

@@ -59,11 +59,11 @@ export function CaseStudyCarousel() {
               <div className="flex flex-col h-full py-2 md:col-span-5 ">
                 <div className="space-y-1">
                   <p className="text-orange-500 lg:text-xl font-bold uppercase tracking-widest">// {slide.category}</p>
-                  <h1 className="font-heading text-white text-6xl md:text-7xl lg:text-[8rem] font-bold leading-[0.8] ">
+                  <h1 className="font-body text-white text-6xl md:text-7xl lg:text-[7rem] font-bold leading-[0.8] ">
                     Case <br /> Study:
                   </h1>
 
-                  <h2 className=" font-heading hidden lg:block text-white mt-24 text-md lg:text-[3rem]/14  ">
+                  <h2 className=" font-body hidden lg:block text-white mt-24 text-md lg:text-[3rem]/14 font-semibold ">
                     {slide.client} : {slide.title} {slide.subtitle}
                   </h2>
 
@@ -73,7 +73,7 @@ export function CaseStudyCarousel() {
 
                 </div>
 
-                <div className="flex items-center justify-between mt-15 lg:mt-auto lg:pb-10">
+                <div className="flex items-center justify-between mt-15 lg:mt-auto lg:pb-16">
 
                   <span className="text-white/20 text-4xl font-serif font-semibold tracking-tighter">{slide.pub_name}</span>
 
@@ -97,27 +97,25 @@ export function CaseStudyCarousel() {
                 </div>
 
                 <div className="hidden md:block h-14"></div>
-
-
               </div>
 
               <div className="flex flex-col space-y-8  md:col-span-7">
                 <div className="relative overflow-hidden rounded-2xl">
                   <img
                     src={slide.image}
-                    className="rounded-2xl w-full object-cover aspect-4/5 max-h-screen"
+                    className="rounded-2xl lg:w-250 object-cover aspect-4/5 lg:h-200"
                     alt={slide.title}
                   />
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 w-full ">
+                <div className="grid grid-cols-2 sm:grid-cols-2 w-full ">
                   <div>
-                    <p className="text-white text-xs lg:text-xl  leading-tight">{slide.statMain}</p>
-                    <p className="text-white text-xs text-md lg:text-xl leading-tight">{slide.statSub}</p>
+                    <p className="text-white text-xs lg:text-2xl  leading-tight">{slide.statMain}</p>
+                    <p className="text-white text-xs text-md lg:text-2xl leading-tight">{slide.statSub}</p>
                   </div>
 
-                  <div className="relative pr-14">
-                    <p className="text-white/50 text-[12px] leading-relaxed ">
+                  <div className="relative pr-20">
+                    <p className="text-white/50 text-[15px] leading-relaxed ">
                       {slide.description}
                     </p>
                     <div className="absolute right-0 top-0">
@@ -126,6 +124,8 @@ export function CaseStudyCarousel() {
                       </button>
                     </div>
                   </div>
+
+
                 </div>
               </div>
 

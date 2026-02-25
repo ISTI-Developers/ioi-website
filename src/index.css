@@ -9,8 +9,8 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme {
-  --font-heading: "Darker Grotesque", sans-serif;
-  --font-body: "Goldman", serif;
+  --font-body: "Darker Grotesque", sans-serif;
+  --font-heading: "Goldman", serif;
   --font-secondary: "Nunito Sans";
   --color-primary: #ff6014;
   --color-dark: #982005;
@@ -68,8 +68,6 @@ body {
 }
 
 :root {
-  --font-heading: "Goldman", serif;
-  --font-body: "Darker Grotesque", sans-serif;
   --radius: 0.625rem;
   --background: oklch(1 0 0);
   --foreground: oklch(0.129 0.042 264.695);

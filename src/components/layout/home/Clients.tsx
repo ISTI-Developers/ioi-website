@@ -1,11 +1,16 @@
 import { LogoCarousel } from "../../ui/logo-carousel";
+import { useClients } from "@/hooks/useClients";
 
 export function Clients() {
+  const { data: clients, isLoading } = useClients();
+
+  if (isLoading) return <p>Loading clients...</p>;
+
     return (
         <div className="w-full flex flex-col items-center md:px-10">
-            
+
             <div className="w-full max-w-2xl text-left">
-                
+
                 <span className="text-orange-500 text-xs sm:text-sm tracking-widest block mb-4">
                     // CLIENTS & PARTNERS
                 </span>
@@ -25,7 +30,7 @@ export function Clients() {
             </div>
 
             <div className="mt-20 w-full">
-                <LogoCarousel />
+                <LogoCarousel clients={clients ?? []} />
             </div>
         </div>
     );

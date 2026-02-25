@@ -12,23 +12,21 @@ export default function Hero({
 }: HeroProps) { 
     return (
         <div className="w-full text-white">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-30 items-end py-10">
-                <h1 className={`font-heading font-semibold lg:col-span-8
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 lg:gap-2 items-end py-10">
+                
+                <h1 className={`font-heading font-semibold 
                     ${isHome ? 
-                        "text-[2.4rem]/12 lg:text-[7.2rem] lg:leading-[0.9] lg-tracking-tighter lg:justify-start" : 
-                        "text-4xl lg:text-[5.5rem] justify-end lg:justify-end"}
+                        "text-[2.4rem]/12 lg:text-[6rem] lg:leading-[0.9] lg-tracking-tighter" : 
+                        "text-4xl lg:text-[5rem]"}
                 `}>
                     {title}
                 </h1>
 
-                <div className={`flex items-end
-                    ${isHome ? "lg:justify-start lg:col-span-4" : "lg:justify-between lg:col-span-4"}
-                `}>
-
+                <div className={`flex ${isHome ? "lg:justify-start" : "lg:justify-end"}`}>
                     {description && (
-                    <p className="whitespace-pre-line text-gray-400 text-md lg:text-xl max-w-80 ml-auto text-left font-semibold">
-                        {description}
-                    </p>
+                        <p className="whitespace-pre-line text-gray-400 text-md lg:text-xl max-w-80 ml-auto  text-left font-semibold">
+                            {description}
+                        </p>
                     )}
                 </div>
 

@@ -53,28 +53,29 @@ export default function TeamMembers() {
 
   return (
     <section className="py-20 text-white overflow-x-hidden">
-      <div className="max-w-7xl px-2 sm:px-8 lg:px-24">
+<div className="max-w-7xl mx-auto px-6 lg:px-16">
 
 
-        <header className="ml-80 w-full lg:w-2/3 mb-30">
+        <header className="w-full lg:ml-40 mb-30">
           <span className="block text-sm lg:text-2xl text-primary mb-2">
             // Our awesome team
           </span>
-          <h1 className="font-heading text-5xl lg:text-8xl font-bold max-w-xl ">
+          <h1 className="font-heading text-5xl lg:text-7xl font-bold max-w-xl ">
             Team members
           </h1>
         </header>
 
-        <div className="flex items-end relative w-full ml-30">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] items-end w-full ">
           <div className="flex items-end">
-            <span className="hidden lg:block uppercase whitespace-nowrap [writing-mode:vertical-rl] rotate-180 text-[12rem] lg:text-[18rem] font-bold">
+            <span className="hidden lg:block uppercase whitespace-nowrap [writing-mode:vertical-rl] rotate-180 text-[12rem] lg:text-[18rem] font-bold mb-20 ">
               Mancomm
             </span>
           </div>
 
-          <div className="flex flex-col">
+          <div>
             <TeamCards members={mancommMembers} />
           </div>
+
         </div>
 
 

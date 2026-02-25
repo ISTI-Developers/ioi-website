@@ -1,4 +1,3 @@
-import { useTeams } from "@/hooks/useTeam";
 import type { TeamMember } from "@/data/types";
 import { API_BASE_URL } from "@/hooks/api/config";
 
@@ -25,7 +24,7 @@ if (!members) return null;
             <img
               src={`${baseUrl}/${member.file}`}
               alt={`${member.first_name} ${member.last_name}`}
-              className="w-100 h-100 object-cover rounded-3xl shrink-0"
+              className="w-80 h-80 object-cover rounded-3xl shrink-0"
             />
 
             <div className="flex flex-col mt-6 text-left">
@@ -35,7 +34,7 @@ if (!members) return null;
 
             </div>
           </article>
-          <div className="my-8 w-full border-b border-white/20" />
+          <div className="my-12 w-full border-b border-white/20" />
         </div>
       ))}
     </div>

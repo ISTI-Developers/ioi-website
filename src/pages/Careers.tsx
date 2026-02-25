@@ -10,7 +10,7 @@ function Careers() {
         <div className="w-full text-white overflow-x-hidden px-6 md:px-12 lg:px-24 flex flex-col space-y-20">
 
             <Hero
-                title={<>/Explore Exciting Opportunities</>}
+                title={<>/Explore&nbsp;Exciting Opportunities</>}
                 description="We believe in fostering a dynamic and collaborative work environment that empowers our team to create digital excellence."
             />
 
