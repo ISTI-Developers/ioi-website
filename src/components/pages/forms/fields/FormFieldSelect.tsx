@@ -10,7 +10,6 @@ import {
   SelectContent,
   SelectTrigger,
   SelectValue,
-  SelectItem,
 } from "@/components/ui/select";
 import { getColumnIcon } from "@/lib/columnNameUtils";
 import type { Control } from "react-hook-form";
@@ -43,9 +42,10 @@ function FormFieldSelect({
           </FormLabel>
           <Select
             onValueChange={(value) => {
-              field.onChange(Number(value));
+              const parsed = Number(value);
+              field.onChange(isNaN(parsed) ? value : parsed);
             }}
-            defaultValue={String(field.value)} // Fix: Convert to String
+            defaultValue={String(field.value)}
           >
             <FormControl>
               <SelectTrigger className="w-full">

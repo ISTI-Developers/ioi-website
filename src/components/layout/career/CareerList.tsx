@@ -1,52 +1,61 @@
 import SectionHeader from "../headers/SectionHeader";
-
-
-
+import { useCareers } from "@/hooks/useCareer";
 
 export default function CareerList() {
+    const { data, isLoading } = useCareers();
 
-    const jobData = {
-        "Business Development": [
-            { title: "Media & Insights Analyst", location: "Onsite", type: "Fulltime" },
-            { title: "Strategic Planning Executive", location: "Onsite", type: "Fulltime" },
-            { title: "Media & Insights Lead", location: "Onsite", type: "Fulltime" },
-            { title: "Sales Executive", location: "Onsite", type: "Fulltime" },
-        ],
-        "Account Management": [
-            { title: "Digital Ad Media Specialist", location: "Onsite", type: "Fulltime" },
-            { title: "Multimedia Artist", location: "Onsite", type: "Fulltime" },
-        ],
-        "Creative Team": [
-            { title: "Jr Multimedia Artist", location: "Onsite", type: "Fulltime" },
-            { title: "Jr Content Producer", location: "Onsite", type: "Fulltime" },
-        ],
-    };
+    const careers = Array.isArray(data) ? data : [];
+
+    // Group active careers by department
+    const groupedByDepartment = careers
+        .filter((c) => c.is_active)
+        .reduce((acc, career) => {
+            if (!acc[career.department]) {
+                acc[career.department] = [];
+            }
+            acc[career.department].push(career);
+            return acc;
+        }, {} as Record<string, typeof careers>);
+
+    if (isLoading) {
+        return <div className="text-white text-center py-20">Loading careers...</div>;
+    }
+
+    if (Object.keys(groupedByDepartment).length === 0) {
+        return <div className="text-white text-center py-20">No open positions at the moment.</div>;
+    }
 
     return (
         <div className="w-full">
-
-            {Object.entries(jobData).map(([department, jobs]) => (
+            {Object.entries(groupedByDepartment).map(([department, jobs]) => (
                 <div key={department} className="mb-20">
-
                     <SectionHeader
                         category={department}
-                        description="If you think you might be a good fit for our team, we’d love to hear from you!"
+                        description="If you think you might be a good fit for our team, we'd love to hear from you!"
                     />
 
                     {jobs.map((job, index) => (
-                        <section key={index} className="text-white flex flex-col py-16 border-b border-white/50">
+                        <section key={job.career_id} className="text-white flex flex-col py-16 border-b border-white/50">
                             <span className="block">
-                                <span className="text-primary mr-2"> {(index + 1 ).toString().padStart(2, "0")} /</span> 
-                                
+                                <span className="text-primary mr-2">
+                                    {(index + 1).toString().padStart(2, "0")} /
+                                </span>
+                                {job.work_setup} – {job.employment_type}
+                            </span>
 
-                                {job.location} – {job.type}</span>
-
-                            <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-y-15  mt-2">
-                                <h2 className="text-5xl">{job.title}</h2>
+                            <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-y-15 mt-2">
+                                <h2 className="text-5xl">{job.career_title}</h2>
 
                                 <div className="flex flex-row items-center lg:items-center gap-y-2 gap-x-4 lg:shrink-0">
                                     <span className="uppercase text-md tracking-widest">Explore</span>
-                                    <button className="border border-white/50 rounded-md py-2 px-3 text-lg leading-none">↗</button>
+                                        <a
+                                        href={job.application_link ?? "#"}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="border border-white/50 rounded-md py-2 px-3 text-lg leading-none"
+                                    >
+                                        ↗
+                                    </a>
                                 </div>
                             </div>
                         </section>
@@ -55,4 +64,4 @@ export default function CareerList() {
             ))}
         </div>
     );
-};
+}

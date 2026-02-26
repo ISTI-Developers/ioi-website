@@ -15,7 +15,7 @@ export function LogoCarousel({ clients }: ClientCardProps) {
   const [emblaRef, emblaApi] = useEmblaCarousel(
     {
       loop: true,
-      dragFree: false,
+      dragFree: true,
       containScroll: false,
     },
     [
@@ -41,8 +41,10 @@ export function LogoCarousel({ clients }: ClientCardProps) {
       <div className="overflow-hidden" ref={emblaRef}>
         <div className="flex">
           {clients.filter(c => c.file).map(client => (
-            <div key={client.client_id} className="flex-[0_0_auto] min-w-75 pr-8">
-              <img src={`${baseUrl}/${client.file}`} alt={client.client_name} className="w-full h-80 object-cover rounded-3xl" />
+            <div key={client.client_id} className="flex-[0_0_auto] pr-8">
+              <div className="w-[300px] h-[90px] overflow-hidden">
+              <img src={`${baseUrl}/${client.file}`} alt={client.client_name} className="w-full h-full object-contain" />
+              </div>
             </div>
           ))}
         </div>

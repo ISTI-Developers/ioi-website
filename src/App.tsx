@@ -18,7 +18,6 @@ const Projects = lazy(() => import("./pages/Project"));
 //Admin
 const Team = lazy(() => import("./pages/Admin/Team"));
 const Client = lazy(() => import("./pages/Admin/Client"));
-const Project = lazy(() => import("./pages/Admin/Project"));
 
 
 
@@ -58,7 +57,6 @@ function AppRoutes() {
               <Route path="admin" element={<Sidebar />}>
                 <Route path="team" element={<Team />} />
                 <Route path="clients" element={<Client />} />
-                <Route path="projects" element={<Project />} />
               </Route>
 
               <Route path="*" element={<>Error 404</>} />
