@@ -29,12 +29,29 @@ export const useProject = (id: number) => {
 };
 
 
-// export const useAddProject = <TData = unknown>() => {
-//     const queryClient = useQueryClient();
+export const useAddProject = <TData = unknown>() => {
+    const queryClient = useQueryClient();
 
-//     return useMutation({
-//         mutationFn: async ({ data})
+    return useMutation({
+        mutationFn: async ({ data, file}: {data: TData; file?: File}) => {
+            const formData = new FormData();
+            formData.append("data", JSON.stringify(data));
 
-//     });
-// };
+
+            if(file) {
+            formData.append("file", file);
+            }
+
+
+            const response = await api.post(`index.php?resource=projects`, formData);
+            return response.data;
+        },
+
+        onSuccess: (data) => {
+            queryClient.refetchQueries({ queryKey: [PROJECTS]});
+            toast.success("SUccessfully added new Project");
+        },
+        onError: catchError,
+    });
+};
 

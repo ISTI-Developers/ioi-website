@@ -36,6 +36,7 @@ export const useTeam = (id: number) => {
   });
 };
 
+// Multiple File Array
 
 export const useAddTeam = <TData = unknown>() => {
   const queryClient = useQueryClient();
@@ -57,6 +58,29 @@ export const useAddTeam = <TData = unknown>() => {
     onError: catchError,
   });
 };
+
+
+// Backup
+// export const useAddTeam = <TData = unknown>() => {
+//   const queryClient = useQueryClient();
+
+//   return useMutation({
+//     mutationFn: async ({ data, file }: { data: TData; file: File[] }) => {
+//       const formData = new FormData();
+//       formData.append("data", JSON.stringify(data));
+
+//       file.forEach((f) => formData.append("file[]", f));
+
+//       const response = await api.post(`index.php?resource=team`, formData);
+//       return response.data;
+//     },
+//     onSuccess: (data) => {
+//       queryClient.refetchQueries({ queryKey: ["TEAM"] });
+//       toast.success("Successfully added new Team Member");
+//     },
+//     onError: catchError,
+//   });
+// };
 
 
 export const useUpdateTeam = <TData extends {}>() => {
