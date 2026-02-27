@@ -19,3 +19,9 @@ export type Settings = {
   settings_key: string;
   value: string;
 };
+
+
+export type Tab = {
+  label: string;
+  value: string;
+}
