@@ -29,6 +29,7 @@ interface FormFieldFileProps {
   accept?: string;
   files: File[];
   setFiles: (files: File[]) => void;
+  multiple?: boolean;
 }
 
 function FormFieldFile({
@@ -39,6 +40,7 @@ function FormFieldFile({
   accept = "image/*",
   files,
   setFiles,
+  multiple = true,
 }: FormFieldFileProps) {
   const IconComponent = getColumnIcon(name);
 
@@ -71,7 +73,7 @@ function FormFieldFile({
             <div className="space-y-2">
               <div className="flex items-center gap-2">
                 <Input
-                  multiple
+                  multiple={multiple}
                   type="file"
                   accept={accept}
                   className="hidden"
@@ -103,7 +105,7 @@ function FormFieldFile({
                       setProcessedCount(allowed.length);
                     }
 
-                    const newFiles = [...files, ...allowed];
+                    const newFiles = multiple ? [...files, ...allowed] : allowed.slice(0,1);
                     setFiles(newFiles);
                     setImages(
                       newFiles.map((file) => URL.createObjectURL(file))
