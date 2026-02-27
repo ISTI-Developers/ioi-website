@@ -23,13 +23,23 @@ export type Project = {
 
 export function useProjectColumns(
     onEdit?: (row: Project) => void,
-    onDelete?: (row: Project) => void
+    onDelete?: (row: Project) => void,
+    onProjectClick?: (row: Project) => void,
 
 ): ColumnDef<Project>[] {
     return [
         {
             accessorKey: "project_name",
             header: "Project Name",
+            cell: ({row}) => (
+              <button
+                className="text-blue-500 cursor-pointer"
+                onClick={() => onProjectClick?.(row.original)}
+              >
+                {row.original.project_name}
+
+              </button>
+            )
         },
         {
             accessorKey: "project_type",
@@ -46,17 +56,21 @@ export function useProjectColumns(
         {
             accessorKey: "end_date",
             header: "End Date",
+            cell: ({row}) => {
+              const endDate = row.original.end_date;
+              return endDate ? endDate : "Ongoing";
+            },
         },
 
-        {
-            accessorKey: "company_description",
-            header: "Company Description",
-            cell: ({row}) => (
-                <div className="max-w-xs truncate" title={row.original.company_description}>
-                    {row.original.company_description}
-                </div>
-            )
-        },
+        // {
+        //     accessorKey: "company_description",
+        //     header: "Company Description",
+        //     cell: ({row}) => (
+        //         <div className="max-w-xs truncate" title={row.original.company_description}>
+        //             {row.original.company_description}
+        //         </div>
+        //     )
+        // },
         // {
         //     accessorKey: "brand_positioning",
         //     header: "Brand Positioning",
