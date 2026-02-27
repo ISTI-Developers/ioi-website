@@ -16,7 +16,7 @@ function About() {
             />
 
             <div className="-mt-20 lg:-mt-32">
-                <FeaturedImage />
+                <FeaturedImage section = "about_top" />
             </div>
 
             <Experience />

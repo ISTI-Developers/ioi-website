@@ -37,12 +37,7 @@ function Contacts () {
         </div>
 
         {/* Phone Image */}
-        <div className="bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl sm:rounded-3xl p-8 sm:p-12 mb-8 sm:mb-12 flex items-center justify-center min-h-[300px] sm:min-h-[400px]">
-          <div className="text-center">
-            <div className="text-6xl sm:text-8xl mb-4">📞</div>
-            <p className="text-white text-lg sm:text-xl">Contact Us</p>
-          </div>
-        </div>
+          <FeaturedImage section="contact_middle" />
 
         {/* Contact Form */}
         <div className="space-y-5 sm:space-y-6 mb-12 sm:mb-16">
@@ -86,10 +81,10 @@ function Contacts () {
         </div>
       </div>
 
-      {/* Bottom Section */}
+<div className='space-y-20'>
         <Clients />
-      {/* Team Photo Section */}
-      <FeaturedImage />
+      <FeaturedImage section = "contact_bottom" />
+      </div>
     </div>
   )
 }

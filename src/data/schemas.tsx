@@ -44,7 +44,13 @@ export const CareerSchema = z.object({
     description: z.string({ message: "Description is required" }),
     is_active: z.boolean().optional(),
     application_link: z.string({ message: "Application link is required" }).url({ message: "Application link must be a valid URL" }).optional(),
+});
+export const BannerSchema = z.object({
+    banner_id: z.number().optional(),
+    section: z.string({ message: "Section is required" }),
+    file: z.array(z.string()).optional(),
+    year: z.string({ message: "Year is required" }),
+    text: z.string({ message: "Text is required" }),
 })
-
 
 

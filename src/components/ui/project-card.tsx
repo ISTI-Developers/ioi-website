@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { FeaturedImage } from "./featured-image";
 
 interface Project {
     slug: string;
@@ -78,13 +79,7 @@ interface Project {
               Located in the Makati, Philippines, our Agency is dedicated to crafting robust and renowned brands.
             </p>
           </div>
-            <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden mb-3 sm:mb-4 cursor-pointer">
-              <img 
-                src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1200&h=700&fit=crop" 
-                alt="Team project" 
-                className="w-full h-auto object-cover"
-              />
-            </div>
+            <FeaturedImage section="project_top" />
           <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 text-xs sm:text-sm text-gray-400">
             <p>Located in the Makati, our studio is dedicated to <br></br> crafting robust and renowned brands.</p>
             <p className="sm:text-right">24 Jan 2024</p>

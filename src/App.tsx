@@ -4,6 +4,7 @@ import Footer from "./components/layout/Footer";
 import Sidebar from "./components/layout/Sidebar";
 import { lazy, Suspense } from "react";
 import { cn } from "./lib/utils";
+import Banner from "./pages/Admin/Banner";
 
 
 //Public
@@ -61,6 +62,7 @@ function AppRoutes() {
                 <Route path="clients" element={<Client />} />
                 <Route path="projects" element={<Project />} />
                 <Route path="careers" element={<Career />} />
+                <Route path="banners" element={<Banner />} />
               </Route>
 
               <Route path="*" element={<>Error 404</>} />

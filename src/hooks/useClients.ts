@@ -45,7 +45,7 @@ export const useAddClient = <TData = unknown>() => {
             const response = await api.post(`index.php?resource=clients`, formData);
             return response.data;
         },
-        onSuccess: (data) => {
+        onSuccess: (_data) => {
             queryClient.refetchQueries({ queryKey: ["CLIENT"]});
             toast.success("Successfully added new Client Brand");
         },

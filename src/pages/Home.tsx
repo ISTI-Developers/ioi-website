@@ -44,7 +44,7 @@ function Home() {
       <Experience />
 
       <div className="mt-20 mb-30">
-        <FeaturedImage />
+        <FeaturedImage section = "home_bottom" />
       </div>
 
       <Clients />

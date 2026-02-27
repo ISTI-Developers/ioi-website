@@ -18,7 +18,7 @@ function Careers() {
             <CareerList />
 
 
-            <FeaturedImage />
+            <FeaturedImage section = "career_bottom"/>
 
 
             <Clients/>
