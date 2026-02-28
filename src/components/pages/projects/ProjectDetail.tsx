@@ -1,57 +1,48 @@
 import { useState } from "react";
-import Gallery from "./projectdetails/Gallery";
-import Bullet from "./projectdetails/Bullet";
 import type { Project } from "@/data/project_columns";
 import type { Tab } from "@/data/types";
+import Bullet from "./projectdetails/Bullet";
 import DisplayTabsByStatus from "@/components/layout/DisplayTabs";
 
 interface ProjectDetailProps {
-    project: Project;
-    onBack: () => void;
+  project: Project;
+  onBack: () => void;
 }
 
 export default function ProjectDetail({ project, onBack }: ProjectDetailProps) {
-    const [selectedStatus, setSelectedStatus] = useState<string>("bullet");
+  const [selectedStatus, setSelectedStatus] = useState<string>("bullet");
 
-    const tabs: Tab[] = [
-        { value: "bullet", label: "Bullet" },
-        { value: "gallery", label: "Gallery" },
-    ];
+  const tabs: Tab[] = [
+    { value: "bullet", label: "Bullet" },
+    { value: "gallery", label: "Gallery" },
+  ];
 
+  return (
+    <div>
+      <button
+        className="mb-4 text-sm text-gray-600 underline"
+        onClick={onBack}
+      >
+        Back
+      </button>
 
+      <h1>{project.project_name}</h1>
 
-    return (
+      <DisplayTabsByStatus
+        selectedStatus={selectedStatus}
+        setSelectedStatus={setSelectedStatus}
+        tabs={tabs}
+      >
         <div>
-            <button
-                className="mb-4 text-sm text-gray-600 underline"
-                onClick={onBack}
-            >
-                Back
-            </button>
-
-            <h1>{project.project_name}</h1>
-
-            <DisplayTabsByStatus
-                selectedStatus={selectedStatus}
-                setSelectedStatus={setSelectedStatus}
-                tabs={tabs}
-            >
-
-                <div>
-                    {selectedStatus === "bullet" && <Bullet />}
-                    {selectedStatus === "gallery" && <Gallery />}
-
-                </div>
-
-            </DisplayTabsByStatus>
-
-
-
-
-
+          {selectedStatus === "bullet" && project.project_id && (
+            <Bullet projectId={project.project_id} />
+          )}
+          {/* Uncomment once Gallery works */}
+          {/* {selectedStatus === "gallery" && project.project_id && (
+            <Gallery projectId={project.project_id} />
+          )} */}
         </div>
-
-    );
-
+      </DisplayTabsByStatus>
+    </div>
+  );
 }
-

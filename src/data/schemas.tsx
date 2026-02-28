@@ -35,6 +35,25 @@ export const ProjectSchema = z.object({
   brand_positioning: z.string({ message: "Brand positioning is required" })
 });
 
+export const PointSchema = z.object({
+    point_id: z.number().optional(),
+    project_id: z.number(),
+    type: z.enum(["problem", "solution", "service", "result"]),
+    content: z.string({message: "Description is required"}),
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
 export const CareerSchema = z.object({
     career_id: z.number().optional(),
     career_title: z.string({ message: "Career title is required" }),
@@ -52,5 +71,7 @@ export const BannerSchema = z.object({
     year: z.string({ message: "Year is required" }),
     text: z.string({ message: "Text is required" }),
 })
+
+
 
 

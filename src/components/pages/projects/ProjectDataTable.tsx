@@ -16,8 +16,9 @@ export default function ProjectDataTable({ projects }: ProjectDataTableProps) {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
 
-  const columns = useProjectColumns(undefined, undefined, setSelectedProject);
-
+const columns = useProjectColumns(undefined, undefined, (project: Project) => {
+  setSelectedProject(project);
+});
 
   const [columnVisibility, setColumnVisibility] = useColumnVisibility(
     "team-column-visibility",
