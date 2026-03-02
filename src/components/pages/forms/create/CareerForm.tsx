@@ -69,19 +69,31 @@ function CareerForm({ onSuccess }: CareerFormProps) {
                     />
 
                     <div className="gap-4 sm:flex sm:gap-x-5">
-                        <FormFieldText
+                        <FormFieldSelect
                             control={form.control}
                             name="department"
                             label="Department *"
-                            placeholder="e.g. Engineering"
-                        />
+                            placeholder="Select Department"
+                            className="w-full sm:w-1/2"
+                            >
+                            <SelectItem value="Business Development">Business Development</SelectItem>
+                            <SelectItem value="Accounts Management">Accounts Management</SelectItem>
+                            <SelectItem value="Creative Team>">Creative Team</SelectItem>
+                        </FormFieldSelect>
+                        
 
-                        <FormFieldText
+                        <FormFieldSelect
                             control={form.control}
                             name="work_setup"
                             label="Work Setup *"
-                            placeholder="e.g. Onsite, Remote, Hybrid"
-                        />
+                            placeholder="Select work setup"
+                            className="w-full sm:w-1/2"
+                            >
+                            <SelectItem value="Onsite">Onsite</SelectItem>
+                            <SelectItem value="Online">Online</SelectItem>
+                            <SelectItem value="Hybrid">Hybrid</SelectItem>
+                        </FormFieldSelect>
+                        
                     </div>
                 </FormCardContent>
 

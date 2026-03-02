@@ -51,8 +51,8 @@ export const useAddTeam = <TData = unknown>() => {
       const response = await api.post(`index.php?resource=team`, formData);
       return response.data;
     },
-    onSuccess: (data) => {
-      queryClient.refetchQueries({ queryKey: ["TEAM"] });
+    onSuccess: (_data) => {
+      queryClient.refetchQueries({ queryKey: [TEAM] });
       toast.success("Successfully added new Team Member");
     },
     onError: catchError,

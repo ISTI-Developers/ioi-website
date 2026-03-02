@@ -82,6 +82,7 @@ function TeamForm({ onSuccess }: TeamFormProps) {
                             name="first_name"
                             label="First Name *"
                             placeholder="e.g. Juan"
+                            className="w-full sm:w-1/2"
                         />
 
                         <FormFieldText
@@ -89,6 +90,7 @@ function TeamForm({ onSuccess }: TeamFormProps) {
                             name="last_name"
                             label="Last Name *"
                             placeholder="e.g. dela Cruz"
+                            className="w-full sm:w-1/2"
                         />
                     </div>
 

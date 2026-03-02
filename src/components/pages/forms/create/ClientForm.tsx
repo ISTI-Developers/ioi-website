@@ -54,12 +54,12 @@ function ClientForm({ onSuccess }: ClientFormProps) {
     return (
    <Form {...form}>
             <form
-                id="team-form"
+                id="client-form"
                 onSubmit={form.handleSubmit(onSubmit)}
                 className="space-y-5"
                 encType="multipart/form-data"
             >
-                <FormCardContent title="Team Information">
+                <FormCardContent title="Client Information">
                     <FormFieldText
                         control={form.control}
                         name="client_name"
@@ -94,9 +94,9 @@ function ClientForm({ onSuccess }: ClientFormProps) {
                     <Button
                         className="w-full flex items-center justify-center rounded-xl p-6"
                         type="submit"
-                        form="team-form"
+                        form="client-form"
                     >
-                        ADD TEAM
+                        ADD CLIENT
                     </Button>
                 </div>
             </form>

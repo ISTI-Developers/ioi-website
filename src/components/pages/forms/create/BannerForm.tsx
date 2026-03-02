@@ -3,8 +3,10 @@ import { Form } from "@/components/ui/form";
 import FormFieldText from "../fields/FormFieldText";
 import FormFieldFile from "../fields/FormFieldFile";
 import FormCardContent from "@/components/layout/FormCardContent";
+import FormFieldSelect from "../fields/FormFieldSelect";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
+import { SelectItem } from "@/components/ui/select";
 import { useAddBanner } from "@/hooks/useBanner";
 
 interface BannerFormProps {
@@ -55,24 +57,34 @@ function BannerForm({ onSuccess }: BannerFormProps) {
                 encType="multipart/form-data"
             >
                 <FormCardContent title="Banner Information">
-                    <FormFieldText
+                    <FormFieldSelect
                         control={form.control}
                         name="section"
                         label="Section *"
-                        placeholder="e.g. contact_middle"
-                    />
+                        placeholder="Select section"
+                    >
+                        <SelectItem value="about_top">About Banner</SelectItem>
+                        <SelectItem value="career_bottom">Career Bottom</SelectItem>
+                        <SelectItem value="contact_middle">Contact Middle</SelectItem>
+                        <SelectItem value="contact_bottom">Contact Bottom</SelectItem>
+                        <SelectItem value="home_bottom">Home Bottom</SelectItem>
+                        <SelectItem value="project_top">Project Top</SelectItem>
+                    </FormFieldSelect>
+
                     <div className="gap-4 sm:flex sm:gap-x-5">
                         <FormFieldText
                             control={form.control}
                             name="year"
                             label="Year *"
                             placeholder="e.g. 2024"
+                            className="w-full sm:w-1/2"
                         />
                         <FormFieldText
                             control={form.control}
                             name="text"
                             label="Text *"
                             placeholder="e.g. innovationone.com.ph"
+                            className="w-full sm:w-1/2"
                         />
                     </div>
                 </FormCardContent>

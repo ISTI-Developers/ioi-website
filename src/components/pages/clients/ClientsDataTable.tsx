@@ -15,7 +15,7 @@ export default function ClientDataTable({ clients }: ClientDataTableProps) {
 
 
     const [columnVisibility, setColumnVisibility] = useColumnVisibility(
-        "team-column-visibility",
+        "client-column-visibility",
         columns,
         def_client_columns
     );
@@ -29,7 +29,7 @@ export default function ClientDataTable({ clients }: ClientDataTableProps) {
       data={clients}
       defaultVisibleColumns={dynamicDefaultColumns}
       filterableColumns={filterable}
-      type="Team"
+      type="Client"
       form={<ClientForm />}
 
       columnVisibility={columnVisibility}

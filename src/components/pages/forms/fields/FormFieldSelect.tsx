@@ -20,6 +20,7 @@ interface FormFieldSelectProps {
   label: string;
   placeholder?: string;
   children?: React.ReactNode;
+  className?: string;
 }
 
 function FormFieldSelect({
@@ -28,6 +29,7 @@ function FormFieldSelect({
   label,
   placeholder,
   children,
+  className,
 }: FormFieldSelectProps) {
   const IconComponent = getColumnIcon(name);
   return (
@@ -35,7 +37,7 @@ function FormFieldSelect({
       control={control}
       name={name}
       render={({ field }) => (
-        <FormItem>
+        <FormItem className={className}>
           <FormLabel>
             <IconComponent className="h-4 w-4" />
             {label}
