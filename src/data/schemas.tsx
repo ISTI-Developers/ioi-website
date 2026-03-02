@@ -25,14 +25,15 @@ export const ClientSchema = z.object({
 });
 
 export const ProjectSchema = z.object({
-  project_id: z.number().optional(),
-  project_name: z.string({ message: "Project name is required" }),
-  project_type: z.string({ message: "Campaign type is required" }),
-  start_date: z.string({ message: "Start date is required" }),
-  end_date: z.string().optional(), 
-  project_category: z.string({ message: "Project category is required" }),
-  company_description: z.string({ message: "Company description is required" }),
-  brand_positioning: z.string({ message: "Brand positioning is required" })
+    project_id: z.number().optional(),
+    project_name: z.string({ message: "Project name is required" }),
+    project_type: z.string({ message: "Campaign type is required" }),
+    start_date: z.string({ message: "Start date is required" }),
+    end_date: z.string().optional(), 
+    project_category: z.string({ message: "Project category is required" }),
+    company_description: z.string({ message: "Company description is required" }),
+    brand_positioning: z.string({ message: "Brand positioning is required" }),
+    file: z.array(z.string()).optional(),
 });
 
 export const PointSchema = z.object({
@@ -40,6 +41,17 @@ export const PointSchema = z.object({
     project_id: z.number(),
     type: z.enum(["problem", "solution", "service", "result"]),
     content: z.string({message: "Description is required"}),
+});
+
+
+export const GallerySchema = z.object({
+    gallery_id: z.number().optional(),
+    project_id: z.number(),
+    layout_group: z.number(),
+    columns: z.number(),
+    display_order: z.number(),
+    file: z.string().optional(), 
+
 });
 
 

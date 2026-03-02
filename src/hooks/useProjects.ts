@@ -35,14 +35,13 @@ export const useAddProject = <TData = unknown>() => {
     const queryClient = useQueryClient();
 
     return useMutation({
-        mutationFn: async ({ data, file}: {data: TData; file?: File}) => {
+        mutationFn: async ({ data, file}: {data: TData; file: File[]}) => {
             const formData = new FormData();
             formData.append("data", JSON.stringify(data));
 
 
-            if(file) {
-            formData.append("file", file);
-            }
+               file.forEach((f) => formData.append("file[]", f));
+
 
 
             const response = await api.post(`index.php?resource=projects`, formData);

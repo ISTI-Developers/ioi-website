@@ -1,5 +1,5 @@
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { getAll, getOne, catchError } from "./controller";
+import {  useMutation, useQueryClient } from "@tanstack/react-query";
+import { catchError } from "./controller";
 import type { Point } from "@/data/types";
 import api from "./api/config";
 import { toast } from "sonner";

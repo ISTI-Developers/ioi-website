@@ -2,6 +2,7 @@ import { useState } from "react";
 import type { Project } from "@/data/project_columns";
 import type { Tab } from "@/data/types";
 import Bullet from "./projectdetails/Bullet";
+import Gallery from "./projectdetails/Gallery";
 import DisplayTabsByStatus from "@/components/layout/DisplayTabs";
 
 interface ProjectDetailProps {
@@ -37,10 +38,10 @@ export default function ProjectDetail({ project, onBack }: ProjectDetailProps) {
           {selectedStatus === "bullet" && project.project_id && (
             <Bullet projectId={project.project_id} />
           )}
-          {/* Uncomment once Gallery works */}
-          {/* {selectedStatus === "gallery" && project.project_id && (
+
+          {selectedStatus === "gallery" && project.project_id && (
             <Gallery projectId={project.project_id} />
-          )} */}
+          )}
         </div>
       </DisplayTabsByStatus>
     </div>

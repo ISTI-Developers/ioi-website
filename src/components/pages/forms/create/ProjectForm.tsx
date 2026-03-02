@@ -31,26 +31,25 @@ function ProjectForm({ onSuccess }: ProjectFormProps) {
     });
 
 
-    const [file, setFile] = useState<File>();
+    const [files, setFiles] = useState<File[]>([]);
 
 
     const { mutate } = useAddProject();
 
     const onSubmit = (values: any) => {
         console.log(values);
-        const { file: _ignored, ...rest } = values;
-
+        const { file, ...rest } = values;
 
         mutate(
             {
                 data: rest,
-                file: file,
+                file: files,
             },
 
             {
                 onSuccess: () => {
                     form.reset();
-                    setFile(undefined);
+                    setFiles([]);
                     onSuccess?.();
 
                 },
@@ -128,8 +127,8 @@ function ProjectForm({ onSuccess }: ProjectFormProps) {
                         name="file"
                         label="Images"
                         placeholder="Upload images"
-                        files={file ? [file] : []}
-                        setFiles={(files) =>setFile(files[0])}
+                        files={files}
+                        setFiles={setFiles}
                     />
 
                 </FormCardContent>
