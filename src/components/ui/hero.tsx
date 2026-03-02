@@ -24,7 +24,7 @@ export default function Hero({
 
                 <div className={`flex ${isHome ? "lg:justify-start" : "lg:justify-end"}`}>
                     {description && (
-                        <p className="whitespace-pre-line text-gray-400 text-md lg:text-xl max-w-80 ml-auto  text-left font-semibold">
+                        <p className="whitespace-pre-line text-gray-400 text-md lg:text-lg max-w-80 ml-auto  text-left font-semibold">
                             {description}
                         </p>
                     )}
