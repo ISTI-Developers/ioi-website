@@ -1,7 +1,5 @@
-import test from "@/assets/test.jpg";
 import useEmblaCarousel from "embla-carousel-react";
-
-
+import { useImageUrl } from "../../api/useImageUrl";
 
 const slides = [
   {
@@ -11,36 +9,36 @@ const slides = [
     client: "OMRON",
     title: "BE SURE",
     subtitle: "Campaign 2024/2025",
-    image: test,
+    image: "omron.webp",
     statMain: "70% Increase in High Quality",
     statSub: "Inquiries & Advocacy Engagements",
     description: "Significant Behavior Change: from 80% Reactive Counterfeit Concerns to 70% Proactive Awareness & Inquiries.",
   },
-  {
-    id: 2,
-    category: "INFLUENCER STRATEGY",
-    pub_name: "Vogue",
-    client: "CLN",
-    title: "CLN LUXURY",
-    subtitle: "KOL Collaboration 2025",
-    image: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee",
-    statMain: "1.2M Total Reach",
-    statSub: "Across Premium Lifestyle Segments",
-    description: "Successfully transitioned the brand from traditional retail to a digital-first luxury positioning through strategic KOL seeding.",
-  },
-  {
-    id: 3,
-    category: "BRAND INNOVATION",
-    pub_name: "Vogue",
-    client: "IDK",
+  // {
+  //   id: 2,
+  //   category: "INFLUENCER STRATEGY",
+  //   pub_name: "Vogue",
+  //   client: "CLN",
+  //   title: "CLN LUXURY",
+  //   subtitle: "KOL Collaboration 2025",
+  //   image: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee",
+  //   statMain: "1.2M Total Reach",
+  //   statSub: "Across Premium Lifestyle Segments",
+  //   description: "Successfully transitioned the brand from traditional retail to a digital-first luxury positioning through strategic KOL seeding.",
+  // },
+  // {
+  //   id: 3,
+  //   category: "BRAND INNOVATION",
+  //   pub_name: "Vogue",
+  //   client: "IDK",
 
-    title: "GLOBAL AMBASSADOR",
-    subtitle: "Innovation One 2024",
-    image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085",
-    statMain: "45% Brand Recall",
-    statSub: "In Competitive Healthcare Markets",
-    description: "The global launch focused on trust and precision, resulting in a massive spike in direct-to-consumer digital engagement.",
-  }
+  //   title: "GLOBAL AMBASSADOR",
+  //   subtitle: "Innovation One 2024",
+  //   image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085",
+  //   statMain: "45% Brand Recall",
+  //   statSub: "In Competitive Healthcare Markets",
+  //   description: "The global launch focused on trust and precision, resulting in a massive spike in direct-to-consumer digital engagement.",
+  // }
 ];
 
 export function CaseStudyCarousel() {
@@ -54,7 +52,17 @@ export function CaseStudyCarousel() {
       <div className="overflow-hidden" ref={emblaRef}>
         <div className="flex">
           {slides.map((slide) => (
-            <div key={slide.id} className="relative flex-[0_0_100%] min-w-0 lg:px-6 grid grid-cols-1 md:grid-cols-12 gap-10 items-stretch">
+           <Slide key={slide.id} slide={slide} />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Slide({ slide }: { slide: typeof slides[0] }) {
+  const { url } = useImageUrl(slide.image);
+  return <div key={slide.id} className="relative flex-[0_0_100%] min-w-0 lg:px-6 grid grid-cols-1 md:grid-cols-12 gap-10 items-stretch">
 
               <div className="flex flex-col h-full py-2 md:col-span-5 ">
                 <div className="space-y-1">
@@ -77,7 +85,7 @@ export function CaseStudyCarousel() {
 
                   <span className="text-white/20 text-4xl font-serif font-semibold tracking-tighter">{slide.pub_name}</span>
 
-                  <div className="flex gap-2">
+                  {/* <div className="flex gap-2">
                     <button
                       onClick={scrollPrev}
                       className="flex items-center justify-center w-10 h-10 border border-white/20 hover:bg-white/10 transition text-white text-[20px] rounded-md"
@@ -92,7 +100,7 @@ export function CaseStudyCarousel() {
                       →
                     </button>
 
-                  </div>
+                  </div> */}
 
                 </div>
 
@@ -102,7 +110,7 @@ export function CaseStudyCarousel() {
               <div className="flex flex-col space-y-8  md:col-span-7">
                 <div className="relative overflow-hidden rounded-2xl">
                   <img
-                    src={slide.image}
+                    src={url || slide.image}
                     className="rounded-2xl lg:w-250 object-cover aspect-4/5 lg:h-200"
                     alt={slide.title}
                   />
@@ -130,12 +138,5 @@ export function CaseStudyCarousel() {
               </div>
 
             </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
 }
-
-
 
