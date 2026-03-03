@@ -9,6 +9,10 @@ import { useState } from "react";
 import { SelectItem } from "@/components/ui/select";
 import { useAddBanner } from "@/hooks/useBanner";
 
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { app, storage } from "@/firebase";
+console.log("Firebase App:", app);
+console.log("Firebase Storage:", storage);
 interface BannerFormProps {
     onSuccess?: () => void;
 }
@@ -19,7 +23,6 @@ function BannerForm({ onSuccess }: BannerFormProps) {
             section: "",
             year: "",
             text: "",
-            file: undefined,
         },
         mode: "all",
     });
@@ -27,25 +30,37 @@ function BannerForm({ onSuccess }: BannerFormProps) {
     const [files, setFiles] = useState<File[]>([]);
     const { mutate, isPending } = useAddBanner();
 
-    const onSubmit = (values: any) => {
-        const { file, ...rest } = values;
-
-        mutate(
-            {
-                data: rest,
-                file: files,
-            },
-            {
-                onSuccess: () => {
-                    form.reset();
-                    setFiles([]);
-                    onSuccess?.();
-                },
-                onError: (err) => {
-                    console.error("Failed to save banner", err);
-                },
+    const onSubmit = async (values: any) => {
+        try {
+            if (!files.length) {
+                alert("Please upload an image");
+                return;
             }
-        );
+
+            const storage = getStorage(app);
+            const file = files[0];
+            const imageRef = ref(storage, `banners/${Date.now()}_${file.name}`);
+
+            await uploadBytes(imageRef, file);
+            const downloadURL = await getDownloadURL(imageRef);
+            console.log("Firebase Download URL:", downloadURL);
+
+            mutate(
+                {
+                    ...values,
+                    file: downloadURL,
+                },
+                {
+                    onSuccess: () => {
+                        form.reset();
+                        setFiles([]);
+                        onSuccess?.();
+                    },
+                }
+            );
+        } catch (error) {
+            console.error("Upload failed:", error);
+        }
     };
 
     return (
@@ -54,7 +69,6 @@ function BannerForm({ onSuccess }: BannerFormProps) {
                 id="banner-form"
                 onSubmit={form.handleSubmit(onSubmit)}
                 className="space-y-5"
-                encType="multipart/form-data"
             >
                 <FormCardContent title="Banner Information">
                     <FormFieldSelect
@@ -104,7 +118,6 @@ function BannerForm({ onSuccess }: BannerFormProps) {
                     <Button
                         className="w-full flex items-center justify-center rounded-xl p-6"
                         type="submit"
-                        form="banner-form"
                         disabled={isPending}
                     >
                         {isPending ? "SAVING..." : "ADD BANNER"}
