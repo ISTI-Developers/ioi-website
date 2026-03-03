@@ -4,7 +4,7 @@ import { Form } from "@/components/ui/form";
 import FormCardContent from "@/components/layout/FormCardContent";
 import FormFieldTextArea from "../../forms/fields/FormFieldTextArea";
 
-import { useProject } from "@/hooks/useProjects";
+import { useProjectByPoints } from "@/hooks/useProjects";
 import { useAddPoint } from "@/hooks/useProjectPoint";
 
 interface BulletProps {
@@ -25,7 +25,7 @@ export default function Bullet({ projectId, onSuccess }: BulletProps) {
 
     const { mutate } = useAddPoint();
 
-    const { data: project, isLoading } = useProject(projectId);
+    const { data: project, isLoading } = useProjectByPoints(projectId);
 
     if (isLoading) return <p>Loading bullets...</p>;
 
@@ -38,12 +38,12 @@ export default function Bullet({ projectId, onSuccess }: BulletProps) {
 
 
 
-    const onSubmit = (type: "problem" | "solution" | "service" | "result") => {   
+    const onSubmit = (type: "problem" | "solution" | "service" | "result") => {
         const value = form.getValues(type);
 
         if (!value?.trim()) return;
 
-             console.log(value);
+        console.log(value);
         mutate(
             {
                 project_id: projectId,
@@ -98,7 +98,7 @@ export default function Bullet({ projectId, onSuccess }: BulletProps) {
                     </FormCardContent>
 
                     <FormCardContent title="Solutions">
-                        <ul>
+                        <ul className="list-disc list-inside">
                             {solutions.map((p) => (
                                 <li key={p.point_id}>{p.content}</li>
                             ))}
@@ -110,18 +110,26 @@ export default function Bullet({ projectId, onSuccess }: BulletProps) {
                             placeholder="Add a solution..."
                         />
                         <div className="flex justify-end">
-                            <Button type="submit" size="sm" className="mt-2">Add</Button>
+                            <Button
+                                type="submit"
+                                size="sm"
+                                className="mt-2"
+                                onClick={() => onSubmit("solution")}
+
+                            >
+                                Add
+                            </Button>                        
                         </div>
                     </FormCardContent>
                 </div>
 
                 <div className="flex gap-2">
                     <FormCardContent title="Service Rendered">
-                        <ul>
+                        <ol className=" list-decimal list-inside">
                             {services.map((p) => (
                                 <li key={p.point_id}>{p.content}</li>
                             ))}
-                        </ul>
+                        </ol>
                         <FormFieldTextArea
                             control={form.control}
                             name="service"
@@ -129,12 +137,19 @@ export default function Bullet({ projectId, onSuccess }: BulletProps) {
                             placeholder="Add a service..."
                         />
                         <div className="flex justify-end">
-                            <Button type="submit" size="sm" className="mt-2">Add</Button>
-                        </div>
+                            <Button
+                                type="submit"
+                                size="sm"
+                                className="mt-2"
+                                onClick={() => onSubmit("service")}
+
+                            >
+                                Add
+                            </Button>                        </div>
                     </FormCardContent>
 
                     <FormCardContent title="Key Results">
-                        <ul>
+                        <ul className="list-decimal list-inside">
                             {results.map((p) => (
                                 <li key={p.point_id}>{p.content}</li>
                             ))}
@@ -146,8 +161,15 @@ export default function Bullet({ projectId, onSuccess }: BulletProps) {
                             placeholder="Add a result..."
                         />
                         <div className="flex justify-end">
-                            <Button type="submit" size="sm" className="mt-2">Add</Button>
-                        </div>
+                            <Button
+                                type="submit"
+                                size="sm"
+                                className="mt-2"
+                                onClick={() => onSubmit("result")}
+
+                            >
+                                Add
+                            </Button>                        </div>
                     </FormCardContent>
                 </div>
             </div>
