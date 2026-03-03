@@ -17,7 +17,7 @@ export default function Hero({
                 <h1 className={`font-heading font-semibold 
                     ${isHome ? 
                         "text-[2.4rem]/12 lg:text-[6rem] lg:leading-[0.9] lg-tracking-tighter" : 
-                        "text-4xl lg:text-[5rem]"}
+                        "text-4xl lg:text-[6rem]"}
                 `}>
                     {title}
                 </h1>
