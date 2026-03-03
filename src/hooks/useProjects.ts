@@ -21,8 +21,16 @@ export const useProjects = () => {
     });
 };
 
+export const useProjectById = (id: number) => {
+    return useQuery({
+        queryKey: [PROJECTS, id],
+        queryFn: () => getOne<Project>(PROJECTS, id),
+        staleTime: 60 * 10 * 1000
+    });
+};
 
-export const useProject = (id: number) => {
+
+export const useProjectByPoints = (id: number) => {
     return useQuery({
         queryKey: [PROJECTS, id],
         queryFn: () => getOne<ProjectWithPoints>(PROJECTS, id),
