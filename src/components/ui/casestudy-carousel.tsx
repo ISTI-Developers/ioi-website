@@ -1,5 +1,5 @@
 import useEmblaCarousel from "embla-carousel-react";
-import { useImageUrl } from "../../api/useImageUrl";
+import { useImageUrl } from "../../hooks/useImageUrl";
 
 const slides = [
   {
