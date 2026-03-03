@@ -52,7 +52,7 @@ function AppRoutes() {
               {/* Public */}
               <Route path="/" element={<Home />} />
               <Route path="projects" element={<Projects />} />
-              <Route path="projects/:title" element={<ProjectDetails />} />
+              <Route path="projects/:id" element={<ProjectDetails />} />
               <Route path="careers" element={<Careers />} />
               <Route path="about" element={<About />} />
               <Route path="contact" element={<Contact />} />
