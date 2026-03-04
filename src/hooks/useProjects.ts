@@ -43,24 +43,19 @@ export const useAddProject = <TData = unknown>() => {
     const queryClient = useQueryClient();
 
     return useMutation({
-        mutationFn: async ({ data, file}: {data: TData; file: File[]}) => {
-            const formData = new FormData();
-            formData.append("data", JSON.stringify(data));
+        mutationFn: async (data: TData) => {    
+            const res = await api.post(`index.php?resource=${PROJECTS}`, data, {
+                headers: {"Content-Type": "application/json"},
+            });
 
-
-               file.forEach((f) => formData.append("file[]", f));
-
-
-
-            const response = await api.post(`index.php?resource=projects`, formData);
-            return response.data;
+            return res.data;
         },
 
-        onSuccess: (data) => {
+        onSuccess: () => {
             queryClient.refetchQueries({ queryKey: [PROJECTS]});
             toast.success("SUccessfully added new Project");
         },
-        onError: catchError,
+        onError: catchError
     });
 };
 
