@@ -32,11 +32,7 @@ export default function FirebaseMedia ({
     }
 
     if(error || !url) {
-        return (
-            <div className={`bg-gray-100 text-gray-400 flex items-center justify-center rounded-lg ${className}`}>
-                Media  not available
-            </div>
-        );
+        return <Skeleton className={cn("w-full h-100 rounded-lg", className)} />;
     }
 
     const ext = path.split(".").pop()?.toLowerCase();
