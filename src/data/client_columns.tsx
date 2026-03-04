@@ -1,12 +1,7 @@
 import type { ColumnDef } from "@tanstack/react-table";
-import { Badge } from "@/components/ui/badge";
 import { EllipsisVertical } from "lucide-react";
 import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover";
-import {
-    Command,
-    CommandGroup,
-    CommandItem,
-} from "@/components/ui/command";
+import { Command,CommandGroup,CommandItem } from "@/components/ui/command";
 import { Button } from "@/components/ui/button";
 
 
@@ -14,7 +9,7 @@ export type Client = {
     client_id?: number;
     client_name: string;
     client_description: string;
-    file?: string[];
+    file?: string;
 };
 
 

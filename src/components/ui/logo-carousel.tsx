@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import AutoScroll from "embla-carousel-auto-scroll";
 import type { ClientMember } from "@/data/types";
-import { API_BASE_URL } from "@/hooks/api/config";
 
 interface ClientCardProps {
   clients: ClientMember[] | undefined;
@@ -10,7 +9,7 @@ interface ClientCardProps {
 
 export function LogoCarousel({ clients }: ClientCardProps) {
   console.log(clients);
-  const baseUrl = API_BASE_URL;
+
 
   const [emblaRef, emblaApi] = useEmblaCarousel(
     {
@@ -40,10 +39,10 @@ export function LogoCarousel({ clients }: ClientCardProps) {
     <div className="relative w-screen left-1/2 -ml-[50vw] overflow-hidden">
       <div className="overflow-hidden" ref={emblaRef}>
         <div className="flex">
-          {clients.filter(c => c.file).map(client => (
+          {clients.filter((c): c is ClientMember & { file: string } => !!c.file).map(client => (
             <div key={client.client_id} className="flex-[0_0_auto] pr-8">
               <div className="w-[300px] h-[90px] overflow-hidden">
-              <img src={`${baseUrl}/${client.file}`} alt={client.client_name} className="w-full h-full object-contain" />
+              <img src={client.file} alt={client.client_name} className="w-full h-full object-contain" />
               </div>
             </div>
           ))}

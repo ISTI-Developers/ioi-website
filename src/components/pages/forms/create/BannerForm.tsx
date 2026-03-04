@@ -7,57 +7,70 @@ import FormFieldSelect from "../fields/FormFieldSelect";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { SelectItem } from "@/components/ui/select";
-import { useAddBanner } from "@/hooks/useBanner";
-
+import { useAddBanner, useUpdateBanner, type Banner } from "@/hooks/useBanner";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { app, storage } from "@/firebase";
-console.log("Firebase App:", app);
-console.log("Firebase Storage:", storage);
+import { app } from "@/firebase";
+
 interface BannerFormProps {
     onSuccess?: () => void;
+    existing?: Banner;
 }
 
-function BannerForm({ onSuccess }: BannerFormProps) {
+function BannerForm({ onSuccess, existing }: BannerFormProps) {
+    const isEdit = !!existing;
+
     const form = useForm({
         defaultValues: {
-            section: "",
-            year: "",
-            text: "",
+            section: existing?.section ?? "",
+            year: existing?.year ?? "",
+            text: existing?.text ?? "",
         },
         mode: "all",
     });
 
     const [files, setFiles] = useState<File[]>([]);
-    const { mutate, isPending } = useAddBanner();
+    const { mutate: addBanner, isPending: isAdding } = useAddBanner();
+    const { mutate: updateBanner, isPending: isUpdating } = useUpdateBanner();
+    const isPending = isAdding || isUpdating;
 
     const onSubmit = async (values: any) => {
         try {
-            if (!files.length) {
+            let fileURL = existing?.file ?? "";
+
+            if (files.length > 0) {
+                const storage = getStorage(app);
+                const file = files[0];
+                const imageRef = ref(storage, `banners/${Date.now()}_${file.name}`);
+                await uploadBytes(imageRef, file);
+                fileURL = await getDownloadURL(imageRef);
+                console.log("Firebase Download URL:", fileURL);
+            } else if (!isEdit) {
                 alert("Please upload an image");
                 return;
             }
 
-            const storage = getStorage(app);
-            const file = files[0];
-            const imageRef = ref(storage, `banners/${Date.now()}_${file.name}`);
+            const payload = { ...values, file: fileURL };
 
-            await uploadBytes(imageRef, file);
-            const downloadURL = await getDownloadURL(imageRef);
-            console.log("Firebase Download URL:", downloadURL);
-
-            mutate(
-                {
-                    ...values,
-                    file: downloadURL,
-                },
-                {
+            if (isEdit) {
+                updateBanner(
+                    { id: existing!.banner_id!, data: payload },
+                    {
+                        onSuccess: () => {
+                            form.reset();
+                            setFiles([]);
+                            onSuccess?.();
+                        },
+                    }
+                );
+            } else {
+                addBanner(payload, {
                     onSuccess: () => {
                         form.reset();
                         setFiles([]);
                         onSuccess?.();
                     },
-                }
-            );
+                });
+            }
         } catch (error) {
             console.error("Upload failed:", error);
         }
@@ -120,7 +133,7 @@ function BannerForm({ onSuccess }: BannerFormProps) {
                         type="submit"
                         disabled={isPending}
                     >
-                        {isPending ? "SAVING..." : "ADD BANNER"}
+                        {isPending ? "SAVING..." : isEdit ? "UPDATE BANNER" : "ADD BANNER"}
                     </Button>
                 </div>
             </form>

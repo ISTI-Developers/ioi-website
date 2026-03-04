@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import {ContactForm} from '../components/pages/forms/contact'
 import { Clients } from '../components/layout/home/Clients'
 import { FeaturedImage } from '../components/ui/featured-image'
 
@@ -23,7 +24,7 @@ function Contacts () {
   }
 
   return (
-    <div className="min-h-screen bg-black text-white py-6 sm:py-12 px-4 sm:px-6 lg:px-8">
+    <div className="w-full text-white overflow-x-hidden px-6 md:px-12 lg:px-24 flex flex-col space-y-20">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="mb-6 sm:mb-8">
@@ -37,47 +38,10 @@ function Contacts () {
         </div>
 
         {/* Phone Image */}
+        <div className='space-y-20'>
           <FeaturedImage section="contact_middle" />
-
         {/* Contact Form */}
-        <div className="space-y-5 sm:space-y-6 mb-12 sm:mb-16">
-          <div>
-            <input
-              type="text"
-              name="name"
-              placeholder="Your Name"
-              value={formData.name}
-              onChange={handleChange}
-              className="w-full bg-transparent border-b border-gray-700 py-2 sm:py-3 px-0 text-base sm:text-lg text-white placeholder-gray-500 focus:outline-none focus:border-orange-500 transition-colors"
-            />
-          </div>
-
-          <div>
-            <input
-              type="email"
-              name="email"
-              placeholder="Enter your email"
-              value={formData.email}
-              onChange={handleChange}
-              className="w-full bg-transparent border-b border-gray-700 py-2 sm:py-3 px-0 text-base sm:text-lg text-white placeholder-gray-500 focus:outline-none focus:border-orange-500 transition-colors"/>
-          </div>
-
-          <div>
-            <textarea
-              name="message"
-              placeholder="Message"
-              value={formData.message}
-              onChange={handleChange}
-              rows={4}
-              className="w-full bg-transparent border-b border-gray-700 py-2 sm:py-3 px-0 text-base sm:text-lg text-white placeholder-gray-500 focus:outline-none focus:border-orange-500 transition-colors resize-none"/>
-          </div>
-
-          <button
-            onClick={handleSubmit}
-            className="w-full bg-orange-600 hover:bg-orange-700 text-white font-semibold py-3 sm:py-4 px-4 sm:px-6 rounded-lg transition-colors flex items-center justify-between group text-sm sm:text-base">
-            <span>Send Message</span>
-            <span className="text-lg sm:text-xl group-hover:translate-x-1 transition-transform">||||</span>
-          </button>
+        <ContactForm />
         </div>
       </div>
 
