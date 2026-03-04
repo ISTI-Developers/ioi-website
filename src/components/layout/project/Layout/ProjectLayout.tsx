@@ -1,16 +1,13 @@
 import { useParams } from "react-router-dom";
 import Hero from "@/components/ui/hero";
-import { API_BASE_URL } from "@/hooks/api/config";
-import type { BlockType, Gallery } from "@/data/types";
 import { groupGalleryItems, getGridCols, getGridHeights } from "@/lib/galleryUtils";
 import { useGallery } from "@/hooks/useGallery";
 import FirebaseMedia from "@/components/ui/firebase-media";
-import { useProjectById, useProjectByPoints } from "@/hooks/useProjects";
+import { useProjectByPoints } from "@/hooks/useProjects";
 import { formatMonthYear } from "@/lib/dateUtils";
 
 
 export default function ProjectLayout() {
-    const baseUrl = API_BASE_URL;
     const { id } = useParams<{ id: string }>();
     const projectId = Number(id);
 

@@ -28,21 +28,16 @@ interface Block {
 
 export default function Gallery({ projectId, onSuccess }: GalleryProps) {
 
-  const { data, isLoading, error } = useGallery(projectId);
   const [blocks, setBlocks] = useState<Block[]>([]);
 
   const { mutate } = useAddGallery();
 
 
-
-  if (isLoading) return <p>Loading gallery...</p>;
-  if (error) return <p>Error loading gallery</p>;
-
   const { data: galleryData, isLoading: loadingGallery } = useGallery(projectId);
-    if (loadingGallery) return <p>Loading gallery...</p>;
-    const galleryArray = Array.isArray(galleryData?.gallery) ? galleryData.gallery : [];
+  if (loadingGallery) return <p>Loading gallery...</p>;
+  const galleryArray = Array.isArray(galleryData?.gallery) ? galleryData.gallery : [];
 
-    const groupedGallery = groupGalleryItems(galleryArray);
+  const groupedGallery = groupGalleryItems(galleryArray);
 
   const addBlock = (type: BlockType) => {
     const existingGroups = galleryArray.map(item => item.layout_group || 0);

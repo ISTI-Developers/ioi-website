@@ -4,11 +4,19 @@ import Experience from "../components/layout/home/Experience";
 import { HomeCarousel } from "../components/ui/home-carousel";
 import { FeaturedImage } from "../components/ui/featured-image";
 import { ContactForm } from "../components/pages/forms/contact";
+import { useProjects } from "@/hooks/useProjects";
 import { Clients } from "../components/layout/home/Clients";
 import Hero from "../components/ui/hero";
 
 
 function Home() {
+
+  const { data: projects, isLoading } = useProjects();
+
+  if (isLoading) return <p>Loading...</p>;
+  if (!projects) return <p>Project not found</p>;
+
+
   return (
     <div className="w-full overflow-x-hidden px-2 lg:px-25 flex flex-col space-y-12 lg:space-y-42">
 
@@ -32,8 +40,9 @@ function Home() {
           <span className="text-md">More +500</span>
         </div>
 
-        <div className="-m-2 sm:-mx-8 lg:-mx-40">
-          <HomeCarousel />
+
+        <div className="-ml-50">
+          <HomeCarousel projects={projects} />
         </div>
       </div>
 
@@ -44,7 +53,7 @@ function Home() {
       <Experience />
 
       <div className="mt-20 mb-30">
-        <FeaturedImage section = "home_bottom" />
+        <FeaturedImage section="home_bottom" />
       </div>
 
       <Clients />
