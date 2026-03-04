@@ -3,15 +3,17 @@
 interface SectionHeaderProps {
     category: string | React.ReactNode;
     description?: string;
+    noMarginTop?: boolean;
 }
 
 
 export default function SectionHeader({
     category,
-    description
+    description,
+    noMarginTop = false
 }: SectionHeaderProps) {
     return (
-        <section className=" text-lightgray  mt-20">
+        <section className={`text-lightgray ${noMarginTop ? "":  "mt-50"}`}>
             <div className="flex flex-col ">
                 <h2 className="text-2xl md:text-2xl lg:text-3xl font-bold tracking-tight">
                    Current Openings | {category}
