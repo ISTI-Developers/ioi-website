@@ -8,6 +8,7 @@ import FormFieldDate from "../fields/FormFieldDate";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { useAddProject } from "@/hooks/useProjects";
+import { useUploadImage } from "@/hooks/useImageUrl";
 
 
 interface ProjectFormProps {
@@ -30,35 +31,41 @@ function ProjectForm({ onSuccess }: ProjectFormProps) {
         mode: "all",
     });
 
-
     const [files, setFiles] = useState<File[]>([]);
-
+    const { upload, loading } = useUploadImage();
 
     const { mutate } = useAddProject();
 
-    const onSubmit = (values: any) => {
-        console.log(values);
-        const { file, ...rest } = values;
+    const onSubmit = async (values: any) => {
+        try {
 
-        mutate(
-            {
-                data: rest,
-                file: files,
-            },
+            const imageUrl = await upload(files[0], "projects")
+            console.log(values);
+            const { file, ...rest } = values;
 
-            {
-                onSuccess: () => {
-                    form.reset();
-                    setFiles([]);
-                    onSuccess?.();
-
+            mutate(
+                {
+                    ...rest,
+                    file: imageUrl,
                 },
-                onError: (err) => {
-                    console.error("Failed to save project", err);
-                },
-            }
 
-        );
+                {
+                    onSuccess: () => {
+                        form.reset();
+                        setFiles([]);
+                        onSuccess?.();
+
+                    },
+                    onError: (err) => {
+                        console.error("Failed to save project", err);
+                    },
+                }
+
+            );
+        } catch (err) {
+            console.error("Submit failed", err);
+
+        }
     };
 
     return (
@@ -133,7 +140,7 @@ function ProjectForm({ onSuccess }: ProjectFormProps) {
 
                 </FormCardContent>
 
-                 <div className="pb-6">
+                <div className="pb-6">
                     <Button
                         className="w-full flex items-center justify-center rounded-xl p-6"
                         type="submit"
