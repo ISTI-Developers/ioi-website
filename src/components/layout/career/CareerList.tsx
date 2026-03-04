@@ -6,7 +6,6 @@ export default function CareerList() {
 
     const careers = Array.isArray(data) ? data : [];
 
-    // Group active careers by department
     const groupedByDepartment = careers
         .filter((c) => c.is_active)
         .reduce((acc, career) => {
@@ -27,11 +26,12 @@ export default function CareerList() {
 
     return (
         <div className="w-full">
-            {Object.entries(groupedByDepartment).map(([department, jobs]) => (
+            {Object.entries(groupedByDepartment).map(([department, jobs], index) => (
                 <div key={department} className="mb-20">
                     <SectionHeader
                         category={department}
                         description="If you think you might be a good fit for our team, we'd love to hear from you!"
+                        noMarginTop={index === 0}
                     />
 
                     {jobs.map((job, index) => (
@@ -52,7 +52,7 @@ export default function CareerList() {
                                         href={job.application_link ?? "#"}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="border border-white/50 rounded-md py-2 px-3 text-lg leading-none"
+                                        className="border border-white/50 rounded-md py-2 px-3 text-lg leading-none hover:bg-white hover:text-black"
                                     >
                                         ↗
                                     </a>
