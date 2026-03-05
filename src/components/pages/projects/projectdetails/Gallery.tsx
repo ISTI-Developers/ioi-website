@@ -4,6 +4,7 @@ import type { BlockType, Gallery } from "@/data/types";
 import { Button } from "@/components/ui/button";
 import UploadBox from "@/components/ui/upload-box";
 import FirebaseMedia from "@/components/ui/firebase-media";
+import { useUploadImage } from "@/hooks/useImageUrl";
 import { getGridHeights } from "@/lib/galleryUtils";
 import { Plus } from "lucide-react";
 import {
@@ -31,6 +32,7 @@ export default function Gallery({ projectId, onSuccess }: GalleryProps) {
   const [blocks, setBlocks] = useState<Block[]>([]);
 
   const { mutate } = useAddGallery();
+  const { upload } = useUploadImage(); 
 
 
   const { data: galleryData, isLoading: loadingGallery } = useGallery(projectId);
@@ -69,32 +71,46 @@ export default function Gallery({ projectId, onSuccess }: GalleryProps) {
     );
   };
 
-  const handleSaveGallery = () => {
-    blocks.forEach(block => {
-      mutate(
-        {
-          data: {
+  const handleSaveGallery = async () => {
+  try {
+
+    for(let blockIndex = 0; blockIndex < blocks.length; blockIndex++) {
+      const block = blocks[blockIndex];
+
+      const validImages = block.images.filter((img) => img !== null);
+
+      for (let index = 0; index < validImages.length; index++) {
+        const file = validImages[index];
+        const imageUrl = await upload(file, "project_gallery");
+      
+        mutate(
+          {
             project_id: projectId,
             layout_group: block.layout_group,
             columns: block.images.length,
-            display_order: 1,
+            display_order: index + 1,
+            file: imageUrl,
           },
-          file: block.images.filter((img): img is File => img !== null),
-        },
-        {
-          onSuccess: () => {
-            console.log("Block uploaded:", block.layout_group);
-          },
-          onError: (err) => {
-            console.error("Upload failed:", err);
-          },
-        }
-      );
-    });
+          {
+            onSuccess: () => {
+              setBlocks([]);
+              onSuccess?. ();
+            },
+            onError:(err) => {
+              console.error("Failed to save image", err);
+            },
+          }
+        );
+      }
+      
+    }
+  
+  } catch (err) {
+    console.error("Submit failed", err);
+  }
+};
 
-    setBlocks([]);
-    onSuccess?.();
-  };
+
   return (
     <div className="space-y-8 mt-6">
       <div className="flex justify-end">

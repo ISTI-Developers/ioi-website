@@ -20,21 +20,14 @@ export const useGallery  = (id: number) => {
 export const useAddGallery = <TData=unknown>() => {
     const queryClient = useQueryClient();
 
-
     return useMutation({
-        mutationFn: async ({data, file}: {data: TData; file: File[]}) => {
-            const formData = new FormData();
-            formData.append("data", JSON.stringify(data));
-
-            file.forEach((f) => formData.append("file[]", f));
-
-            const response = await api.post(`index.php?resource=gallery`, formData);
-            response.data; 
+        mutationFn: async (data: TData) => {
+            const res = await api.post(`index.php?resource=${GALLERY}`, data);
+            return res.data;
         },
-
         onSuccess: (_data) => {
-            queryClient.refetchQueries({ queryKey: ["GALLERY"]});
-            toast.success("Successfullt added new gallery images");
+            queryClient.refetchQueries({ queryKey: [GALLERY] });
+            toast.success("Successfully added new gallery images");
         },
         onError: catchError,
     });
