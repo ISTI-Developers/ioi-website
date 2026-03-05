@@ -4,24 +4,6 @@ import { Clients } from '../components/layout/home/Clients'
 import { FeaturedImage } from '../components/ui/featured-image'
 
 function Contacts () {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: ''
-  })
-
-  const handleSubmit = () => {
-    console.log('Form submitted:', formData)
-    // Add your form submission logic here
-    alert('Message sent!')
-  }
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    })
-  }
 
   return (
     <div className="w-full text-white overflow-x-hidden px-6 md:px-12 lg:px-24 flex flex-col space-y-20">
