@@ -3,8 +3,8 @@ import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import FormCardContent from "@/components/layout/FormCardContent";
 import FormFieldTextArea from "../../forms/fields/FormFieldTextArea";
-
-import { useProjectByPoints } from "@/hooks/useProjects";
+import { useProjectByPoints } from "@/hooks/useProjects"
+import { EllipsisVertical } from "lucide-react";
 import { useAddPoint } from "@/hooks/useProjectPoint";
 
 interface BulletProps {
@@ -60,8 +60,6 @@ export default function Bullet({ projectId, onSuccess }: BulletProps) {
                 }
             }
         )
-
-
     }
 
 
@@ -118,7 +116,7 @@ export default function Bullet({ projectId, onSuccess }: BulletProps) {
 
                             >
                                 Add
-                            </Button>                        
+                            </Button>
                         </div>
                     </FormCardContent>
                 </div>
@@ -169,7 +167,8 @@ export default function Bullet({ projectId, onSuccess }: BulletProps) {
 
                             >
                                 Add
-                            </Button>                        </div>
+                            </Button>
+                        </div>
                     </FormCardContent>
                 </div>
             </div>
