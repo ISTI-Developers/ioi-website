@@ -9,12 +9,12 @@ export default function TeamMembers() {
   if (isLoading) return <p>Loading...</p>;
 
   const mancommMembers = teamMembers?.filter(
-    (teamMembers) => teamMembers.is_mancomm === 1
+    (teamMembers: { is_mancomm: number; }) => teamMembers.is_mancomm === 1
   );
 
   const accountMembers = teamMembers?.filter(
-    (teamMembers) => teamMembers.role_id === 1)
-    .sort((a, b) => {
+    (teamMembers: { role_id: number; }) => teamMembers.role_id === 1)
+    .sort((a: { is_mancomm: number; role_id: number; }, b: { is_mancomm: number; role_id: number; }) => {
 
       if (a.is_mancomm !== b.is_mancomm) {
         return b.is_mancomm - a.is_mancomm;
@@ -26,8 +26,8 @@ export default function TeamMembers() {
 
 
   const creativeMembers = teamMembers?.filter(
-    (teamMembers) => teamMembers.role_id === 2)
-    .sort((a, b) => {
+    (teamMembers: { role_id: number; }) => teamMembers.role_id === 2)
+    .sort((a: { is_mancomm: number; role_id: number; }, b: { is_mancomm: number; role_id: number; }) => {
 
       if (a.is_mancomm !== b.is_mancomm) {
         return b.is_mancomm - a.is_mancomm;
@@ -39,8 +39,8 @@ export default function TeamMembers() {
 
 
   const strategyMembers = teamMembers?.filter(
-    (teamMembers) => teamMembers.role_id === 3)
-    .sort((a, b) => {
+    (teamMembers: { role_id: number; }) => teamMembers.role_id === 3)
+    .sort((a: { is_mancomm: number; role_id: number; }, b: { is_mancomm: number; role_id: number; }) => {
 
       if (a.is_mancomm !== b.is_mancomm) {
         return b.is_mancomm - a.is_mancomm;

@@ -14,8 +14,11 @@ export type Team = {
   first_name: string;
   last_name: string;
   position: string;
+  is_mancomm?: number
+  quote?: string;
+  role_id?:number;
   role_name?: string;
-  file?: string[];
+  file?: string;
 };
 
 export function useTeamColumns(
