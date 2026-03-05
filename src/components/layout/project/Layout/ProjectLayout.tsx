@@ -33,7 +33,20 @@ export default function ProjectLayout() {
     return (
         <div>
             <Hero
-                title={<>{project?.project_name}</>}
+                title={
+                    <>
+                        {project.project_name
+                            ?.split(" ")
+                            .map((word, index) =>
+                                index === 0
+                                ? word + "\u00A0"
+                                : index === 1
+                                ? word
+                                : " " + word
+                            )
+                            .join("")}
+                    </>
+                }
                 description={"We're located in Makati City, \n Philippines"}
             />
 
