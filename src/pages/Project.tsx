@@ -34,12 +34,14 @@ function Projects() {
           key={project.project_id}
           project={project}
           linkPrefix="/projects/"
-          className="mb-8"
+          className="mb-8 mt-6"
         />
       ))}
 
 
-      <Clients />
+      <div className="mt-40">
+        <Clients />
+      </div>
       <CaseStudyCarousel />
     </div>
   )

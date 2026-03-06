@@ -35,16 +35,22 @@ export default function ProjectLayout() {
             <Hero
                 title={
                     <>
-                        {project.project_name
-                            ?.split(" ")
-                            .map((word, index) =>
-                                index === 0
-                                ? word + "\u00A0"
-                                : index === 1
-                                ? word
-                                : " " + word
-                            )
-                            .join("")}
+                        {project.project_name?.split(" ").map((word, index, words) => {
+                            if (index === 0) {
+                                return word + "\u00A0";
+                            }
+
+                            if (words[1] === "&") {
+                                if (index === 1) return word + "\u00A0";
+                                if (index === 2) return word;
+                            }
+
+                            if (index === 1) {
+                                return word;
+                            }
+
+                            return " " + word;
+                        }).join("")}
                     </>
                 }
                 description={"We're located in Makati City, \n Philippines"}
@@ -54,7 +60,7 @@ export default function ProjectLayout() {
                 key={project.project_id}
                 path={project.file}
                 alt="Banner"
-                className="w-full h-full object-cover rounded-3xl"
+                className="w-full h-full object-top rounded-3xl"
 
             />
 
@@ -117,7 +123,7 @@ export default function ProjectLayout() {
                 </div>
             </div>
 
-            <div className="mt-20">
+            <div className="mt-50 mb-50">
                 <h1 className="text-5xl sm:text-2xl lg:text-5xl font-medium mb-6">
                     Key Results:
                 </h1>
@@ -146,7 +152,7 @@ export default function ProjectLayout() {
                                         key={`${item.gallery_id}-${i}`}
                                         path={filePath}
                                         alt="Gallery"
-                                        className={`w-full ${getGridHeights(columns)} rounded-lg`}
+                                        className={`w-full ${getGridHeights(columns)} `}
                                     />
                                 ));
                             })}
