@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import {ContactForm} from '../components/pages/forms/contact'
 import { Clients } from '../components/layout/home/Clients'
 import { FeaturedImage } from '../components/ui/featured-image'
@@ -8,7 +7,7 @@ function Contacts () {
   return (
     <div className="w-full text-white overflow-x-hidden px-6 md:px-12 lg:px-24 flex flex-col space-y-20">
       <div className="max-w-4xl mx-auto">
-        {/* Header */}
+
         <div className="mb-6 sm:mb-8">
           <h1 className="text-center text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-3 sm:mb-4 break-words">
             Hello@example.com
@@ -19,10 +18,8 @@ function Contacts () {
           </div>
         </div>
 
-        {/* Phone Image */}
         <div className='space-y-20'>
           <FeaturedImage section="contact_middle" />
-        {/* Contact Form */}
         <ContactForm />
         </div>
       </div>

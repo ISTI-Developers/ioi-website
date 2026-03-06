@@ -4,7 +4,7 @@ import { useColumnVisibility } from "@/hooks/useColumnVisibility";
 import type { Client } from "@/data/client_columns";
 import ClientForm from "../forms/create/ClientForm";
 import { useClientColumns, def_client_columns, client_filters } from "@/data/client_columns";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import FormSheet from "@/components/layout/FormSheet";
 
 interface ClientDataTableProps {
     clients: Client[];
@@ -49,25 +49,26 @@ export default function ClientDataTable({
                 onColumnVisibilityChange={setColumnVisibility}
             />
 
-            <Dialog open={isEditOpen} onOpenChange={(open) => {
-                setIsEditOpen(open);
-                if (!open) setSelectedClient(null);
-            }}>
-                <DialogContent>
-                    <DialogHeader>
-                        <DialogTitle>Edit Client</DialogTitle>
-                    </DialogHeader>
-                    {selectedClient && (
-                        <ClientForm
+            <FormSheet
+                type="Client"
+                taskName="Edit"
+                open={isEditOpen}
+                onOpenChange={(open) => {
+                    setIsEditOpen(open);
+                    if (!open) setSelectedClient(null);
+                }}
+                form={
+                    selectedClient ? (
+                        <ClientForm  // ← was BannerForm, fixed
                             existing={selectedClient}
                             onSuccess={() => {
                                 setIsEditOpen(false);
                                 setSelectedClient(null);
                             }}
                         />
-                    )}
-                </DialogContent>
-            </Dialog>
+                    ) : <></>
+                }
+            />
         </>
     );
 }

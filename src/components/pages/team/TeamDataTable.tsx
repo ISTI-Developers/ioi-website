@@ -6,7 +6,6 @@ import TeamForm from "../forms/create/TeamForm";
 import { useTeamColumns, def_team_columns, team_filters } from "@/data/team_columns";
 import FormSheet from "@/components/layout/FormSheet";
 
-
 interface TeamDataTableProps {
     teams: Team[];
     onEdit: (team: Team) => void;
@@ -50,7 +49,6 @@ export default function TeamDataTable({
                 onColumnVisibilityChange={setColumnVisibility}
             />
 
-            {/* Edit Sheet — reuses FormSheet with controlled open state */}
             {selectedTeam && (
                 <FormSheet
                 type="Team"

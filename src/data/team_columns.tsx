@@ -1,11 +1,7 @@
 import type { ColumnDef } from "@tanstack/react-table";
 import { EllipsisVertical } from "lucide-react";
 import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover";
-import {
-  Command,
-  CommandGroup,
-  CommandItem,
-} from "@/components/ui/command";
+import { Command, CommandGroup, CommandItem, } from "@/components/ui/command";
 import { Button } from "@/components/ui/button";
 
 export type Team = {

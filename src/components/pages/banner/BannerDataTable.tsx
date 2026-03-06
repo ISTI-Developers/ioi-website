@@ -4,7 +4,7 @@ import { useColumnVisibility } from "@/hooks/useColumnVisibility";
 import type { Banner } from "@/data/banner_columns";
 import BannerForm from "../forms/create/BannerForm";
 import { useBannerColumns, def_banner_columns, banner_filters } from "@/data/banner_columns";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import FormSheet from "@/components/layout/FormSheet";
 
 interface BannerDataTableProps {
     banners: Banner[];
@@ -49,25 +49,25 @@ export default function BannerDataTable({
                 onColumnVisibilityChange={setColumnVisibility}
             />
 
-            <Dialog open={isEditOpen} onOpenChange={(open) => {
+            <FormSheet 
+            type={"Banner"}
+            taskName={"Edit"} 
+            open={isEditOpen}
+            onOpenChange={(open)=> {
                 setIsEditOpen(open);
-                if (!open) setSelectedBanner(null);
-            }}>
-                <DialogContent>
-                    <DialogHeader>
-                        <DialogTitle>Edit Banner</DialogTitle>
-                    </DialogHeader>
-                    {selectedBanner && (
-                        <BannerForm
-                            existing={selectedBanner}
-                            onSuccess={() => {
-                                setIsEditOpen(false);
-                                setSelectedBanner(null);
-                            }}
-                        />
-                    )}
-                </DialogContent>
-            </Dialog>
+                if(!open) setSelectedBanner(null);
+            }}
+            form={
+                selectedBanner ? (
+                    <BannerForm
+                    existing={selectedBanner}
+                    onSuccess={()=>{
+                        setIsEditOpen(false);
+                        setSelectedBanner(null);
+                    }}
+                />
+                ):<></>
+            }/>
         </>
     );
 }
