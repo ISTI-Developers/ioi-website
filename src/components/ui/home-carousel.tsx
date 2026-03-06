@@ -27,6 +27,14 @@ export const HomeCarousel: React.FC<HomeCarouselProps> = ({ projects }) => {
 
   const n = projects.length;
 
+  if(n === 0) {
+    return (
+      <div className="relative w-full h-[500px] lg:h-[800px] flex items-center justify-center">
+      <p className="text-zinc-500 text-lg">No projects available.</p>
+    </div>
+    )
+  }
+
   const desktopOffsets = [0, 440, 800, 1100];
   const mobileOffsets = [0, 220, 400, 550];
   const slideWidth = isMobile ? 270 : 500;

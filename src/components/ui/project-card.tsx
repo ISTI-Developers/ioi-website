@@ -30,7 +30,7 @@ export default function ProjectCard({ project, linkPrefix = "/", className = "" 
         <FirebaseMedia
         path={Array.isArray(project.file) ? project.file[0] : project.file}
         alt={project.project_name}
-        className="w-full h-full object-cover rounded-3xl"
+        className="w-full h-200 object-cover rounded-3xl"
       />
 
       <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 bg-gradient-to-t from-black/80 to-transparent">
