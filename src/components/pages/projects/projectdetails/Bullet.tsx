@@ -13,6 +13,8 @@ interface BulletProps {
 }
 
 export default function Bullet({ projectId, onSuccess }: BulletProps) {
+        console.log("projectId:", projectId); 
+
     const form = useForm({
         defaultValues: {
             problem: "",
@@ -40,6 +42,7 @@ export default function Bullet({ projectId, onSuccess }: BulletProps) {
 
     const onSubmit = (type: "problem" | "solution" | "service" | "result") => {
         const value = form.getValues(type);
+    console.log("submitting:", { project_id: projectId, type, content: value }); 
 
         if (!value?.trim()) return;
 

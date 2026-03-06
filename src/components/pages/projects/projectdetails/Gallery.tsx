@@ -32,7 +32,7 @@ export default function Gallery({ projectId, onSuccess }: GalleryProps) {
   const [blocks, setBlocks] = useState<Block[]>([]);
 
   const { mutate } = useAddGallery();
-  const { upload } = useUploadImage(); 
+  const { upload } = useUploadImage();
 
 
   const { data: galleryData, isLoading: loadingGallery } = useGallery(projectId);
@@ -72,43 +72,43 @@ export default function Gallery({ projectId, onSuccess }: GalleryProps) {
   };
 
   const handleSaveGallery = async () => {
-  try {
+    try {
 
-    for(let blockIndex = 0; blockIndex < blocks.length; blockIndex++) {
-      const block = blocks[blockIndex];
+      for (let blockIndex = 0; blockIndex < blocks.length; blockIndex++) {
+        const block = blocks[blockIndex];
 
-      const validImages = block.images.filter((img) => img !== null);
+        const validImages = block.images.filter((img) => img !== null);
 
-      for (let index = 0; index < validImages.length; index++) {
-        const file = validImages[index];
-        const imageUrl = await upload(file, "project_gallery");
-      
-        mutate(
-          {
-            project_id: projectId,
-            layout_group: block.layout_group,
-            columns: block.images.length,
-            display_order: index + 1,
-            file: imageUrl,
-          },
-          {
-            onSuccess: () => {
-              setBlocks([]);
-              onSuccess?. ();
+        for (let index = 0; index < validImages.length; index++) {
+          const file = validImages[index];
+          const imageUrl = await upload(file, "project_gallery");
+
+          mutate(
+            {
+              project_id: projectId,
+              layout_group: block.layout_group,
+              columns: block.images.length,
+              display_order: index + 1,
+              file: imageUrl,
             },
-            onError:(err) => {
-              console.error("Failed to save image", err);
-            },
-          }
-        );
+            {
+              onSuccess: () => {
+                setBlocks([]);
+                onSuccess?.();
+              },
+              onError: (err) => {
+                console.error("Failed to save image", err);
+              },
+            }
+          );
+        }
+
       }
-      
+
+    } catch (err) {
+      console.error("Submit failed", err);
     }
-  
-  } catch (err) {
-    console.error("Submit failed", err);
-  }
-};
+  };
 
 
   return (
@@ -140,14 +140,16 @@ export default function Gallery({ projectId, onSuccess }: GalleryProps) {
               {group.map(item => {
                 const files: string[] = Array.isArray(item.file) ? item.file : [item.file].filter(Boolean) as string[];
 
-                return files.map((filePath: string, i: number) => (
-                  <FirebaseMedia
-                    key={`${item.gallery_id}-${i}`}
-                    path={filePath}
-                    alt="Gallery"
-                    className={`w-full ${getGridHeights(columns)} rounded-lg`}
-                  />
-                ));
+                return files.map((filePath: string, i: number) => {
+                  return (
+                    <FirebaseMedia
+                      key={`${item.gallery_id}-${i}`}
+                      path={filePath}
+                      alt="Gallery"
+                      className={`w-full ${getGridHeights(columns)} rounded-lg`}
+                    />
+                  );
+                });
               })}
             </div>
           );
