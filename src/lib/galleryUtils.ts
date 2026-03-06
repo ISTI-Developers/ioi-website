@@ -26,9 +26,9 @@ export function getGridCols(cols: number): string {
 export function getGridHeights(cols: number): string {
   switch (cols) {
     case 1: return "h-180";   
-    case 2: return "h-120";  
-    case 3: return "h-130";   
-    case 4: return "h-48";   
+    case 2: return "h-170";  
+    case 3: return "h-150";   
+    case 4: return "h-110";   
     default: return "h-60";
   }
 }
