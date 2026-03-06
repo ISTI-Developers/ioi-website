@@ -41,7 +41,7 @@ function Home() {
         </div>
 
 
-        <div className="-ml-50">
+        <div className="-ml-50 z-0">
           <HomeCarousel projects={projects} />
         </div>
       </div>

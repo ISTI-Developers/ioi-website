@@ -45,7 +45,6 @@ export const HomeCarousel: React.FC<HomeCarouselProps> = ({ projects }) => {
         const scale = 1 - slotIndex * 0.15;
 
         return (
-          <div className="relative z-0">
           <motion.div
             key={project.project_id}
             className="absolute top-1/2 -translate-y-1/2 cursor-pointer select-none origin-center"
@@ -93,7 +92,6 @@ export const HomeCarousel: React.FC<HomeCarouselProps> = ({ projects }) => {
               </h3>
             </motion.div>
           </motion.div>
-          </div>
         );
       })}
     </div>
