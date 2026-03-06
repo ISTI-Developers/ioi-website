@@ -13,12 +13,9 @@ export const useAddPoint = () => {
     const queryClient = useQueryClient();
 
     return useMutation({
-        mutationFn: async (data: Point) => {
-              const formData = new FormData();
-            formData.append("data", JSON.stringify(data));
-           
-            const response = await api.post(`index.php?resource=points`, formData);
-            return response.data;
+        mutationFn: async (data: Point) => {           
+            const res = await api.post(`index.php?resource=points`, data);
+            return res.data;
         },
 
         onSuccess: (_, variables) => {
