@@ -22,6 +22,7 @@ export default function FirebaseMedia ({
     muted = false,
 }: FirebaseMediaProps) {
     const { url, loading, error } = useImageUrl(path);
+console.log({ path, url, loading, error });
 
 
     if(!path) return null;
@@ -35,7 +36,7 @@ export default function FirebaseMedia ({
         return <Skeleton className={cn("w-full h-100 rounded-lg", className)} />;
     }
 
-    const ext = path.split(".").pop()?.toLowerCase();
+    const ext = path.split("?")[0].split(".").pop()?.toLowerCase();
     const isVideo = ext === "mp4" || ext ==="webm" || ext === "mov";
 
 
@@ -47,7 +48,8 @@ export default function FirebaseMedia ({
             controls
             autoPlay={autoplay}
             loop={loop}
-            muted={muted}
+            muted={true}
+
             playsInline
             />
         )
@@ -61,7 +63,7 @@ export default function FirebaseMedia ({
         <img
             src={url}
             alt={alt}
-            className={`object-cover ${className}`}
+            className={`object-top ${className}`}
 
         />
 
