@@ -2,7 +2,6 @@ import { Clients } from "../components/layout/home/Clients";
 import { CaseStudyCarousel } from "../components/ui/casestudy-carousel";
 import { useProjects } from "@/hooks/useProjects";
 import ProjectCard from "../components/ui/project-card";
-import FirebaseImage from "@/components/ui/firebase-media";
 import { FeaturedImage } from "@/components/ui/featured-image";
 import Hero from "@/components/ui/hero";
 

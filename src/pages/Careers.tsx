@@ -17,7 +17,7 @@ function Careers() {
        
             <CareerList />
 
-
+            
             <FeaturedImage section = "career_bottom"/>
 
 

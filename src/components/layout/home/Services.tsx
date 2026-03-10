@@ -27,7 +27,7 @@ export default function Services() {
               <div  className="flex flex-col gap-4 w-full">
                 <div>
                   <span className="text-2xl text-gray">/{(index + 1).toString().padStart(2, "0")}</span>
-                  <h2 className="text-5xl text-white mb-30 lg:mb-40 font-bold">{item.category}</h2>
+                  <h2 className="text-5xl text-white mb-10 lg:mb-20 font-bold">{item.category}</h2>
                 </div>
 
                 <h3 className="text-2xl text-white font-semibold">{item.title}</h3>

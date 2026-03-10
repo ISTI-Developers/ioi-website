@@ -1,11 +1,11 @@
 export function ContactForm() {
     return (
         <div className="max-w-4xl mx-auto w-full ">
-        <header className="text-lightgray mb-10 lg:mb-20 space-y-4 leading-6">
+        <header className="text-lightgray mb-10 lg:mb-20 space-y-4 leading-6 max-w-212 mx-auto px-4 text-left">
             <h1 className="font-heading text-[2.8rem] md:text-7xl lg:text-[7rem] font-semibold">Contact us</h1>
             <p className="text-[0.9rem]/5 lg:text-[1.63rem]">Our clients are more than just collaborators—they are visionaries <br/>who inspire us to push the boundaries of design and innovation.</p>
         </header>
-            <div className="space-y-5 lg:space-y-6 mb-5 lg:mb-16 max-w-212   mx-auto ">
+            <div className="space-y-5 lg:space-y-6 mb-5 lg:mb-16 max-w-212 mx-auto ">
                 <div>
                     <input
                         type="text"
