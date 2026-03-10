@@ -2,14 +2,14 @@ import { useParams } from "react-router-dom";
 import { Clients } from "../components/layout/home/Clients";
 import { ContactForm } from "../components/pages/forms/contact";
 import ProjectLayout from "@/components/layout/project/Layout/ProjectLayout";
-import { useProjectByPoints } from "@/hooks/useProjects";
+import { useProjectByIdWithPointsAndProse } from "@/hooks/useProjects";
 
 
 export default function ProjectDetails() {
   const { id } = useParams<{ id: string }>();
   const projectId = Number(id);
 
-  const { data : project, isLoading } = useProjectByPoints(projectId);
+  const { data : project, isLoading } = useProjectByIdWithPointsAndProse(projectId);
 
   if(isLoading) return <p className="text-white p-10">Loading....</p>;
 

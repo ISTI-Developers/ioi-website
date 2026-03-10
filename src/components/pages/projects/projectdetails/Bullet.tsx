@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import FormCardContent from "@/components/layout/FormCardContent";
 import FormFieldTextArea from "../../forms/fields/FormFieldTextArea";
-import { useProjectByPoints } from "@/hooks/useProjects"
+import { useProjectByIdWithPointsAndProse } from "@/hooks/useProjects"
 import { EllipsisVertical } from "lucide-react";
 import { useAddPoint } from "@/hooks/useProjectPoint";
 
@@ -27,7 +27,7 @@ export default function Bullet({ projectId, onSuccess }: BulletProps) {
 
     const { mutate } = useAddPoint();
 
-    const { data: project, isLoading } = useProjectByPoints(projectId);
+    const { data: project, isLoading } = useProjectByIdWithPointsAndProse(projectId);
 
     if (isLoading) return <p>Loading bullets...</p>;
 
