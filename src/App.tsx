@@ -30,11 +30,14 @@ function App() {
   const isAdminRoute = location.pathname.startsWith("/admin");
 
   return (
-    <div className={`min-h-screen ${isAdminRoute ? "bg-white font-sans" : "bg-black"}`}>
-      {!isAdminRoute && <Navbar />}
-      <AppRoutes />
-      {!isAdminRoute && <Footer />}
-    </div>
+   
+    < div className = {`min-h-screen ${isAdminRoute ? "bg-white font-sans" : "bg-black"}`}>
+  {/* <div className={`min-h-screen ${isAdminRoute ? "bg-white font-sans" : "bg-[#121212]"}`}> */}
+
+    {!isAdminRoute && <Navbar />}
+    <AppRoutes />
+    {!isAdminRoute && <Footer />}
+  </div>
   );
 }
 
@@ -43,34 +46,34 @@ function AppRoutes() {
 
 
   return (
-        <Suspense fallback={<div className="p-10 text-center">Loading...</div>}>
+    <Suspense fallback={<div className="p-10 text-center">Loading...</div>}>
 
-          <div
-           
-          >
-            <Routes>
-              {/* Public */}
-              <Route path="/" element={<Home />} />
-              <Route path="projects" element={<Projects />} />
-              <Route path="projects/:id" element={<ProjectDetails />} />
-              <Route path="careers" element={<Careers />} />
-              <Route path="about" element={<About />} />
-              <Route path="contact" element={<Contact />} />
+      <div
 
-              {/* Admin */}
-              <Route path="admin" element={<Sidebar />}>
-                <Route path="team" element={<Team />} />
-                <Route path="clients" element={<Client />} />
-                <Route path="projects" element={<Project />} />
-                <Route path="careers" element={<Career />} />
-                <Route path="banners" element={<Banner />} />
-              </Route>
+      >
+        <Routes>
+          {/* Public */}
+          <Route path="/" element={<Home />} />
+          <Route path="projects" element={<Projects />} />
+          <Route path="projects/:id" element={<ProjectDetails />} />
+          <Route path="careers" element={<Careers />} />
+          <Route path="about" element={<About />} />
+          <Route path="contact" element={<Contact />} />
 
-              <Route path="*" element={<>Error 404</>} />
-            </Routes>
+          {/* Admin */}
+          <Route path="admin" element={<Sidebar />}>
+            <Route path="team" element={<Team />} />
+            <Route path="clients" element={<Client />} />
+            <Route path="projects" element={<Project />} />
+            <Route path="careers" element={<Career />} />
+            <Route path="banners" element={<Banner />} />
+          </Route>
 
-          </div>
-        </Suspense>
+          <Route path="*" element={<>Error 404</>} />
+        </Routes>
+
+      </div>
+    </Suspense>
 
   );
 }
