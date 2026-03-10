@@ -3,7 +3,7 @@ import Hero from "@/components/ui/hero";
 import { groupGalleryItems, getGridCols, getGridHeights } from "@/lib/galleryUtils";
 import { useGallery } from "@/hooks/useGallery";
 import FirebaseMedia from "@/components/ui/firebase-media";
-import { useProjectByPoints } from "@/hooks/useProjects";
+import { useProjectByIdWithPointsAndProse } from "@/hooks/useProjects";
 import { formatMonthYear } from "@/lib/dateUtils";
 
 
@@ -11,25 +11,32 @@ export default function ProjectLayout() {
     const { id } = useParams<{ id: string }>();
     const projectId = Number(id);
 
-    const { data: project, isLoading } = useProjectByPoints(projectId);
+    const { data: project, isLoading } = useProjectByIdWithPointsAndProse(projectId);
+    const { data: galleryData, isLoading: loadingGallery } = useGallery(projectId);
+
 
     if (isLoading) return <p>Loading...</p>;
     if (!project) return <p>Project not found</p>;
-
-    const { data: galleryData, isLoading: loadingGallery } = useGallery(projectId);
     if (loadingGallery) return <p>Loading gallery...</p>;
-    const galleryArray = Array.isArray(galleryData?.gallery) ? galleryData.gallery : [];
 
+
+    const galleryArray = Array.isArray(galleryData?.gallery) ? galleryData.gallery : [];
     const groupedGallery = groupGalleryItems(galleryArray);
 
 
-    const points = project?.points ?? [];
+    const points = project.points ?? [];
+    const proseList = project.prose ?? [];
 
     const problems = points.filter((p) => p.type === "problem");
     const solutions = points.filter((p) => p.type === "solution");
     const services = points.filter((p) => p.type === "service");
     const results = points.filter((p) => p.type === "result");
 
+    const hasPoints =
+        problems.length > 0 ||
+        solutions.length > 0 ||
+        services.length > 0 ||
+        results.length > 0;
     return (
         <div>
             <Hero
@@ -64,11 +71,10 @@ export default function ProjectLayout() {
 
             />
 
-
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm lg:text-lg text-primary mb-12 sm:mb-16 mt-10">
                 <div>{project.project_category}</div>
                 <div className="sm:text-center">
-                    {formatMonthYear(project.start_date)} - {formatMonthYear(project.end_date)}
+                    {formatMonthYear(project.start_date)} - {formatMonthYear(project.end_date) || "On-going"}
                 </div>
                 <div className="sm:text-right">{project.project_type}</div>
             </div>
@@ -77,67 +83,62 @@ export default function ProjectLayout() {
                 <div>
                     {project.company_description}
                 </div>
-                <div className="sm:text-center lg:text-2xl">
-                    001
-                </div>
+                {hasPoints && (
+                    <div className="sm:text-center lg:text-2xl">
+                        001
+                    </div>
+                )}
                 <div className="sm:text-right">
                     {project.brand_positioning}
                 </div>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-31 mt-20">
+            {hasPoints ? (
+                <>
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-31 mt-20">
 
-                {/* left */}
-                <div className="lg:col-span-8 space-y-20">
-                    <h1 className="font-semibold mb-4 text-xl sm:text-2xl">
-                        The Problem:
-                    </h1>
-                    <ul className="list-disc ml-5 lg:text-3xl">
-                        {problems.map((p) => (
-                            <li key={p.point_id}>{p.content}</li>
-                        ))}
-                    </ul>
+                        {/* Left side: Problem & Solution */}
+                        <div className="lg:col-span-8 space-y-20">
+                            <h1 className="font-semibold mb-4 text-xl sm:text-2xl">The Problem:</h1>
+                            <ul className="list-disc ml-5 lg:text-3xl">
+                                {problems.map(p => <li key={p.point_id}>{p.content}</li>)}
+                            </ul>
 
-                    <h1 className="font-semibold mb-4 text-xl sm:text-2xl">
-                        The Solution:
-                    </h1>
+                            <h1 className="font-semibold mb-4 text-xl sm:text-2xl">The Solution:</h1>
+                            <ul className="list-disc ml-5 lg:text-3xl">
+                                {solutions.map(p => <li key={p.point_id}>{p.content}</li>)}
+                            </ul>
+                        </div>
 
-                    <ul className="list-disc ml-5 lg:text-3xl">
-                        {solutions.map((p) => (
-                            <li key={p.point_id}>{p.content}</li>
-                        ))}
-                    </ul>
+                        {/* Right side: Services */}
+                        <div className="lg:col-span-3">
+                            <h1 className="text-5xl sm:text-2xl lg:text-5xl font-medium mb-6">
+                                Services <br />Rendered:
+                            </h1>
+                            <ul className="list-decimal ml-12 text-5xl">
+                                {services.map(p => <li key={p.point_id}>{p.content}</li>)}
+                            </ul>
+                        </div>
+                    </div>
+
+                    {/* Key Results */}
+                    <div className="mt-50 mb-50">
+                        <h1 className="text-5xl sm:text-2xl lg:text-5xl font-medium mb-6">Key Results:</h1>
+                        <ul className="list-decimal ml-12 text-5xl">
+                            {results.map(p => <li key={p.point_id}>{p.content}</li>)}
+                        </ul>
+                    </div>
+                </>
+            ) : (
+                // If no points, render prose as section
+                <div className="mt-20 space-y-8">
+                    {proseList.map(p => (
+                        <p key={p.prose_id} className="whitespace-pre-wrap text-lg lg:text-xl">
+                            {p.content}
+                        </p>
+                    ))}
                 </div>
-
-
-                {/* right */}
-                <div className="lg:col-span-3">
-                    <h1 className="text-5xl sm:text-2xl lg:text-5xl font-medium mb-6">
-                        Services <br />Rendered:
-                    </h1>
-                    <ul className="list-decimal ml-12 text-5xl">
-                        {services.map((p) => (
-                            <li key={p.point_id}>{p.content}</li>
-                        ))}
-                    </ul>
-                </div>
-            </div>
-
-            <div className="mt-50 mb-50">
-                <h1 className="text-5xl sm:text-2xl lg:text-5xl font-medium mb-6">
-                    Key Results:
-                </h1>
-
-                <div className="lg:col-span-1">
-                    <ul className="list-decimal ml-12 text-5xl">
-                        {results.map((p) => (
-                            <li key={p.point_id}>{p.content}</li>
-                        ))}
-
-                    </ul>
-                </div>
-
-            </div>
+            )}
 
             <div className="mt-20 space-y-8">
                 {Object.values(groupedGallery).map((group, idx) => {
@@ -160,10 +161,6 @@ export default function ProjectLayout() {
                     );
                 })}
             </div>
-
-
-
-
         </div>
     );
 }
