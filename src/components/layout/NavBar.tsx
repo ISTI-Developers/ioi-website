@@ -1,7 +1,7 @@
 
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import type { ReactNode } from "react";
-import company_logo from "@/assets/ioi_LogoDesign_MainLogo.png"
 import Menu from "./menu/menu";
 import Hamburger from "../ui/hamburger-menu";
 
@@ -19,10 +19,22 @@ export default function Navbar({ children }: NavbarProps) {
   return (
     <div className="flex w-full relative ">
       <header className="flex justify-between w-full px-2  lg:px-24 py-5 items-center bg-black sticky top-0 z-40">
-        <img src={company_logo} className="h-10 w-60" alt="Innovation One Inc Logo" />
+        <div>
+          <Link
+            to={"/"}>
+            <img src="https://firebasestorage.googleapis.com/v0/b/innovation-one-4de73.firebasestorage.app/o/InnovationOneLogo%2Fioi_LogoDesign_MainLogo.png?alt=media&token=0083aab3-cfa0-4412-b4cf-ed88facb09a2"
+            className="h-10 w-60 opacity-85" 
+            alt="Innovation One Inc Logo" 
+            />
+          </Link>
+        </div>
+
         <Hamburger active={open} setActive={setOpen} />
+
       </header>
-      <Menu open={open} setOpen={setOpen} />
+
+
+      {open && <Menu open={open} setOpen={setOpen} />}
       <main className="flex-1 w-full">
         {children}
       </main>
