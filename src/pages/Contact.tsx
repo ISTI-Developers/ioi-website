@@ -19,9 +19,13 @@ function Contacts () {
 
         <div className='space-y-30'>
           <FeaturedImage section="contact_middle" />
+<<<<<<< Updated upstream
           <ContactForm />
         </div>
         <div className='space-y-50 '>
+=======
+        <ContactForm />
+>>>>>>> Stashed changes
         <Clients />
       <FeaturedImage section = "contact_bottom" />
       </div>
