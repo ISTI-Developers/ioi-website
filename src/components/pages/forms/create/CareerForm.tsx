@@ -43,7 +43,7 @@ function CareerForm({ onSuccess, existing }: CareerFormProps) {
                 { id: existing!.career_id!, data: values },
                 {
                     onSuccess: () => {
-                        toast.success("Career updated successfully"); // ← ADDED toast
+                        toast.success("Career updated successfully"); 
                         form.reset();
                         onSuccess?.();
                     },
