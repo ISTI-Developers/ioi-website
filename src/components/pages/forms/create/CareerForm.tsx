@@ -5,51 +5,66 @@ import FormFieldTextArea from "../fields/FormFieldTextArea";
 import FormCardContent from "@/components/layout/FormCardContent";
 import FormFieldSelect from "../fields/FormFieldSelect";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
 import { SelectItem } from "@/components/ui/select";
-import { useAddCareer } from "@/hooks/useCareer";
+import { useAddCareer, useUpdateCareer } from "@/hooks/useCareer"; 
+import { toast } from "sonner"; 
+import type { Career } from "@/hooks/useCareer"; 
 
 interface CareerFormProps {
     onSuccess?: () => void;
+    existing?: Career; 
 }
 
-function CareerForm({ onSuccess }: CareerFormProps) {
+function CareerForm({ onSuccess, existing }: CareerFormProps) {
+    const isEdit = !!existing;
+
     const form = useForm({
         defaultValues: {
-            career_title: "",
-            department: "",
-            work_setup: "",
-            employment_type: "",
-            description: "",
-            application_link: "",
-            file: undefined,
+            career_title: existing?.career_title ?? "", 
+            department: existing?.department ?? "",     
+            work_setup: existing?.work_setup ?? "",    
+            employment_type: existing?.employment_type ?? "", 
+            description: existing?.description ?? "",  
+            application_link: existing?.application_link ?? "", 
+            is_active: existing?.is_active ?? 1,      
         },
         mode: "all",
     });
 
-    const [files, setFiles] = useState<File[]>([]);
-    const { mutate, isPending } = useAddCareer();
+   
+    const { mutate: addCareer, isPending: isAdding } = useAddCareer();
+    const { mutate: updateCareer, isPending: isUpdating } = useUpdateCareer(); 
+    const isPending = isAdding || isUpdating;
 
     const onSubmit = (values: any) => {
-        console.log("form values:", values);
-        const { file, ...rest } = values;
 
-        mutate(
-            {
-                data: rest,
-                file: files,
-            },
-            {
+        if (isEdit) {
+            updateCareer(
+                { id: existing!.career_id!, data: values },
+                {
+                    onSuccess: () => {
+                        toast.success("Career updated successfully"); // ← ADDED toast
+                        form.reset();
+                        onSuccess?.();
+                    },
+                    onError: () => {
+                        toast.error("Failed to update career"); 
+                    },
+                }
+            );
+        } else {
+          
+            addCareer(values, {
                 onSuccess: () => {
+                    toast.success("Career added successfully");
                     form.reset();
-                    setFiles([]);
                     onSuccess?.();
                 },
-                onError: (err) => {
-                    console.error("Failed to save career", err);
+                onError: () => {
+                    toast.error("Failed to add career"); 
                 },
-            }
-        );
+            });
+        }
     };
 
     return (
@@ -58,7 +73,7 @@ function CareerForm({ onSuccess }: CareerFormProps) {
                 id="career-form"
                 onSubmit={form.handleSubmit(onSubmit)}
                 className="space-y-5"
-                encType="multipart/form-data"
+                
             >
                 <FormCardContent title="Career Information">
                     <FormFieldText
@@ -67,7 +82,6 @@ function CareerForm({ onSuccess }: CareerFormProps) {
                         label="Career Title *"
                         placeholder="e.g. Software Engineer"
                     />
-
                     <div className="gap-4 sm:flex sm:gap-x-5">
                         <FormFieldSelect
                             control={form.control}
@@ -75,12 +89,11 @@ function CareerForm({ onSuccess }: CareerFormProps) {
                             label="Department *"
                             placeholder="Select Department"
                             className="w-full sm:w-1/2"
-                            >
+                        >
                             <SelectItem value="Business Development">Business Development</SelectItem>
                             <SelectItem value="Accounts Management">Accounts Management</SelectItem>
-                            <SelectItem value="Creative Team>">Creative Team</SelectItem>
+                            <SelectItem value="Creative Team">Creative Team</SelectItem> 
                         </FormFieldSelect>
-                        
 
                         <FormFieldSelect
                             control={form.control}
@@ -88,12 +101,11 @@ function CareerForm({ onSuccess }: CareerFormProps) {
                             label="Work Setup *"
                             placeholder="Select work setup"
                             className="w-full sm:w-1/2"
-                            >
+                        >
                             <SelectItem value="Onsite">Onsite</SelectItem>
                             <SelectItem value="Online">Online</SelectItem>
                             <SelectItem value="Hybrid">Hybrid</SelectItem>
                         </FormFieldSelect>
-                        
                     </div>
                 </FormCardContent>
 
@@ -140,10 +152,10 @@ function CareerForm({ onSuccess }: CareerFormProps) {
                     <Button
                         className="w-full flex items-center justify-center rounded-xl p-6"
                         type="submit"
-                        form="career-form"
                         disabled={isPending}
                     >
-                        {isPending ? "SAVING..." : "ADD CAREER"}
+                        
+                        {isPending ? "SAVING..." : isEdit ? "UPDATE CAREER" : "ADD CAREER"}
                     </Button>
                 </div>
             </form>
