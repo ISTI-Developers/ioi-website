@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { formatMonthYear } from "@/lib/dateUtils";
 import FirebaseMedia from "@/components/ui/firebase-media";
@@ -17,6 +17,7 @@ export interface HomeCarouselProps {
 export const HomeCarousel: React.FC<HomeCarouselProps> = ({ projects }) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
+  const hoverTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 640);
@@ -42,6 +43,24 @@ export const HomeCarousel: React.FC<HomeCarouselProps> = ({ projects }) => {
   const getOffset = (slotIndex: number) =>
     -(isMobile ? mobileOffsets[slotIndex] : desktopOffsets[slotIndex]);
 
+  const handleSlotHover = (slotIndex: number, projectIndex: number) => {
+    if(slotIndex === 0 ) return;
+
+    if(hoverTimeoutRef.current){
+      clearTimeout(hoverTimeoutRef.current);
+    }
+
+    hoverTimeoutRef.current = setTimeout(() => {
+      setActiveIndex(projectIndex);
+    }, 600);
+  }
+
+  const handleSlotLeave = () => {
+    if(hoverTimeoutRef.current) {
+      clearTimeout(hoverTimeoutRef.current)
+    }
+  }
+
   return (
     <div className="relative w-full h-[500px] lg:h-[800px] flex items-center justify-end overflow-hidden"
     >
@@ -56,7 +75,7 @@ export const HomeCarousel: React.FC<HomeCarouselProps> = ({ projects }) => {
           <motion.div
             key={project.project_id}
             className="absolute top-1/2 -translate-y-1/2 cursor-pointer select-none origin-center"
-            style={{ width: slideWidth }}
+            style={{ width: slideWidth, cursor: isActive ? "default" : "pointer"}}
             initial={false}
             animate={{
               x: getOffset(slotIndex),
@@ -71,7 +90,9 @@ export const HomeCarousel: React.FC<HomeCarouselProps> = ({ projects }) => {
               damping: 25,
               mass: 0.8,
             }}
-            onClick={() => setActiveIndex(projectIndex)}
+
+            onHoverStart={() => handleSlotHover(slotIndex, projectIndex)}
+            onHoverEnd={handleSlotLeave}
           >
             <div className="relative aspect-[4/5] rounded-[1.5rem] overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,0,0,1)] border border-white/10 ring-1 ring-white/10">
               <motion.div
