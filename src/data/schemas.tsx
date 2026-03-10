@@ -55,6 +55,12 @@ export const GallerySchema = z.object({
 
 });
 
+export const ProseSchema = z.object({
+    prose_id: z.number().optional(),
+    project_id: z.number(),
+    content: z.string({ message: "Description is required" }),
+});
+
 
 
 
@@ -77,6 +83,8 @@ export const CareerSchema = z.object({
     is_active: z.boolean().optional(),
     application_link: z.string({ message: "Application link is required" }).url({ message: "Application link must be a valid URL" }).optional(),
 });
+
+
 export const BannerSchema = z.object({
     banner_id: z.number().optional(),
     section: z.string({ message: "Section is required" }),

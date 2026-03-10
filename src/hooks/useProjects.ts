@@ -1,13 +1,16 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { getAll, getOne, catchError } from "./controller";
-import type { Project, Point } from "@/data/types";
+import type { Project, Point, Prose } from "@/data/types";
 import api from "./api/config";
 import { toast } from "sonner";
 
 
 export type ProjectWithPoints = Project & { points: Point[] };
+export type ProjectWithProse= Project & { prose: Prose[] };
 
 const PROJECTS = "projects";
+const PROJECT_POINTS = "points";
+const PROJECT_PROSE = "prose";
 
 export const useProjects = () => {
     return useQuery({
@@ -32,8 +35,16 @@ export const useProjectById = (id: number) => {
 
 export const useProjectByPoints = (id: number) => {
     return useQuery({
-        queryKey: [PROJECTS, id],
+        queryKey: [PROJECTS, id , [PROJECT_POINTS]],
         queryFn: () => getOne<ProjectWithPoints>(PROJECTS, id),
+        staleTime: 60 * 10 * 1000
+    });
+};
+
+export const useProjectByProse = (id: number) => {
+    return useQuery({
+        queryKey: [PROJECTS, id, [PROJECT_PROSE]],
+        queryFn: () => getOne<ProjectWithProse>(PROJECTS, id),
         staleTime: 60 * 10 * 1000
     });
 };

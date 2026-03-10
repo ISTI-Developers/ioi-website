@@ -1,6 +1,6 @@
 import type z from "zod";
 import type { 
-  TeamSchema, ClientSchema, ProjectSchema, PointSchema, GallerySchema,
+  TeamSchema, ClientSchema, ProjectSchema, PointSchema, GallerySchema, ProseSchema,
   CareerSchema, BannerSchema
 
 } from "./schemas";
@@ -13,6 +13,7 @@ export type Career = z.infer<typeof CareerSchema>;
 export type Project = z.infer<typeof ProjectSchema>;
 export type Point = z.infer<typeof PointSchema>;
 export type Gallery = z.infer<typeof GallerySchema>;
+export type Prose = z.infer<typeof ProseSchema>;
 
 
 export type Banner = z.infer<typeof BannerSchema>;
