@@ -5,9 +5,10 @@ import api from "./api/config";
 import { toast } from "sonner";
 
 
-export type ProjectWithPoints = Project & { points: Point[] };
-export type ProjectWithProse= Project & { prose: Prose[] };
-
+export type ProjectWithPointsAndProse = Project & {
+  points: Point[];
+  prose: Prose[];
+};
 const PROJECTS = "projects";
 const PROJECT_POINTS = "points";
 const PROJECT_PROSE = "prose";
@@ -33,21 +34,21 @@ export const useProjectById = (id: number) => {
 };
 
 
-export const useProjectByPoints = (id: number) => {
-    return useQuery({
-        queryKey: [PROJECTS, id , [PROJECT_POINTS]],
-        queryFn: () => getOne<ProjectWithPoints>(PROJECTS, id),
-        staleTime: 60 * 10 * 1000
-    });
+export const useProjectByIdWithPointsAndProse = (id: number) => {
+  return useQuery({
+    queryKey: [PROJECTS, id],
+    queryFn: () => getOne<ProjectWithPointsAndProse>(PROJECTS, id),
+    staleTime: 60 * 10 * 1000,
+  });
 };
 
-export const useProjectByProse = (id: number) => {
-    return useQuery({
-        queryKey: [PROJECTS, id, [PROJECT_PROSE]],
-        queryFn: () => getOne<ProjectWithProse>(PROJECTS, id),
-        staleTime: 60 * 10 * 1000
-    });
-};
+// export const useProjectByProse = (id: number) => {
+//     return useQuery({
+//         queryKey: [PROJECTS, id, [PROJECT_PROSE]],
+//         queryFn: () => getOne<ProjectWithProse>(PROJECTS, id),
+//         staleTime: 60 * 10 * 1000
+//     });
+// };
 
 
 export const useAddProject = <TData = unknown>() => {
