@@ -77,10 +77,10 @@ function Slide({ slide, scrollPrev, scrollNext }: {
       <div className="flex flex-col h-full py-2 md:col-span-5">
         <div className="space-y-1">
           <p className="text-orange-500 lg:text-xl font-bold uppercase tracking-widest">// {slide.category}</p>
-          <h1 className="font-body text-white text-6xl md:text-7xl lg:text-[7rem] font-bold leading-[0.8]">
-            Case <br /> Study:
+          <h1 className="font-body text-white text-6xl md:text-7xl lg:text-[6rem] font-bold leading-[0.8]">
+            Case Study:
           </h1>
-          <h2 className="font-body hidden lg:block text-white mt-24 text-md lg:text-[3rem]/14 font-semibold">
+          <h2 className="font-body hidden lg:block text-white mt-24 text-md lg:text-[40px]/10 w-120 font-semibold">
             {slide.client} : {slide.title} {slide.subtitle}
           </h2>
         </div>
@@ -111,7 +111,7 @@ function Slide({ slide, scrollPrev, scrollNext }: {
         <div className="relative overflow-hidden rounded-2xl">
           <img
             src={url || slide.image}
-            className="rounded-2xl lg:w-250 object-cover aspect-4/5 lg:h-200"
+            className="rounded-2xl lg:w-200 object-cover aspect-4/5 lg:h-170"
             alt={slide.title}
           />
         </div>
