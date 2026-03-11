@@ -30,7 +30,7 @@ export const HomeCarousel: React.FC<HomeCarouselProps> = ({ projects }) => {
 
   if(n === 0) {
     return (
-      <div className="relative w-full h-[500px] lg:h-[800px] flex items-center justify-center">
+      <div className="relative w-full h-125 lg:h-200 flex items-center justify-center">
       <p className="text-zinc-500 text-lg">No projects available.</p>
     </div>
     )
@@ -97,7 +97,6 @@ export const HomeCarousel: React.FC<HomeCarouselProps> = ({ projects }) => {
             <div className="relative aspect-[4/5] rounded-[1.5rem] overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,0,0,1)] border border-white/10 ring-1 ring-white/10">
               <motion.div
                 className="w-full h-full"
-                whileHover={{ scale: 1.15 }}
                 transition={{ duration: 0.5 }}
               >
                 <FirebaseMedia
