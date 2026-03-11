@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import Hero from "@/components/ui/hero";
-import { groupGalleryItems, getGridCols, getGridHeights } from "@/lib/galleryUtils";
+import { groupGalleryItems, getGridCols, getGridHeights, getGridTemplateColumns } from "@/lib/galleryUtils";
 import { useGallery } from "@/hooks/useGallery";
 import FirebaseMedia from "@/components/ui/firebase-media";
 import { useProjectByIdWithPointsAndProse } from "@/hooks/useProjects";
@@ -144,7 +144,12 @@ export default function ProjectLayout() {
                 {Object.values(groupedGallery).map((group, idx) => {
                     const columns = group[0]?.columns || 1;
                     return (
-                        <div key={idx} className={`grid ${getGridCols(columns)} gap-5`}>
+
+                        <div
+                            key={idx}
+                            className="grid gap-5"
+                            style={{ gridTemplateColumns: getGridTemplateColumns(group[0]) }}
+                        >
                             {group.map(item => {
                                 const files: string[] = Array.isArray(item.file) ? item.file : [item.file].filter(Boolean) as string[];
 

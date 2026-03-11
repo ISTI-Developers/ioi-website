@@ -14,6 +14,11 @@ import {
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
 import { groupGalleryItems, getGridCols } from "@/lib/galleryUtils";
+import { galleryLayoutOptions } from "@/constants/galleryLayoutOptions";
+
+
+type ColumnCount = 1 | 2 | 3 | 4;
+
 
 interface GalleryProps {
   projectId: number;
@@ -25,6 +30,7 @@ interface Block {
   type: BlockType;
   images: (File | null)[];
   layout_group: number;
+  ratio?: string;
 }
 
 export default function Gallery({ projectId, onSuccess }: GalleryProps) {
@@ -50,9 +56,14 @@ export default function Gallery({ projectId, onSuccess }: GalleryProps) {
         type === "grid_2" ? 2 :
           type === "grid_3" ? 3 : 4;
 
+    const countKey = imageCount as ColumnCount;
+
     setBlocks(prev => [
       ...prev,
-      { id: Date.now(), type, images: Array(imageCount).fill(null), layout_group: maxGroup + 1 },
+      {
+        id: Date.now(), type, images: Array(imageCount).fill(null), layout_group: maxGroup + 1,
+        ratio: galleryLayoutOptions[countKey][0].value,
+      },
     ]);
   };
 
@@ -88,6 +99,8 @@ export default function Gallery({ projectId, onSuccess }: GalleryProps) {
               project_id: projectId,
               layout_group: block.layout_group,
               columns: block.images.length,
+              column_ratio: block.ratio,
+
               display_order: index + 1,
               file: imageUrl,
             },
@@ -132,49 +145,75 @@ export default function Gallery({ projectId, onSuccess }: GalleryProps) {
       <h2 className="text-lg font-bold">Gallery</h2>
 
 
-      <div className="mt-20 space-y-8">
+     <div className="mt-20 space-y-8">
         {Object.values(groupedGallery).map((group, idx) => {
+          const ratio = group[0]?.column_ratio;
           const columns = group[0]?.columns || 1;
-          return (
-            <div key={idx} className={`grid ${getGridCols(columns)} gap-5`}>
-              {group.map(item => {
-                const files: string[] = Array.isArray(item.file) ? item.file : [item.file].filter(Boolean) as string[];
 
-                return files.map((filePath: string, i: number) => {
-                  return (
-                    <FirebaseMedia
-                      key={`${item.gallery_id}-${i}`}
-                      path={filePath}
-                      alt="Gallery"
-                      className={`w-full ${getGridHeights(columns)} rounded-lg`}
-                    />
-                  );
-                });
-              })}
+          return (
+            <div
+              key={idx}
+              className="grid gap-5"
+              style={{
+                gridTemplateColumns: ratio || `repeat(${columns}, 1fr)`,
+              }}
+            >
+              {group.map(item => (
+                <FirebaseMedia
+                  key={item.gallery_id}
+                  path={item.file}
+                  alt="Gallery"
+                  className="w-full h-[400px] object-cover rounded-lg"
+                />
+              ))}
             </div>
           );
         })}
       </div>
 
+      {/* Upload blocks */}
       {blocks.map(block => {
-        const gridClass =
-          block.type === "single"
-            ? "grid-cols-1"
-            : block.type === "grid_2"
-              ? "grid-cols-2"
-              : block.type === "grid_3"
-                ? "grid-cols-3"
-                : "grid-cols-4";
+        const columnCount = block.images.length as ColumnCount;
+        const layouts = galleryLayoutOptions[columnCount];
 
         return (
-          <div key={block.id} className={`grid ${gridClass} gap-4`}>
-            {block.images.map((img, idx) => (
-              <UploadBox
-                key={idx}
-                file={img}
-                onUpload={(file) => handleUpload(block.id, idx, file)}
-              />
-            ))}
+          <div key={block.id} className="space-y-3">
+            {/* Layout dropdown */}
+            {layouts && layouts.length > 1 && (
+              <select
+                value={block.ratio}
+                onChange={(e) =>
+                  setBlocks(prev =>
+                    prev.map(b =>
+                      b.id === block.id ? { ...b, ratio: e.target.value } : b
+                    )
+                  )
+                }
+                className="border rounded-md p-2"
+              >
+                {layouts.map(layout => (
+                  <option key={layout.value} value={layout.value}>
+                    {layout.label}
+                  </option>
+                ))}
+              </select>
+            )}
+
+            {/* Upload grid */}
+            <div
+              className="grid gap-4"
+              style={{
+                gridTemplateColumns: block.ratio || `repeat(${block.images.length}, 1fr)`,
+              }}
+            >
+              {block.images.map((img, idx) => (
+                <UploadBox
+                  key={idx}
+                  file={img}
+                  onUpload={(file) => handleUpload(block.id, idx, file)}
+                />
+              ))}
+            </div>
           </div>
         );
       })}

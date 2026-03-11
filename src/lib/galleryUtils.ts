@@ -25,10 +25,14 @@ export function getGridCols(cols: number): string {
 
 export function getGridHeights(cols: number): string {
   switch (cols) {
-    case 1: return "h-180";   
-    case 2: return "h-170";  
-    case 3: return "h-150";   
+    case 1: return "h-160";   
+    case 2: return "h-140";  
+    case 3: return "h-130";   
     case 4: return "h-110";   
     default: return "h-60";
   }
+}
+
+export function getGridTemplateColumns(item: any): string {
+  return item.column_ratio || `repeat(${item.columns || 1}, 1fr)`;
 }
