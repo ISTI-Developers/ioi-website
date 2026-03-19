@@ -59,7 +59,10 @@ function ImageDialog({
         {images.length > 1 && (
           <div className="flex items-center justify-center w-full">
             <div className="w-full max-w-[300px]">
-              <ImageCarousel images={images} setDisplayImage={setDisplayImage} />
+              <ImageCarousel
+              images={images}
+              setDisplayImage={setDisplayImage}
+              baseUrl={baseUrl} />
             </div>
           </div>
         )}

@@ -19,6 +19,24 @@ export function useClientColumns(
 ): ColumnDef<Client>[] {
     return [
         {
+            accessorKey: "file",
+            header: "Image",
+            cell: ({ row }) => {
+                const file = row.original.file;
+                return file ? (
+                    <img
+                        src={file}
+                        alt={`${row.original.client_name} logo`}
+                        className="w-16 h-10 rounded-md  object-cover"
+                    />
+                ) : (
+                    <div className="w-16 h-10 rounded-md bg-muted flex items-center justify-center text-xs text-muted-foreground">
+                        N/A
+                    </div>
+                );
+            },
+        },
+        {
             accessorKey: "client_name",
             header: "Client Name",
         },
@@ -26,7 +44,6 @@ export function useClientColumns(
             accessorKey: "client_description",
             header: "Client Description",
         },
-
         {
             id: "actions",
             header: "Actions",
@@ -56,13 +73,10 @@ export function useClientColumns(
 }
 
 export const def_client_columns = [
+  "file",
   "client_name",
   "client_description",
   "actions",
 ];
 
 export const client_filters = ["client_name"];
-
-
-
-

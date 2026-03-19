@@ -30,7 +30,7 @@ export default function TeamPage() {
 
     const handleDelete = (team: Team) => {
         if (!confirm(`Are you sure you want to delete "${team.first_name} ${team.last_name}"?`)) return;
-        deleteTeam({ id: team.team_id!, fileUrl: team.file });
+        deleteTeam({ id: team.team_id!, fileUrl: team.file ?? []});
     };
 
     if (isLoading) return <div className="p-6">Loading...</div>;

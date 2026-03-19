@@ -9,9 +9,10 @@ import {
 interface ImageCarouselProps {
   images: string[];
   setDisplayImage: (image: string) => void;
+  baseUrl?: string;
 }
 
-function ImageCarousel({ images, setDisplayImage }: ImageCarouselProps) {
+function ImageCarousel({ images, setDisplayImage, baseUrl = import.meta.env.VITE_SERVER }: ImageCarouselProps) {
   return (
     <div className="w-full">
       <Carousel
@@ -31,7 +32,7 @@ function ImageCarousel({ images, setDisplayImage }: ImageCarouselProps) {
                   className="w-full h-full p-0 rounded-sm overflow-hidden focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                 >
                     <img
-                    src={`${import.meta.env.VITE_SERVER}${image}`}
+                    src={`${baseUrl}${image}`} 
                     alt={`Image ${index + 1}`}
                     className="object-cover h-full rounded-sm"
                     />

@@ -3,6 +3,7 @@ import { EllipsisVertical } from "lucide-react";
 import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover";
 import { Command, CommandGroup, CommandItem, } from "@/components/ui/command";
 import { Button } from "@/components/ui/button";
+import ImageDialog from "@/components/ui/image-dialog";
 
 export type Team = {
   team_id?: number;
@@ -14,7 +15,7 @@ export type Team = {
   quote?: string;
   role_id?:number;
   role_name?: string;
-  file?: string;
+  file?: string[];
 };
 
 export function useTeamColumns(
@@ -22,6 +23,31 @@ export function useTeamColumns(
   onDelete?: (row: Team) => void
 ): ColumnDef<Team>[] {
   return [
+    {
+      accessorKey: "file",
+      header: "Image",
+      cell: ({ row }) => {
+        const file = row.original.file; 
+        const fullName = `${row.original.first_name} ${row.original.last_name}`;
+    
+        if (!file) {
+          return (
+            <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center text-xs text-muted-foreground">
+              N/A
+            </div>
+          );
+        }
+    
+        return (
+          <ImageDialog
+            title={fullName}
+            images={file} 
+            baseUrl=""
+            triggerClassName="w-10 h-10 object-cover rounded-sm cursor-pointer"
+          />
+        );
+      },
+    },
     {
       accessorKey: "employee_id",
       header: "Employee ID",
@@ -34,18 +60,14 @@ export function useTeamColumns(
       accessorKey: "last_name",
       header: "Last Name",
     },
-
     {
       accessorKey: "position",
       header: "Position",
     },
-
     {
       accessorKey: "role_name",
       header: "Role",
     },
-
-
     {
       id: "actions",
       header: "Actions",
@@ -75,6 +97,7 @@ export function useTeamColumns(
 }
 
 export const def_team_columns = [
+  "file",
   "employee_id",
   "first_name",
   "last_name",

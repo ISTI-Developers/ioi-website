@@ -17,7 +17,7 @@ export type Team = {
   quote?: string;
   role_id?: number;
   role_name?: string;
-  file?: string;
+  file?: string [];
 };
 
 export const useTeams = () => {
@@ -25,7 +25,13 @@ export const useTeams = () => {
     queryKey: [TEAM],
     queryFn: async ()=> {
       const res = await api.get(`index.php?resource=${TEAM}`);
-      return res.data;
+      console.log("API response:", res.data); 
+
+      if (Array.isArray(res.data)) return res.data;          
+      if (Array.isArray(res.data?.data)) return res.data.data;
+      if (Array.isArray(res.data?.results)) return res.data.results; 
+
+      return [];
     },
     staleTime: 10 * 60 * 1000,
   });
@@ -53,7 +59,7 @@ export const useTeam = (id: number) => {
   });
 };
 
-// Multiple File Array
+
 
 export const useAddTeam = <TData = unknown>() => {
   const queryClient = useQueryClient();
@@ -104,7 +110,7 @@ export const useUpdateTeam = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: async ({ id, data }: { id: number; data: Partial<Team>}) => {
+    mutationFn: async ({ id, data, oldFiles, }: { id: number; data: Partial<Team>; oldFiles?: string[]}) => {
       const res = await api.put(`index.php?resource=${TEAM}&id=${id}`, data, {
         headers: { "Content-Type": "application/json" },
       });
@@ -119,30 +125,37 @@ export const useUpdateTeam = () => {
 };
 
 export const useDeleteTeam = () => {
-    const queryClient = useQueryClient();
+  const queryClient = useQueryClient();
 
-    return useMutation({
-      mutationFn: async ({ id, fileUrl }: { id:number; fileUrl?: string }) => {
-        if (fileUrl && fileUrl.includes("firebasestorage.googleapis.com")){
-          try {
-            const storage = getStorage(app);
-            const fileRef = ref(storage, fileUrl);
-            await deleteObject(fileRef);
-          } catch (err) {
-              console.warn("Firebase delete failed:", err);
-          }
-        }
-        const res = await api.delete(`index.php?resource=${TEAM}&id=${id}`);
-        return res.data;
-      },
-      onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: [TEAM] });
-        toast.success("Successfully deleted Team Member");
-      },
-      onError: (err: any) => {
-        console.error("Failed to delete team member:", err);
-        toast.error("Failed to delete team member");
-      },
+  return useMutation({
+    mutationFn: async ({ id, fileUrl }: { id: number; fileUrl?: string[] }) => {
+
+      if (fileUrl && fileUrl.length > 0) {
+        const storage = getStorage(app);
+        await Promise.all(
+          fileUrl
+            .filter((url) => url.includes("firebasestorage.googleapis.com"))
+            .map(async (url) => {
+              try {
+                const fileRef = ref(storage, url);
+                await deleteObject(fileRef);
+              } catch (err) {
+                console.warn("Firebase delete failed:", err);
+              }
+            })
+        );
+      }
+      const res = await api.delete(`index.php?resource=${TEAM}&id=${id}`);
+      return res.data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: [TEAM] });
+      toast.success("Successfully deleted Team Member");
+    },
+    onError: (err: any) => {
+      console.error("Failed to delete team member:", err);
+      toast.error("Failed to delete team member");
+    },
   });
 };
 

@@ -14,6 +14,7 @@ import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { app } from "@/firebase";
 import type { Team } from "@/hooks/useTeam";
 import { toast } from "sonner";
+import { X } from "lucide-react";
 
 interface TeamFormProps {
     onSuccess?: () => void;
@@ -37,32 +38,50 @@ function TeamForm({ onSuccess, existing }: TeamFormProps) {
     });
 
     const [files, setFiles] = useState<File[]>([]);
+
+    // 👈 tracks which existing images the user wants to keep
+    const [keptFiles, setKeptFiles] = useState<string[]>(existing?.file ?? []);
+
     const { mutate: addTeam, isPending: isAdding } = useAddTeam();
     const { mutate: updateTeam, isPending: isUpdating } = useUpdateTeam();
     const { data: roles } = useRoles();
     const isPending = isAdding || isUpdating;
 
+    const handleRemoveExisting = (urlToRemove: string) => {
+        setKeptFiles((prev) => prev.filter((url) => url !== urlToRemove));
+    };
+
     const onSubmit = async (values: any) => {
         try {
-            let fileURL = existing?.file ?? "";
+            let fileURLs: string[] = keptFiles;
 
             if (files.length > 0) {
                 const storage = getStorage(app);
-                const file = files[0];
-                const imageRef = ref(storage, `team/${Date.now()}_${file.name}`);
-                await uploadBytes(imageRef, file);
-                fileURL = await getDownloadURL(imageRef);
-                console.log("Firebase Download URL:", fileURL);
-            } else if (!isEdit) {
-                alert("Please upload a profile image");
+
+                const uploadedURLs = await Promise.all(
+                    files.map(async (file) => {
+                        const imageRef = ref(storage, `team/${Date.now()}_${file.name}`);
+                        await uploadBytes(imageRef, file);
+                        return await getDownloadURL(imageRef);
+                    })
+                );
+
+                
+                fileURLs = [...fileURLs, ...uploadedURLs];
+            } else if (!isEdit && fileURLs.length === 0) {
+                alert("Please upload at least one profile image");
                 return;
             }
 
-            const payload = { ...values, file: fileURL };
+            const payload = { ...values, file: fileURLs };
 
             if (isEdit) {
                 updateTeam(
-                    { id: existing!.team_id!, data: payload },
+                    {
+                        id: existing!.team_id!,
+                        data: payload,
+                        oldFiles: existing?.file ?? [], 
+                    },
                     {
                         onSuccess: () => {
                             toast.success("Team member updated successfully");
@@ -88,9 +107,10 @@ function TeamForm({ onSuccess, existing }: TeamFormProps) {
                     },
                 });
             }
-            } catch (error) {
-                console.error("Upload failed:", error);
-            }
+        } catch (error) {
+            console.error("Upload failed:", error);
+            toast.error("Image upload failed");
+        }
     };
 
     return (
@@ -155,14 +175,36 @@ function TeamForm({ onSuccess, existing }: TeamFormProps) {
                     />
                 </FormCardContent>
 
-                <FormCardContent title="Profile Image">
+                <FormCardContent title="Profile Images">
+                    {isEdit && keptFiles.length > 0 && (
+                        <div className="flex flex-wrap gap-2 mb-2">
+                            {keptFiles.map((url) => (
+                                <div key={url} className="relative group">
+                                    <img
+                                        src={url}
+                                        alt="existing"
+                                        className="w-16 h-16 object-cover rounded-md border"
+                                    />
+                                    <button
+                                        type="button"
+                                        onClick={() => handleRemoveExisting(url)}
+                                        className="absolute -top-2 -right-2 bg-destructive text-destructive-foreground rounded-full p-0.5 opacity-0 group-hover:opacity-100 transition-opacity"
+                                    >
+                                        <X className="w-3 h-3" />
+                                    </button>
+                                </div>
+                            ))}
+                        </div>
+                    )}
+
                     <FormFieldFile
                         control={form.control}
                         name="file"
-                        label="Image"
-                        placeholder="Upload profile image"
+                        label="Images"
+                        placeholder="Upload profile images"
                         files={files}
                         setFiles={setFiles}
+                        multiple
                     />
                 </FormCardContent>
 
