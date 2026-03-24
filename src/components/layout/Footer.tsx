@@ -14,6 +14,7 @@ export default function Footer() {
     const socialLinks = [
         { name: "Facebook", href: "https://www.facebook.com/InnovationOneIncorporated" },
         { name: "Instagram", href: "https://www.instagram.com/innovationoneincorporated" },
+        { name: "Tiktok", href: "https://www.tiktok.com/@innovationone.inc" },
     ];
 
     return (
