@@ -18,10 +18,10 @@ function Careers() {
             <CareerList />
 
             
-            <FeaturedImage section = "career_bottom"/>
+            {/* <FeaturedImage section = "career_bottom"/>
 
 
-            <Clients/>
+            <Clients/> */}
 
 
         </div>
