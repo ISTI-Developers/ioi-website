@@ -31,7 +31,7 @@ function App() {
 
   return (
    
-    < div className = {`min-h-screen ${isAdminRoute ? "bg-white font-sans" : "bg-black"}`}>
+    < div className = {`min-h-screen ${isAdminRoute ? "bg-white font-sans" : " "}`}>
   {/* <div className={`min-h-screen ${isAdminRoute ? "bg-white font-sans" : "bg-[#121212]"}`}> */}
 
     {!isAdminRoute && <Navbar />}
