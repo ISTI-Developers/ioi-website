@@ -4,6 +4,8 @@ import type { Tab } from "@/data/types";
 import Bullet from "./projectdetails/Bullet";
 import Gallery from "./projectdetails/Gallery";
 import Prose from "./projectdetails/Prose";
+
+import Video from "./projectdetails/Video";
 import DisplayTabsByStatus from "@/components/layout/DisplayTabs";
 
 interface ProjectDetailProps {
@@ -18,6 +20,7 @@ export default function ProjectDetail({ project, onBack }: ProjectDetailProps) {
     { value: "bullet", label: "Bullet" },
     { value: "prose", label: "Prose" },
     { value: "gallery", label: "Gallery" },
+    { value: "videos", label: "Videos" },
   ];
 
   return (
@@ -47,6 +50,10 @@ export default function ProjectDetail({ project, onBack }: ProjectDetailProps) {
 
           {selectedStatus === "prose" && project.project_id && (
             <Prose projectId={project.project_id} />
+          )}
+
+          {selectedStatus === "videos" && project.project_id && (
+            <Video projectId={project.project_id} />
           )}
         </div>
       </DisplayTabsByStatus>
