@@ -15,3 +15,18 @@ export const useVideo = (id: number) => {
     });
 }
 
+export const useAddVideo = <TData=unknown>() => {
+    const queryClient = useQueryClient();
+
+    return useMutation({
+        mutationFn: async (data: TData) => {
+            const res = await api.post(`index.php?resource=${VIDEO}`, data);
+            return res.data;
+        },
+        onSuccess: (_data) => {
+            queryClient.refetchQueries({ queryKey: [VIDEO]});
+            toast.success("Successfully added new video");
+        },
+        onError: catchError,
+    });
+}
