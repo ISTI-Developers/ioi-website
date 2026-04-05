@@ -105,7 +105,7 @@ function FormFieldFile({
                       setProcessedCount(allowed.length);
                     }
 
-                    const newFiles = multiple ? [...files, ...allowed] : allowed.slice(0,1);
+                    const newFiles = multiple ? [...files, ...allowed] : allowed.slice(0, 1);
                     setFiles(newFiles);
                     setImages(
                       newFiles.map((file) => URL.createObjectURL(file))
@@ -124,9 +124,8 @@ function FormFieldFile({
                 >
                   <Upload className="h-4 w-4" />
                   {files.length > 0
-                    ? `Change Files (${files.length}${
-                        effectiveMax ? ` / ${effectiveMax}` : ""
-                      })`
+                    ? `Change Files (${files.length}${effectiveMax ? ` / ${effectiveMax}` : ""
+                    })`
                     : placeholder}
                 </Button>
               </div>
@@ -139,11 +138,23 @@ function FormFieldFile({
                       className="flex items-center gap-2 rounded-md"
                     >
                       {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
-                        src={image}
-                        className="max-w-20"
-                        alt={`preview-${index}`}
-                      />
+
+                      {files[index]?.type?.startsWith("video/") ? (
+                        <video
+                          src={image}
+                          className="max-w-20 rounded"
+                          controls
+                        />
+                      ) : (
+                        <img
+                          src={image}
+                          className="max-w-20"
+                          alt={`preview-${index}`}
+                        />
+                      )
+
+                      }
+
                       <Button
                         type="button"
                         variant="ghost"
@@ -178,7 +189,7 @@ function FormFieldFile({
               </div>
 
               <p className="text-xs text-gray-500">
-                Supported formats: JPG, PNG (Max 10MB each)
+                Supported formats depend on field type (Max 10MB each)
               </p>
               {effectiveMax ? (
                 <p className="text-xs text-gray-500">
