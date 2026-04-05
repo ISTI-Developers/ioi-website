@@ -61,6 +61,12 @@ export const ProseSchema = z.object({
     content: z.string({ message: "Description is required" }),
 });
 
+export const VideoSchema = z.object({
+    video_id: z.number().optional(),
+    project_id: z.number(),
+    file: z.string({ message: "Video URL is required" }),
+})
+
 
 
 
