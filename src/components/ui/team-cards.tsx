@@ -3,6 +3,8 @@ import { useState, useEffect, useRef } from "react";
 
 interface TeamCardProps {
     members: TeamMember[] | undefined;
+    cols?: number;
+    imgClassName?: string;
 }
 
 interface ImageCyclerProps {
@@ -46,39 +48,48 @@ function ImageCycler({ images, alt, className }: ImageCyclerProps) {
     );
 }
 
-export default function TeamCards({ members }: TeamCardProps) {
+const colsMap: Record<number, string> = {
+    2: "grid-cols-2",
+    3: "grid-cols-2 lg:grid-cols-3",
+    4: "grid-cols-2 lg:grid-cols-4",
+};
+
+export default function TeamCards({
+    members,
+    cols,
+    imgClassName = "w-full object-cover rounded-2xl",
+}: TeamCardProps) {
     if (!members) return null;
 
-    return (
-        <div className="flex flex-col">
-            {members
-                .filter((member): member is TeamMember & { file: string[] } =>
-                    Array.isArray(member.file) && member.file.length > 0
-                )
-                .map((member, index, filtered) => (
-                    <div key={member.team_id}>
-                        <article className="flex flex-col lg:flex-row gap-6 items-end mb-4">
-                            <ImageCycler
-                                images={member.file}
-                                alt={`${member.first_name} ${member.last_name}`}
-                                className="w-80 h-80 object-cover rounded-3xl"
-                            />
-                            <div className="flex flex-col mt-6 text-left">
-                                <p className="lg:text-[1.2rem] text-gray-300 mb-8 min-h-20">
-                                    {member.quote}
-                                </p>
-                                <h3 className="lg:text-[1.6rem] font-semibold">
-                                    {member.first_name} {member.last_name}
-                                </h3>
-                                <p className="text-sm text-gray-400">{member.position}</p>
-                            </div>
-                        </article>
+    const filtered = members.filter(
+        (member): member is TeamMember & { file: string[] } =>
+            Array.isArray(member.file) && member.file.length > 0
+    );
 
-                        {index !== filtered.length - 1 && (
-                            <div className="my-12 w-full border-b border-white/20" />
-                        )}
+    // Grid layout (new UI)
+if (cols) {
+    return (
+        <div className={`grid ${colsMap[cols] ?? "grid-cols-2 lg:grid-cols-3"} gap-6`}>
+            {filtered.map((member) => (
+                <div key={member.team_id} className="flex flex-col items-center text-center">
+                    <div className="w-full max-w-[300px] ">
+                        <ImageCycler
+                            images={member.file}
+                            alt={`${member.first_name} ${member.last_name}`}
+                            className={imgClassName}
+                        />
                     </div>
-                ))}
+                    <h3 className="font-heading font-bold text-base lg:text-lg text-primary mt-1">
+                        {member.first_name} {member.last_name}
+                    </h3>
+                    <p className="text-gray-400 text-xs lg:text-sm">{member.position}</p>
+                    {member.quote && (
+                        <p className="text-gray-400 text-xs italic leading-snug px-2">"{member.quote}"</p>
+                    )}
+                    
+                </div>
+            ))}
         </div>
     );
+}
 }

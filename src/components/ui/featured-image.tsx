@@ -12,14 +12,14 @@ export function FeaturedImage({ section, imgClassName = "" }: FeaturedImageProps
 
   if (isLoading)
     return (
-      <div className="w-full aspect-video rounded-3xl bg-gray-800 animate-pulse" />
+      <div className="w-full rounded-3xl bg-gray-800 animate-pulse" />
     );
 
 
   if (!banner) return null;
 
   return (
-    <div className="relative w-full aspect-video overflow-hidden rounded-3xl">
+    <div className="relative w-full overflow-hidden rounded-3xl">
         <img
           src={banner.file} 
           alt="Banner"

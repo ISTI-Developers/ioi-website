@@ -8,26 +8,57 @@ import { ContactForm } from "../components/pages/forms/contact";
 
 function About() {
     return (
-        <div className="w-full overflow-x-hidden px-2 lg:px-25 flex flex-col space-y-12 lg:space-y-42">
+        <div className="w-full overflow-x-hidden px-4 md:px-10 lg:px-20 flex flex-col space-y-10 md:space-y-16 lg:space-y-24">
 
             <Hero
                 title={<>/About us</>}
-                description="Located in Makati, Philippines, our Agency is dedicated to crafting robust and renowned brands."
             />
 
-            <div className="-mt-20 lg:-mt-32">
-                <FeaturedImage section = "about_top"  imgClassName="h-170"/>
-            </div>
+            <section className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-20 items-start">
 
+                {/* Left: Company description */}
+                <div className="space-y-4">
+                    <p className="text-base md:text-lg lg:text-xl text-gray-300 text-justify">
+                        <span
+                            className="text-2xl md:text-4xl lg:text-6xl font-extrabold"
+                            style={{ color: "#C8391A" }}
+                        >
+                            InnovationOne Inc.{" "}
+                        </span>
+                        Operating right out of Makati, we’re a digital marketing agency that takes your brand’s online growth
+                        as seriously as we take securing a table in Poblacion on a payday Friday. We navigate the wild,
+                        ever-changing algorithms of the internet with the exact same street-smarts required to survive
+                        rush hour on Edsa—fast, strategic, and occasionally relying on sheer willpower.
+
+                        Forget the tired corporate jargon and copy-paste campaigns; we’re a heavily caffeinated crew of
+                        data nerds and creatives who specialize in stopping the doomscroll and making your audience actually
+                        pay attention. We turn clicks into clients, likes into loyalty, and your marketing budget into the
+                        smartest investment you’ve made since deciding to carry an emergency umbrella in July.
+
+                    </p>
+                </div>
+
+                {/* Right: Team photo */}
+                <div className="w-full max-w-[900px] h-[400px] sm:h-[500px] md:h-[600px] lg:h-[700px]">
+                    <FeaturedImage
+                        section="about_top"
+                    />
+                </div>
+
+            </section>
+
+            {/* 
             <Experience />
 
             <Clients />
+            */}
 
-            <div className="ml-25">
                 <TeamMembers />
-            </div>
 
+
+            {/*
             <ContactForm />
+            */}
         </div>
     )
 }
