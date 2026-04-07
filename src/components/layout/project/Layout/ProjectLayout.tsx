@@ -1,10 +1,12 @@
 import { useParams } from "react-router-dom";
 import Hero from "@/components/ui/hero";
-import { groupGalleryItems, getGridCols, getGridHeights, getGridTemplateColumns } from "@/lib/galleryUtils";
+// import { groupGalleryItems, getGridCols, getGridHeights, getGridTemplateColumns } from "@/lib/galleryUtils";
 import { useGallery } from "@/hooks/useGallery";
 import FirebaseMedia from "@/components/ui/firebase-media";
 import { useProjectByIdWithPointsAndProse } from "@/hooks/useProjects";
 import { formatMonthYear } from "@/lib/dateUtils";
+import VideoCarousel from "@/components/ui/videos";
+import { useVideo } from "@/hooks/useVideo";
 
 
 export default function ProjectLayout() {
@@ -12,16 +14,21 @@ export default function ProjectLayout() {
     const projectId = Number(id);
 
     const { data: project, isLoading } = useProjectByIdWithPointsAndProse(projectId);
+    const { data: videoData, isLoading: isLoadingVideo } = useVideo(projectId);
     const { data: galleryData, isLoading: loadingGallery } = useGallery(projectId);
 
 
     if (isLoading) return <p>Loading...</p>;
     if (!project) return <p>Project not found</p>;
+
     if (loadingGallery) return <p>Loading gallery...</p>;
 
 
     const galleryArray = Array.isArray(galleryData?.gallery) ? galleryData.gallery : [];
-    const groupedGallery = groupGalleryItems(galleryArray);
+    // const groupedGallery = groupGalleryItems(galleryArray);
+
+    const videos = videoData?.video ?? [];
+
 
 
     const points = project.points ?? [];
@@ -114,6 +121,10 @@ export default function ProjectLayout() {
                 <div>
                 </div>
             </div>
+
+            <VideoCarousel videos={videos} height="h-160" />
+
+
             {hasPoints ? (
                 <>
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-50 mt-20">
@@ -154,7 +165,7 @@ export default function ProjectLayout() {
                 </div>
             )}
 
-            <div className="mt-20 space-y-8">
+            {/* <div className="mt-20 space-y-8">
                 {Object.values(groupedGallery).map((group, idx) => {
                     const columns = group[0]?.columns || 1;
                     return (
@@ -179,7 +190,7 @@ export default function ProjectLayout() {
                         </div>
                     );
                 })}
-            </div>
+            </div> */}
         </div>
     );
 }
