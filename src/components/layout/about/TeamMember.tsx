@@ -45,13 +45,24 @@ export default function TeamMembers() {
       : strategyMembers;
 
   return (
-    <section className="py-20 text-white overflow-x-hidden bg-black">
+    <section className="text-white overflow-x-hidden bg-black">
       <div className="max-w-7xl mx-auto">
 
         {/* Title */}
-        <header className="text-center mb-16">
-          <h1 className="font-heading text-5xl lg:text-7xl font-bold leading-tight">
-            The <span className="text-primary">Team</span> <br /> Members
+        <header className="text-center">
+          <h1 className="font-heading text-6xl lg:text-8xl font-bold leading-tight flex flex-col items-center gap-2 mb-5">
+            
+            <div className="flex items-center justify-center gap-3 flex-wrap">
+              The 
+              <img 
+                src="/team.gif" 
+                alt="Team"
+                className="inline-block h-23 lg:h-35 object-contain"
+              />
+            </div>
+
+            <span>Members</span>
+
           </h1>
         </header>
 
@@ -62,7 +73,7 @@ export default function TeamMembers() {
         <hr className="border-white/20 my-10" />
 
         {/* Filter tabs */}
-        <div className="flex justify-center">
+        <div className="flex justify-center align-center ">
         <ButtonPortfolio
           types={filterTypes}
           activeFilter={activeFilter}
@@ -71,8 +82,8 @@ export default function TeamMembers() {
       </div>
 
         {/* Filtered members — 3 col grid */}
-        <div className="mt-12">
-        <TeamCards members={filteredMembers} cols={3} />
+        <div className="px-4 pb-10 sm:px-6 sm:pb-16 md:px-12 md:pb-20 lg:px-24 lg:pb-24 xl:px-50 xl:pb-50 2xl:px-60 2xl:pb-60">
+          <TeamCards members={filteredMembers} cols={3} />
         </div>
 
       </div>

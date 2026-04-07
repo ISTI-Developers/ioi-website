@@ -66,25 +66,24 @@ export default function TeamCards({
             Array.isArray(member.file) && member.file.length > 0
     );
 
-    // Grid layout (new UI)
 if (cols) {
     return (
-        <div className={`grid ${colsMap[cols] ?? "grid-cols-2 lg:grid-cols-3"} gap-6`}>
+        <div className={`grid ${colsMap[cols] ?? "grid-cols-2 lg:grid-cols-3"} gap-6 `}>
             {filtered.map((member) => (
                 <div key={member.team_id} className="flex flex-col items-center text-center">
-                    <div className="w-full max-w-[300px] ">
+                    <div className="w-full">
                         <ImageCycler
                             images={member.file}
                             alt={`${member.first_name} ${member.last_name}`}
                             className={imgClassName}
                         />
                     </div>
-                    <h3 className="font-heading font-bold text-base lg:text-lg text-primary mt-1">
+                    <h3 className="font-heading font-bold text-lg lg:text-xl text-primary mt-5">
                         {member.first_name} {member.last_name}
                     </h3>
-                    <p className="text-gray-400 text-xs lg:text-sm">{member.position}</p>
+                    <p className="text-white-400 text-lg lg:text-xl font-normal">{member.position}</p>
                     {member.quote && (
-                        <p className="text-gray-400 text-xs italic leading-snug px-2">"{member.quote}"</p>
+                        <p className="text-gray-400 text-base italic leading-snug px-2">"{member.quote}"</p>
                     )}
                     
                 </div>
