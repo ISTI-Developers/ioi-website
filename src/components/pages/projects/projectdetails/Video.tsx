@@ -6,48 +6,66 @@ import {
     CarouselNext,
     CarouselPrevious,
 } from "@/components/ui/carousel";
+import FirebaseMedia from "@/components/ui/firebase-media";
+import { useVideo } from "@/hooks/useVideo";
 import FormSheet from "@/components/layout/FormSheet";
 import FormSheetTrigger from "@/components/ui/form-sheet-trigger";
 import VideoForm from "../../forms/create/VideoForm";
-import FirebaseMedia from "@/components/ui/firebase-media";
-
-import { useVideo } from "@/hooks/useVideo";
 import { Plus } from "lucide-react";
 
 
-interface VideosProps {
-    projectId: number;
-    onSuccess?: () => void;
+interface Video {
+    video_id?: number;
+    file: string;
 }
 
-export default function Videos({ projectId, onSuccess }: VideosProps) {
+
+
+
+interface VideoProps {
+    projectId: number
+    height?: string;
+    showAdd?: boolean;
+    onSuccess?: () => void;
+
+
+}
+
+
+export default function Video({ projectId, height = "120", showAdd = true, onSuccess }: VideoProps) {
     const [ratios, setRatios] = useState<Record<number, boolean>>({});
 
-    const { data, isLoading } = useVideo(projectId);
-    const videos = data?.video ?? [];
+    const { data: videoData, isLoading } = useVideo(projectId);
+    const videos = videoData?.video ?? [];
 
     if (isLoading) return <div>Loading...</div>;
 
 
+
+
     const handleMetadata = (videoId: number | undefined, e: React.SyntheticEvent<HTMLVideoElement>) => {
-        if (videoId === undefined) return;
-        const el = e.currentTarget;
-        setRatios(prev => ({ ...prev, [videoId]: el.videoHeight > el.videoWidth }));
+        if (!videoId) return;
+        const vid = e.currentTarget;
+        const isPortratit = vid.videoHeight > vid.videoWidth;
+        setRatios(prev => ({ ...prev, [videoId]: isPortratit }));
     };
 
 
     return (
         <div className="space-y-4">
-            <div className="flex justify-end">
-                <FormSheet
-                    type="Video"
-                    taskName="Add a New"
-                    button={<FormSheetTrigger icon={Plus} buttonName="New" name="Add" />}
-                    form={<VideoForm projectId={projectId} onSuccess={onSuccess} />}
-                />
-            </div>
 
-            <Carousel className="w-full px-10">
+            {showAdd && (
+                <div className="flex justify-end">
+                    <FormSheet
+                        type="Video"
+                        taskName="Add a New"
+                        button={<FormSheetTrigger icon={Plus} buttonName="New" name="Add" />}
+                        form={<VideoForm projectId={projectId} onSuccess={onSuccess} />}
+                    />
+                </div>
+            )}
+
+            <Carousel className="w-full">
                 <CarouselContent>
                     {videos.map((video) => {
                         const isPortrait = video.video_id !== undefined && ratios[video.video_id];
@@ -59,7 +77,7 @@ export default function Videos({ projectId, onSuccess }: VideosProps) {
                                 <div>
                                     <FirebaseMedia
                                         path={video.file}
-                                        className={`w-full rounded-md object-contain bg-black h-150`}
+                                        className={`w-full rounded-md object-contain bg-black ${height}`}
                                         onLoadedMetadata={(e) => handleMetadata(video.video_id, e)}
                                     />
                                 </div>
@@ -71,5 +89,8 @@ export default function Videos({ projectId, onSuccess }: VideosProps) {
                 <CarouselNext />
             </Carousel>
         </div>
-    );
+    )
+
+
 }
+
