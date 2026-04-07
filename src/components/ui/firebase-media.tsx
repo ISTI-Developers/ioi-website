@@ -10,47 +10,51 @@ interface FirebaseMediaProps {
     autoplay?: boolean;
     loop?: boolean;
     muted?: boolean;
+    onLoadedMetadata?: (e: React.SyntheticEvent<HTMLVideoElement>) => void;
+
 }
 
 
-export default function FirebaseMedia ({ 
+export default function FirebaseMedia({
     path,
     alt = "Media",
     className = "",
     autoplay = false,
     loop = false,
     muted = false,
+    onLoadedMetadata,
+
 }: FirebaseMediaProps) {
     const { url, loading, error } = useImageUrl(path);
-console.log({ path, url, loading, error });
+    console.log({ path, url, loading, error });
 
 
-    if(!path) return null;
+    if (!path) return null;
 
 
     if (loading) {
         return <Skeleton className={cn("w-full h-100 rounded-lg", className)} />;
     }
 
-    if(error || !url) {
+    if (error || !url) {
         return <Skeleton className={cn("w-full h-100 rounded-lg", className)} />;
     }
 
     const ext = path.split("?")[0].split(".").pop()?.toLowerCase();
-    const isVideo = ext === "mp4" || ext ==="webm" || ext === "mov";
+    const isVideo = ext === "mp4" || ext === "webm" || ext === "mov";
 
 
-    if(isVideo) {
+    if (isVideo) {
         return (
             <video
-            src={url}
-            className={`object-cover ${className}`}
-            controls
-            autoPlay={autoplay}
-            loop={loop}
-            muted={true}
-
-            playsInline
+                src={url}
+                className={`object-cover ${className}`}
+                controls
+                autoPlay={autoplay}
+                loop={loop}
+                muted={true}
+                onLoadedMetadata={onLoadedMetadata}
+                playsInline
             />
         )
     }
