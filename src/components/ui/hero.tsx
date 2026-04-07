@@ -11,8 +11,8 @@ export default function Hero({
     isHome = false
 }: HeroProps) { 
     return (
-        <div className="w-full text-white">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 lg:gap-2 items-end py-10">
+        <div>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 lg:gap-2 items-end pt-20">
                 
                 <h1 className={`font-heading font-semibold 
                     ${isHome ? 

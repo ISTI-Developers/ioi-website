@@ -1,6 +1,4 @@
 import { useParams } from "react-router-dom";
-import { Clients } from "../components/layout/home/Clients";
-import { ContactForm } from "../components/pages/forms/contact";
 import ProjectLayout from "@/components/layout/project/Layout/ProjectLayout";
 import { useProjectByIdWithPointsAndProse } from "@/hooks/useProjects";
 
@@ -18,8 +16,6 @@ export default function ProjectDetails() {
   return (
     <div className="w-full overflow-x-hidden text-white px-2 lg:px-25 flex flex-col space-y-10 lg:space-y-42">
       <ProjectLayout />
-      <Clients />
-      {/* <ContactForm /> */}
     </div>
   );
 }

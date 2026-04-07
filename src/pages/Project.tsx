@@ -38,7 +38,7 @@ function Projects() {
         </div>
       </div> */}
 
-      <img src="/projects.gif" alt="project" className="w-250 mx-auto block mt-15" />
+      <img src="/projects.gif" alt="Project Gif" className="w-250 mx-auto block mt-15" />
 
 
 
@@ -48,7 +48,7 @@ function Projects() {
         onFilterChange={setActiveFilter}
       />
 
-      <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
+      <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 mb-30">
         {filteredProjects?.map(project => (
           <ProjectCard
             key={project.project_id}

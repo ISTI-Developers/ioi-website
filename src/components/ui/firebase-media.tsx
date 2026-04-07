@@ -67,7 +67,7 @@ export default function FirebaseMedia({
         <img
             src={url}
             alt={alt}
-            className={`object-top ${className}`}
+            className={`object-cover ${className}`}
 
         />
 
