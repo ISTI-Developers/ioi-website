@@ -22,7 +22,7 @@ export default function Footer() {
                 backgroundImage: `url('YOUR_IMAGE_URL_HERE')`, // 👈 Replace with your background image
                 backgroundSize: "cover",
                 backgroundPosition: "center",
-                backgroundColor: "#d2540a",
+                backgroundColor: "#ff8b25",
             }}
         >
             <div className="px-6 sm:px-10 lg:px-16">
@@ -104,7 +104,7 @@ export default function Footer() {
 
             {/* Oversized brand name at the bottom */}
             <div className="w-full overflow-hidden leading-none mt-2">
-                <p className="font-heading font-black text-[#7a2a0a] text-[12.2vw] whitespace-nowrap tracking-tight select-none w-full text-left pl-2 sm:pl-4">
+                <p className="font-heading font-semibold text-[#7a2a0a] text-[12.2vw] whitespace-nowrap tracking-tight select-none w-full text-left pl-2 sm:pl-4">
                     Innovation One
                 </p>
             </div>
