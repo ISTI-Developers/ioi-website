@@ -58,7 +58,7 @@ function Home() {
   return (
     <div>
       <div className="relative">
-        <video src="hero.mp4" autoPlay loop muted className="brightness-70" />
+        <img src="hero.webp" alt="Hero Banner" className=""/>
         <div className="absolute left-1/2 bottom-0 translate-y-1/2 -translate-x-1/2 w-full max-w-6xl">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             {stats.map((stat) => (
