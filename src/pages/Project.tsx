@@ -38,6 +38,9 @@ function Projects() {
         </div>
       </div> */}
 
+      <img src="/projects.gif" alt="project" className="w-250 mx-auto block mt-15" />
+
+
 
       <ButtonPortfolio
         types={uniqueTypes}
