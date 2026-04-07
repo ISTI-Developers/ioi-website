@@ -8,18 +8,9 @@ import { ContactForm } from "../components/pages/forms/contact";
 
 function About() {
     return (
-<<<<<<< Updated upstream
         <div className="w-full overflow-x-hidden px-4 md:px-10 lg:px-20 flex flex-col space-y-10 md:space-y-16 lg:space-y-24">
 
            <img src="/abouts.gif" alt="About us Gif" className="w-250 mx-auto block mt-15" />
-
-=======
-        <div className="w-full overflow-x-hidden px-4 md:px-10 lg:px-20 flex flex-col">
-            <Hero
-                title={<>/About us</>}
-            />
->>>>>>> Stashed changes
-
             <section className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start p-8">
 
                 {/* Left: Company description */}
