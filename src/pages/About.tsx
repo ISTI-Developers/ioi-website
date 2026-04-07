@@ -10,9 +10,8 @@ function About() {
     return (
         <div className="w-full overflow-x-hidden px-4 md:px-10 lg:px-20 flex flex-col space-y-10 md:space-y-16 lg:space-y-24">
 
-            <Hero
-                title={<>/About us</>}
-            />
+           <img src="/abouts.gif" alt="About us Gif" className="w-250 mx-auto block mt-15" />
+
 
             <section className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-20 items-start">
 
