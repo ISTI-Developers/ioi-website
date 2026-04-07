@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
     Carousel,
     CarouselContent,
@@ -20,10 +21,20 @@ interface VideosProps {
 }
 
 export default function Videos({ projectId, onSuccess }: VideosProps) {
+    const [ratios, setRatios] = useState<Record<number, boolean>>({});
+
     const { data, isLoading } = useVideo(projectId);
     const videos = data?.video ?? [];
 
     if (isLoading) return <div>Loading...</div>;
+
+
+    const handleMetadata = (videoId: number | undefined, e: React.SyntheticEvent<HTMLVideoElement>) => {
+        if (videoId === undefined) return;
+        const el = e.currentTarget;
+        setRatios(prev => ({ ...prev, [videoId]: el.videoHeight > el.videoWidth }));
+    };
+
 
     return (
         <div className="space-y-4">
@@ -36,19 +47,25 @@ export default function Videos({ projectId, onSuccess }: VideosProps) {
                 />
             </div>
 
-            <Carousel className="w-full">
+            <Carousel className="w-full px-10">
                 <CarouselContent>
-                    {videos.map((video) => (
-                        <CarouselItem key={video.video_id} className="basis-full">
-                            <div className="p-1">
-                                <video
-                                    src={video.file}
-                                    controls
-                                    className="w-full rounded-md aspect-video"
-                                />
-                            </div>
-                        </CarouselItem>
-                    ))}
+                    {videos.map((video) => {
+                        const isPortrait = video.video_id !== undefined && ratios[video.video_id];
+                        return (
+                            <CarouselItem
+                                key={video.video_id}
+                                className={isPortrait ? "basis-1/3" : "basis-full"}
+                            >
+                                <div>
+                                    <FirebaseMedia
+                                        path={video.file}
+                                        className={`w-full rounded-md object-contain bg-black h-150`}
+                                        onLoadedMetadata={(e) => handleMetadata(video.video_id, e)}
+                                    />
+                                </div>
+                            </CarouselItem>
+                        );
+                    })}
                 </CarouselContent>
                 <CarouselPrevious />
                 <CarouselNext />
