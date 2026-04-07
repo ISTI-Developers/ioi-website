@@ -19,18 +19,16 @@ export default function Footer() {
         <footer
             className="w-full text-black pt-12 lg:pt-16 overflow-hidden relative"
             style={{
-                backgroundImage: `url('YOUR_IMAGE_URL_HERE')`, // 👈 Replace with your background image
+                backgroundImage: `url('YOUR_IMAGE_URL_HERE')`, 
                 backgroundSize: "cover",
                 backgroundPosition: "center",
-                backgroundColor: "#ff8b25",
+                backgroundColor: "#ff6014",
             }}
         >
             <div className="px-6 sm:px-10 lg:px-16">
 
-                {/* Top section */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-y-10 sm:gap-y-12 lg:gap-y-0 items-start mb-12 lg:mb-16">
 
-                    {/* Left: Tagline — cols 1-4 */}
                     <div className="col-span-1 sm:col-span-1 lg:col-span-4 flex flex-col">
                         <p className="text-black text-lg sm:text-xl font-medium leading-snug">
                             Empowering Visionaries: Stories of <br className="hidden sm:block" /> Collaboration and Transformation
@@ -44,7 +42,6 @@ export default function Footer() {
                         </Link>
                     </div>
 
-                    {/* Center: Collaborate — cols 6-9 */}
                     <div className="col-span-1 sm:col-span-1 lg:col-span-4 lg:col-start-6 flex flex-col items-start gap-y-4">
                         <p className="text-black text-lg sm:text-xl font-medium leading-snug text-left">
                             Want to collaborate? Have any <br className="hidden sm:block" /> questions? Slide into our <br className="hidden sm:block" /> email!
@@ -69,7 +66,6 @@ export default function Footer() {
                         </div>
                     </div>
 
-                    {/* Right: Social links — col 12 on desktop, inline on mobile/tablet */}
                     <div className="col-span-1 sm:col-span-2 lg:col-span-1 lg:col-start-12 flex flex-row lg:flex-col gap-x-6 gap-y-3 lg:gap-x-0 flex-wrap lg:flex-nowrap items-start">
                         {socialLinks.map((link) => (
                             <Link
@@ -85,7 +81,6 @@ export default function Footer() {
                     </div>
                 </div>
 
-                {/* Bottom bar */}
                 <div className="flex flex-col sm:flex-row justify-between items-center gap-y-4 sm:gap-y-0 border-t border-black/20 py-5 text-xs sm:text-sm lg:text-base">
                     <span className="text-black/80 text-center sm:text-left">© 2024 InnovationOne. All rights reserved.</span>
                     <div className="flex gap-x-6 sm:gap-x-8">
