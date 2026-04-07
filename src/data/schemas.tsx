@@ -48,10 +48,8 @@ export const PointSchema = z.object({
 export const GallerySchema = z.object({
     gallery_id: z.number().optional(),
     project_id: z.number(),
-    layout_group: z.number(),
-    columns: z.number(),
-    display_order: z.number(),
-    file: z.string().optional(),
+    file: z.string({ message: "Image is required" }),
+    position: z.number({ message: "Position is required" }),
 
 });
 
