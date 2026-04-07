@@ -1,13 +1,9 @@
 import { useForm } from "react-hook-form";
 import { Form } from "@/components/ui/form";
-import FormFieldText from "../fields/FormFieldText";
-import FormFieldTextArea from "../fields/FormFieldTextArea";
 import FormFieldFile from "../fields/FormFieldFile";
 import FormCardContent from "@/components/layout/FormCardContent";
-import FormFieldDate from "../fields/FormFieldDate";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
-import { useAddProject } from "@/hooks/useProjects";
 import { useUploadImage } from "@/hooks/useImageUrl";
 import { useAddVideo } from "@/hooks/useVideo";
 
@@ -38,9 +34,6 @@ function VideoForm({ onSuccess, projectId }: VideoFormProps) {
         try {
             const videoUrl = await upload(files[0], "videos");
             console.log(values);
-            const { file } = values;
-
-                    console.log("Sending:", { project_id: projectId, file: videoUrl }); // add this
 
             mutate(
                 {
@@ -81,8 +74,8 @@ function VideoForm({ onSuccess, projectId }: VideoFormProps) {
                         multiple={false}
                         control={form.control}
                         name="file"
-                        label="Images"
-                        placeholder="Upload images"
+                        label="Videos"
+                        placeholder="Upload videos"
                         files={files}
                         setFiles={setFiles}
                         accept="video/*"
