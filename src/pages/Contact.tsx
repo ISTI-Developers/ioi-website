@@ -5,33 +5,22 @@ import { FeaturedImage } from '../components/ui/featured-image'
 function Contacts () {
 
   return (
-    <div className="w-full overflow-x-hidden text-white px-2 lg:px-25 flex flex-col space-y-10 lg:space-y-42">
-      
-        <div className="mb-6 sm:mb-8">
-          <h1 className="text-center text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-3 sm:mb-4 break-words">
-            Hello@example.com
-          </h1>
-          <div className="flex flex-col sm:flex-row sm:justify-between gap-2 text-gray-400 text-base sm:text-lg">
-            <p>Located in Metro Manila</p>
-            <p className="justify-end">HPL Building, 60 Sen. Gil Puyat Ave.,<br/>
-            Makati City 1234, Philippines</p>
-          </div>
+    <div className="w-full text-white px-2 lg:px-25 flex flex-col mb-30">
+      <h1 className="font-bold text-[20.1vw] w-full text-center">
+        Contact us
+      </h1>
+      <section className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+        <div className="space-y-5 text-base md:text-lg lg:text-xl text-gray-300 text-justify">
+          <p>hello@example.com</p>
+          <p>+63 9975134678</p>
+          <p>
+            HPL Building, 60 Sen. Gil Puyat Ave.,<br />
+            Makati City 1234, Philippines
+          </p>
         </div>
-       
-          <FeaturedImage section="contact_middle" />
-
-          <div className="mt-8 sm:mt-10">
-            <ContactForm />
-          </div>
-
-          <div className="mt-20">
-            <Clients />
-          </div>
-
-          <div className="mt-20">
-            <FeaturedImage section = "contact_bottom" />
-        </div>
-      </div>
+        <ContactForm/>
+      </section>
+    </div>
   )
 }
 export default Contacts
