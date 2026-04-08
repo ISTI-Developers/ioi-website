@@ -1,28 +1,11 @@
 import TeamMembers from "../components/layout/about/TeamMember";
-import Hero from "../components/ui/hero";
-import { Clients } from "../components/layout/home/Clients";
-import Experience from "../components/layout/home/Experience";
 import { FeaturedImage } from "../components/ui/featured-image";
-import { ContactForm } from "../components/pages/forms/contact";
-
 
 function About() {
     return (
-<<<<<<< Updated upstream
         <div className="w-full overflow-x-hidden px-4 md:px-10 lg:px-20 flex flex-col space-y-10 md:space-y-16 lg:space-y-24">
-
            <img src="/abouts.gif" alt="About us Gif" className="w-250 mx-auto block mt-15" />
-
-=======
-        <div className="w-full overflow-x-hidden px-4 md:px-10 lg:px-20 flex flex-col">
-            <Hero
-                title={<>/About us</>}
-            />
->>>>>>> Stashed changes
-
             <section className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start p-8">
-
-                {/* Left: Company description */}
                 <div className="space-y-4">
                     <p className="text-base md:text-lg lg:text-xl text-gray-300 text-justify">
                         <span
@@ -43,25 +26,9 @@ function About() {
 
                     </p>
                 </div>
-
-                {/* Right: Team photo */}
-                <div className="max-w-[900px] h-[400px] sm:h-[500px] md:h-[600px] lg:h-[700px]">
                     <FeaturedImage section="about_top"/>
-                </div>
-
             </section>
-
                     <TeamMembers />
-
-            {/* 
-            <Experience />
-
-            <Clients />
-            */}
-
-            {/*
-            <ContactForm />
-            */}
         </div>
     )
 }
