@@ -78,7 +78,7 @@ if (cols) {
                             className={imgClassName}
                         />
                     </div>
-                    <h3 className="font-heading font-bold text-lg lg:text-xl text-primary mt-5">
+                    <h3 className="font-bold text-2xl lg:text-3xl text-primary mt-3">
                         {member.first_name} {member.last_name}
                     </h3>
                     <p className="text-white-400 text-lg lg:text-xl font-normal">{member.position}</p>
