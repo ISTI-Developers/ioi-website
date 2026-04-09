@@ -105,9 +105,8 @@ function Home() {
 
         {/* <Experience /> */}
 
-        <div className="">
-          <FeaturedImage section="home_bottom" />
-        </div>
+          {/* <FeaturedImage section="home_bottom" /> */}
+        <video src="hero.mp4" autoPlay loop muted className="brightness-70 rounded-md" />
 
         <Clients />
         <CaseStudyCarousel />
