@@ -17,7 +17,7 @@ interface StatCardProps {
 
 function StatCard({ value, label }: StatCardProps) {
   return (
-     
+
     // <div className="relative rounded-2xl bg-linear-to-br from-red-800 via-orange-600 to-yellow-400 shadow-xl text-white overflow-hidden backdrop-blur-lg border border-orange-300/40">
     //   <div className="absolute -bottom-12 -left-12 w-56 h-56 bg-yellow-400/30 rounded-full blur-3xl"></div>
     //   <div className="absolute top-0 right-0 w-44 h-44 bg-red-400/25 rounded-full blur-2xl"></div>
@@ -58,7 +58,7 @@ function Home() {
   return (
     <div>
       <div className="relative">
-        <img src="hero.webp" alt="Hero Banner" className=""/>
+        <img src="hero.webp" alt="Hero Banner" className="" />
         <div className="absolute left-1/2 bottom-0 translate-y-1/2 -translate-x-1/2 w-full max-w-6xl">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             {stats.map((stat) => (
@@ -105,9 +105,16 @@ function Home() {
 
         {/* <Experience /> */}
 
-          {/* <FeaturedImage section="home_bottom" /> */}
-        <video src="hero.mp4" autoPlay loop muted className="brightness-70 rounded-md" />
-
+        {/* <FeaturedImage section="home_bottom" /> */}
+        <div className="rounded-lg overflow-hidden">
+          <video
+            src="hero.mp4"
+            autoPlay
+            loop
+            muted
+            className="brightness-70 h-180 w-full object-cover"
+          />
+        </div>
         <Clients />
         <CaseStudyCarousel />
         {/* <ContactForm /> */}
