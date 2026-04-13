@@ -15,6 +15,7 @@ interface FormFieldTextProps {
   label: string;
   placeholder?: string;
   className?: string;
+  type?: string; 
 }
 
 function FormFieldText({
@@ -23,6 +24,7 @@ function FormFieldText({
   label,
   placeholder,
   className,
+  type,
 }: FormFieldTextProps) {
   const IconComponent = getColumnIcon(name);
 
@@ -37,7 +39,7 @@ function FormFieldText({
             {label}
           </FormLabel>
           <FormControl>
-            <Input type="text" placeholder={placeholder} {...field} />
+            <Input  type={type} placeholder={placeholder} {...field} />
           </FormControl>
           <FormMessage />
         </FormItem>
