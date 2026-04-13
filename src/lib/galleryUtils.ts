@@ -25,12 +25,12 @@ const bentoLayouts: Record<number, Record<number, string>> = {
     5: "col-span-2 row-span-1",
   },
   6: {
-    1: "col-span-1 row-span-1",
-    2: "col-span-2 row-span-1",
+    1: "col-span-2 row-span-1",
+    2: "col-span-1 row-span-1",
     3: "col-span-1 row-span-1",
     4: "col-span-1 row-span-1",
-    5: "col-span-2 row-span-1",
-    6: "col-span-1 row-span-1",
+    5: "col-span-1 row-span-1",
+    6: "col-span-2 row-span-1",
   },
   7: {
     1: "col-span-2 row-span-1",
@@ -39,7 +39,7 @@ const bentoLayouts: Record<number, Record<number, string>> = {
     4: "col-span-1 row-span-1",
     5: "col-span-1 row-span-1",
     6: "col-span-2 row-span-1",
-    7: "col-span-4 row-span-1",
+    7: "col-span-4 row-span-1 max-",
   },
   8: {
     1: "col-span-2 row-span-1",
