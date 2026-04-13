@@ -37,26 +37,30 @@ export default function Gallery({ projectId, onSuccess, showAdd = true }: Galler
           />
         </div>
       )}
+      
+    <div className="space-y-4">
 
-      <div className="grid grid-cols-4 grid-flow-dense gap-2">
-        {gallery.map((item) => (
-          <div
-            key={item.gallery_id}
-            className={`${getBentoClass(gallery.length, item.position)} relative rounded-md overflow-hidden   `}
-
-          >
-            <FirebaseMedia
-              path={item.file}
-              alt={`Gallery item ${item.gallery_id}`}
-              className="w-full h-100 object-cover  object-top"
-            />
-          </div>
-        ))}
-
-      </div>
+  <div className="scale-100 origin-center">
+    <div className="grid grid-cols-4 auto-rows-auto gap-2">
+      {gallery.map((item) => (
+        <div
+          key={item.gallery_id}
+          className={`
+            ${getBentoClass(gallery.length, item.position)}
+            relative rounded-md overflow-hidden bg-muted
+          `}
+        >
+          <FirebaseMedia
+            path={item.file}
+            className="w-full h-full object-contain"
+          />
+        </div>
+      ))}
     </div>
+  </div>
 
-
+</div>
+    </div>
   )
 
 
