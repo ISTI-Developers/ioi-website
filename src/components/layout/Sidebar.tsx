@@ -7,7 +7,7 @@ function Sidebar() {
     <SidebarProvider>
       <AppSidebar />
       <SidebarInset>
-        <main className="flex-1 p-6">
+        <main className="flex-1 p-6 ">
           <Outlet />
         </main>
       </SidebarInset>
