@@ -7,15 +7,15 @@ export const LoginSchema = z.object({
 });
 
 export const AdminSchema = z.object({
-    id: z.number(),
-    username: z.string(),
-    role: z.string()
+  user_id: z.number(),
+  username: z.string(),
+  role: z.string(),
 });
 
 export const AuthResponseSchema = z.object({
-    token: z.string(),
-    admin: AdminSchema,
-})
+  accessToken: z.string(),
+  user: AdminSchema,
+});
 
 
 export const TeamSchema = z.object({
