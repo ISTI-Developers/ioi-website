@@ -96,13 +96,11 @@ export default function Footer() {
                     </div>
                 </div>
             </div>
-
-            {/* Oversized brand name at the bottom */}
-            <div className="w-full overflow-hidden leading-none mt-2">
-                <p className="font-heading font-semibold text-[#7a2a0a] text-[12.2vw] whitespace-nowrap tracking-tight select-none w-full text-left pl-2 sm:pl-4">
-                    Innovation One
-                </p>
-            </div>
-        </footer>
-    );
+        <div className="w-full overflow-hidden leading-none mt-2">
+            <p className="font-heading font-semibold text-[#7a2a0a] text-[12.2vw] whitespace-nowrap tracking-tight select-none w-full text-left pl-2 sm:pl-4">
+                Innovation One
+            </p>
+        </div>
+    </footer>
+);
 }

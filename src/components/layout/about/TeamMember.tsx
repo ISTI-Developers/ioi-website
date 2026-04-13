@@ -47,11 +47,8 @@ export default function TeamMembers() {
   return (
     <section className="text-white overflow-x-hidden bg-black">
       <div className="max-w-7xl mx-auto">
-
-        {/* Title */}
         <header className="text-center">
           <h1 className="font-heading text-6xl lg:text-8xl font-bold leading-tight flex flex-col items-center gap-2 mb-5">
-            
             <div className="flex items-center justify-center gap-3 flex-wrap">
               The 
               <img 
@@ -60,32 +57,21 @@ export default function TeamMembers() {
                 className="inline-block h-23 lg:h-35 object-contain"
               />
             </div>
-
             <span>Members</span>
-
           </h1>
         </header>
-
-        {/* Mancomm — 4 col grid */}
-        <TeamCards members={mancommMembers} cols={4} />
-
-        {/* Divider */}
-        <hr className="border-white/20 my-10" />
-
-        {/* Filter tabs */}
-        <div className="flex justify-center align-center ">
-        <ButtonPortfolio
-          types={filterTypes}
-          activeFilter={activeFilter}
-          onFilterChange={setActiveFilter}
-        />
-      </div>
-
-        {/* Filtered members — 3 col grid */}
-        <div className="px-4 pb-10 sm:px-6 sm:pb-16 md:px-12 md:pb-20 lg:px-24 lg:pb-24 xl:px-50 xl:pb-50 2xl:px-60 2xl:pb-60">
+          <TeamCards members={mancommMembers} cols={4} />
+            <hr className="border-white/20 my-10" />
+              <div className=" flex justify-center ">
+                <ButtonPortfolio
+                  types={filterTypes}
+                  activeFilter={activeFilter}
+                  onFilterChange={setActiveFilter}
+                />
+              </div>
+        <div className="px-4 pb-10 sm:px-6 sm:pb-16 md:px-12 md:pb-20 lg:px-24 lg:pb-24 xl:px-50 xl:pb-50">
           <TeamCards members={filteredMembers} cols={3} />
         </div>
-
       </div>
     </section>
   );

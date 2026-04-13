@@ -1,9 +1,6 @@
 import {ContactForm} from '../components/pages/forms/contact'
-import { Clients } from '../components/layout/home/Clients'
-import { FeaturedImage } from '../components/ui/featured-image'
 
 function Contacts () {
-
   return (
     <div className="w-full text-white px-2 lg:px-25 flex flex-col mb-30">
       <h1 className="font-bold text-[20.1vw] w-full text-center">

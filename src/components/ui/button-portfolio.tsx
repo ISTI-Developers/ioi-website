@@ -6,7 +6,7 @@ interface ButtonPortfolioProps {
 
 function ButtonPortfolio({ types, activeFilter, onFilterChange }: ButtonPortfolioProps) {
   return (
-    <div className="mt-20 mx-auto mb-20">
+    <div className="mx-auto mb-10">
       <div className="flex flex-wrap gap-4">
         {types.map((type) => (
           <button
