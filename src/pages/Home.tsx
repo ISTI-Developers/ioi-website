@@ -58,13 +58,13 @@ function Home() {
   return (
     <div>
       <div className="relative">
-        <img src="hero.webp" alt="Hero Banner" className="" />
+        <img src="hero.jpg" alt="Hero Banner" className="" />
         <div className="absolute left-1/2 bottom-0 translate-y-1/2 -translate-x-1/2 w-full max-w-6xl">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+          {/* <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             {stats.map((stat) => (
               <StatCard key={stat.label} value={stat.value} label={stat.label} />
             ))}
-          </div>
+          </div> */}
 
         </div>
 
