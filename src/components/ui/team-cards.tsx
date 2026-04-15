@@ -20,6 +20,7 @@ function ImageCycler({ images, alt, className }: ImageCyclerProps) {
 
     useEffect(() => {
         if (isHovered && images.length > 1) {
+            setCurrentIndex((prev) => (prev + 1) % images.length);
             intervalRef.current = setInterval(() => {
                 setCurrentIndex((prev) => (prev + 1) % images.length);
             }, 800);
