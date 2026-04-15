@@ -1,11 +1,16 @@
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import FormCardContent from "@/components/layout/FormCardContent";
 import FormFieldTextArea from "../../forms/fields/FormFieldTextArea";
 import { useProjectByIdWithPointsAndProse } from "@/hooks/useProjects"
-import { EllipsisVertical } from "lucide-react";
+import { EllipsisMenu } from "@/components/ui/ellipsis-menu";
 import { useAddPoint } from "@/hooks/useProjectPoint";
+import UpdatePointForm from "../../forms/update/UpdatePointForm";
+import type { Point } from "@/data/types";
+
+
 
 interface BulletProps {
     projectId: number;
@@ -13,8 +18,8 @@ interface BulletProps {
 }
 
 export default function Bullet({ projectId, onSuccess }: BulletProps) {
-        console.log("projectId:", projectId); 
-
+    const [editingPoint, setEditingPoint] = useState<Point | null>(null);
+    const [openUpdate, setOpenUpdate] = useState(false);
     const form = useForm({
         defaultValues: {
             problem: "",
@@ -42,7 +47,7 @@ export default function Bullet({ projectId, onSuccess }: BulletProps) {
 
     const onSubmit = (type: "problem" | "solution" | "service" | "result") => {
         const value = form.getValues(type);
-    console.log("submitting:", { project_id: projectId, type, content: value }); 
+        console.log("submitting:", { project_id: projectId, type, content: value });
 
         if (!value?.trim()) return;
 
@@ -74,11 +79,42 @@ export default function Bullet({ projectId, onSuccess }: BulletProps) {
             <div className="space-y-10 gap-5">
                 <div className="flex gap-2">
                     <FormCardContent title="Problems">
-                        <ul className="list-disc list-inside">
-                            {problems.map((p) => (
-                                <li key={p.point_id}>{p.content}</li>
-                            ))}
-                        </ul>
+                        <div>
+                            <ul className="space-y-1 list-disc list-inside">
+                                {problems.map((p) => (
+                                    <li
+                                        key={p.point_id}
+                                        className="group relative pr-8"
+                                    >
+                                        {p.content}
+
+                                        <span className="absolute right-0 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100">
+                                            <EllipsisMenu
+                                                hoverable
+                                                items={[
+                                                    {
+                                                        label: "Edit",
+                                                        onClick: () => {
+                                                            setEditingPoint(p);
+                                                            setOpenUpdate(true);
+                                                        },
+                                                    },
+                                                ]}
+                                            />
+                                        </span>
+                                    </li>
+                                ))}
+                            </ul>
+
+                            {openUpdate && editingPoint && (
+                                <UpdatePointForm
+                                    point={editingPoint}
+                                    open={openUpdate}
+                                    setOpen={setOpenUpdate}
+                                />
+                            )}
+
+                        </div>
                         <FormFieldTextArea
                             control={form.control}
                             name="problem"
