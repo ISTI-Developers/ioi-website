@@ -57,9 +57,28 @@ function Home() {
 
   return (
     <div>
-      <div className="relative">
-        <img src="hero.jpg" alt="Hero Banner" className="" />
+      <div className="relative ">
+        <div className="relative w-full overflow-hidden">
+          <img
+            src="IOI_WEBSITE BANNER_1920x800 no text.jpg"
+            className="w-full h-90 lg:h-full object-cover object-center sm:object-left lg:object-bottom mt-100 lg:mt-5"
+          />
+
+          <p className="
+            absolute inset-0 flex items-start justify-center
+            pt-10 sm:pt-16 md:pt-20
+            font-hero uppercase text-primary font-bold
+            mt-15 lg:mt-5
+            text-[140px] sm:text-[120px] md:text-[180px] lg:text-[280px]
+            leading-none tracking-wider
+            px-2
+          ">
+            RULE THE FEED
+          </p>
+        </div>
+
         <div className="absolute left-1/2 bottom-0 translate-y-1/2 -translate-x-1/2 w-full max-w-6xl">
+
           {/* <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             {stats.map((stat) => (
               <StatCard key={stat.label} value={stat.value} label={stat.label} />
@@ -99,7 +118,7 @@ function Home() {
           </div>
         </div> */}
 
-        <div>
+        <div className="mt-50">
           <Services />
         </div>
 
