@@ -1,6 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Goldman:wght@400;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Darker+Grotesque:wght@400;500;600;700&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Darker+Grotesque:wght@300..900&family=Goldman:wght@400;700&display=swap');
 
 @import "tailwindcss";
 @import "tw-animate-css";
@@ -12,6 +10,7 @@
   --font-body: "Darker Grotesque", sans-serif;
   --font-heading: "Goldman", serif;
   --font-secondary: "Nunito Sans";
+  --font-hero: "Bebas Neue", sans-serif;
   --color-primary: #ff6014;
   --color-dark: #982005;
   --color-light: #cf4408;
@@ -20,6 +19,9 @@
   --color-darkgray: #777777;
 
 }
+
+
+
 
 body {
   background-color: #000000;
