@@ -91,11 +91,8 @@ function BannerForm({ onSuccess, existing }: BannerFormProps) {
                         placeholder="Select section"
                     >
                         <SelectItem value="about_top">About Banner</SelectItem>
-                        <SelectItem value="career_bottom">Career Bottom</SelectItem>
-                        <SelectItem value="contact_middle">Contact Middle</SelectItem>
-                        <SelectItem value="contact_bottom">Contact Bottom</SelectItem>
                         <SelectItem value="home_bottom">Home Bottom</SelectItem>
-                        <SelectItem value="project_top">Project Top</SelectItem>
+                    
                     </FormFieldSelect>
 
                     <div className="gap-4 sm:flex sm:gap-x-5">
