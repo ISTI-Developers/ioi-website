@@ -41,7 +41,7 @@ export default function Gallery({ projectId, onSuccess, showAdd = true }: Galler
     <div className="space-y-4">
 
   <div className="scale-100 origin-center">
-    <div className="grid grid-cols-4 auto-rows-auto gap-2">
+    <div className="grid grid-cols-3 auto-rows-auto gap-2">
       {gallery.map((item) => (
         <div
           key={item.gallery_id}
