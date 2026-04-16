@@ -5,7 +5,8 @@ import { useColumnVisibility } from "@/hooks/useColumnVisibility";
 import type { Project } from "@/data/project_columns";
 import ProjectForm from "../forms/create/ProjectForm";
 import { useProjectColumns, def_project_columns, project_filters } from "@/data/project_columns";
-
+import FormSheet from "@/components/layout/FormSheet";
+import UpdateProjectForm from "../forms/update/UpdateProjectForm";
 
 interface ProjectDataTableProps {
   projects: Project[];
@@ -14,11 +15,17 @@ interface ProjectDataTableProps {
 
 export default function ProjectDataTable({ projects }: ProjectDataTableProps) {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [editProject, setEditProject] = useState<Project | null>(null);
+  const [open, setOpen] = useState(false);
 
-
-const columns = useProjectColumns(undefined, undefined, (project: Project) => {
-  setSelectedProject(project);
-});
+ const columns = useProjectColumns(
+  (project) => {
+    setEditProject(project);
+    setOpen(true);
+  },
+  undefined,
+  (project) => setSelectedProject(project)
+);
 
   const [columnVisibility, setColumnVisibility] = useColumnVisibility(
     "team-column-visibility",
@@ -46,11 +53,23 @@ const columns = useProjectColumns(undefined, undefined, (project: Project) => {
         />
       ) : (
         <ProjectDetail
-        project={selectedProject}
-        onBack={() => setSelectedProject(null)}
+          project={selectedProject}
+          onBack={() => setSelectedProject(null)}
         />
       )
+
       }
+      {editProject && (
+        <FormSheet
+            open={open}
+  onOpenChange={setOpen}
+          type="Project"
+          taskName="Update"
+          form={<UpdateProjectForm 
+          project={editProject} 
+          onSuccess={() => setOpen(false)}/>}
+        />
+      )}
 
     </>
   );
