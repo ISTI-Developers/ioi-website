@@ -50,7 +50,7 @@ function UpdatePointForm({ point, open, setOpen }: UpdatePointFormProps) {
             },
             {
                 onSuccess: () => {
-                    toast.success("Updated");
+                    toast.success("Updated Point");
                     setOpen(false);
                     form.reset(values);
                 },
@@ -59,7 +59,7 @@ function UpdatePointForm({ point, open, setOpen }: UpdatePointFormProps) {
     }
 
     return (
-        <Dialog open={open} onOpenChange={setOpen}>
+        <Dialog open={open} onOpenChange={setOpen} >
             <DialogContent>
 
                 <DialogHeader>
