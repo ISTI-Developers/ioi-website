@@ -1,14 +1,17 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import api, { setSession } from "./api/config";
 import { toast } from "sonner";
-import type { Login, AdminUser, AuthResponse } from "@/data/types";
+import type { Login, AuthResponse } from "@/data/types";
 import { AuthResponseSchema, LoginSchema } from "@/data/schemas";
 
 const AUTH = "auth";
 
 export const useMe = () => {
+    const token = localStorage.getItem("token");
+
   return useQuery({
     queryKey: [AUTH],
+    enabled:!!token,
     queryFn: async () => {
       const token = localStorage.getItem("token");
 

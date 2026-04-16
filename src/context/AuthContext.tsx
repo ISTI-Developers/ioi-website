@@ -16,7 +16,7 @@ const AuthContext = createContext<AuthContextValue | null>(null);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
 
-  const { data, isLoading, isError, status } = useMe();
+  const { data, isLoading, } = useMe();
     const user = data?.user ?? null;
 
 
