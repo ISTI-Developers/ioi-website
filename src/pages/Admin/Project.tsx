@@ -12,13 +12,13 @@ export default function ProjectPage() {
     return {
       project_id: p.project_id,
       project_name: p.project_name,
-      description: p.company_description,
       start_date: p.start_date,
       end_date: p.end_date,
       project_type: p.project_type,
       project_category: p.project_category,
       company_description: p.company_description,
       brand_positioning: p.brand_positioning,
+      file: p.file
     };
   });
     
