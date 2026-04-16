@@ -40,11 +40,15 @@ function ImageCycler({ images, alt, className }: ImageCyclerProps) {
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
         >
-            <img
-                src={images[currentIndex]}
-                alt={alt}
-                className={className}
-            />
+            {images.map((src, i) => (
+                <img
+                    key={src}
+                    src={src}
+                    alt={alt}
+                    className={`${className} ${i === 0 ? "" : "absolute inset-0"}`}
+                    style={{ opacity: i === currentIndex ? 1 : 0 }}
+                />
+            ))}
         </div>
     );
 }
