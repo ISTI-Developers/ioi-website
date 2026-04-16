@@ -1,111 +1,120 @@
+import { useState } from "react";
 import type { ColumnDef } from "@tanstack/react-table";
-import { EllipsisVertical } from "lucide-react";
-import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover";
-import {
-    Command,
-    CommandGroup,
-    CommandItem,
-} from "@/components/ui/command";
-import { Button } from "@/components/ui/button";
-
+import FormSheet from "@/components/layout/FormSheet";
+import FormSheetTrigger from "@/components/ui/form-sheet-trigger";
+import UpdateProjectForm from "@/components/pages/forms/update/UpdateProjectForm";
+import { EllipsisMenu } from "@/components/ui/ellipsis-menu";
 
 export type Project = {
-    project_id?: number;
-    project_name: string;
-    start_date: string;
-    end_date?: string;
-    project_type: string;
-    project_category: string;
-    company_description: string;
-    brand_positioning: string;
+  project_id?: number;
+  project_name: string;
+  start_date: string;
+  end_date?: string;
+  project_type: string;
+  project_category: string;
+  company_description: string;
+  brand_positioning: string;
 };
 
 
 export function useProjectColumns(
-    onEdit?: (row: Project) => void,
-    onDelete?: (row: Project) => void,
-    onProjectClick?: (row: Project) => void,
+  onEdit?: (row: Project) => void,
+  onDelete?: (row: Project) => void,
+  onProjectClick?: (row: Project) => void,
 
 ): ColumnDef<Project>[] {
-    return [
-        {
-            accessorKey: "project_name",
-            header: "Project Name",
-            cell: ({row}) => (
-              <button
-                className="text-blue-500 cursor-pointer"
-                onClick={() => onProjectClick?.(row.original)}
-              >
-                {row.original.project_name}
+  return [
+    {
+      accessorKey: "project_name",
+      header: "Project Name",
+      cell: ({ row }) => (
+        <button
+          className="text-blue-500 cursor-pointer"
+          onClick={() => onProjectClick?.(row.original)}
+        >
+          {row.original.project_name}
 
-              </button>
-            )
-        },
-        {
-            accessorKey: "project_type",
-            header: "Project Type",
-        },
-        {
-            accessorKey: "project_category",
-            header: "Project Category",
-        },
-        {
-            accessorKey: "start_date",
-            header: "Start Date",
-        },
-        {
-            accessorKey: "end_date",
-            header: "End Date",
-            cell: ({row}) => {
-              const endDate = row.original.end_date;
-              return endDate ? endDate : "Ongoing";
-            },
-        },
+        </button>
+      )
+    },
+    {
+      accessorKey: "project_type",
+      header: "Project Type",
+    },
+    {
+      accessorKey: "project_category",
+      header: "Project Category",
+    },
+    {
+      accessorKey: "start_date",
+      header: "Start Date",
+    },
+    {
+      accessorKey: "end_date",
+      header: "End Date",
+      cell: ({ row }) => {
+        const endDate = row.original.end_date;
+        return endDate ? endDate : "Ongoing";
+      },
+    },
 
-        // {
-        //     accessorKey: "company_description",
-        //     header: "Company Description",
-        //     cell: ({row}) => (
-        //         <div className="max-w-xs truncate" title={row.original.company_description}>
-        //             {row.original.company_description}
-        //         </div>
-        //     )
-        // },
-        // {
-        //     accessorKey: "brand_positioning",
-        //     header: "Brand Positioning",
-        //     cell: ({row}) => (
-        //         <div className="max-w-xs truncate" title={row.original.brand_positioning}>
-        //             {row.original.brand_positioning}
-        //         </div>
-        //     )
-        // },
-         {
+    // {
+    //     accessorKey: "company_description",
+    //     header: "Company Description",
+    //     cell: ({row}) => (
+    //         <div className="max-w-xs truncate" title={row.original.company_description}>
+    //             {row.original.company_description}
+    //         </div>
+    //     )
+    // },
+    // {
+    //     accessorKey: "brand_positioning",
+    //     header: "Brand Positioning",
+    //     cell: ({row}) => (
+    //         <div className="max-w-xs truncate" title={row.original.brand_positioning}>
+    //             {row.original.brand_positioning}
+    //         </div>
+    //     )
+    // },
+    {
       id: "actions",
       header: "Actions",
       cell: ({ row }) => {
-        const team = row.original;
-
+        const project = row.original;
+        const [open, setOpen] = useState(false);
         return (
-          <Popover>
-            <PopoverTrigger asChild>
-              <Button variant="outline" size="icon">
-                <EllipsisVertical className="w-4 h-4" />
-              </Button>
-            </PopoverTrigger>
-            <PopoverContent className="w-36 p-0">
-              <Command>
-                <CommandGroup>
-                  <CommandItem onSelect={() => onEdit?.(team)}>Edit</CommandItem>
-                  <CommandItem onSelect={() => onDelete?.(team)}>Delete</CommandItem>
-                </CommandGroup>
-              </Command>
-            </PopoverContent>
-          </Popover>
+          <>
+            <EllipsisMenu
+              items={[
+                {
+                  label: "Edit",
+                  onClick: () => setOpen(true),
+                },
+                {
+                  label: "Delete",
+                  onClick: () => onDelete?.(project),
+                  variant: "destructive",
+                },
+              ]}
+            />
+
+            <FormSheet
+              open={open}
+              onOpenChange={setOpen}
+              type="Project"
+              taskName="Update Project"
+              form={
+                <UpdateProjectForm
+                  project={project}
+                  onSuccess={() => setOpen(false)}
+                />
+              }
+            />
+          </>
         );
       },
-    },
-    ];
+    }
+  ];
 }
 
 export const def_project_columns = [
