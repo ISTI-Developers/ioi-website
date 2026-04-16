@@ -69,7 +69,7 @@ function Home() {
             pt-10 sm:pt-16 md:pt-20
             font-hero uppercase text-primary font-bold
             mt-15 lg:mt-5
-            text-[140px] sm:text-[120px] md:text-[180px] lg:text-[280px]
+            text-[140px] sm:text-[120px] md:text-[15vw] lg:text-[19vw]
             leading-none tracking-wider
             px-2
           ">
