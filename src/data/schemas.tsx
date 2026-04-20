@@ -7,7 +7,7 @@ export const LoginSchema = z.object({
 });
 
 export const AdminSchema = z.object({
-  user_id: z.number(),
+  user_id: z.coerce.number(), 
   username: z.string(),
   role: z.string(),
 });
@@ -16,7 +16,6 @@ export const AuthResponseSchema = z.object({
   accessToken: z.string(),
   user: AdminSchema,
 });
-
 
 export const TeamSchema = z.object({
     team_id: z.number().optional(),
