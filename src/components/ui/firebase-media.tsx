@@ -1,7 +1,9 @@
 import { useImageUrl } from "@/hooks/useImageUrl";
 import { Skeleton } from "./skeleton";
+import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
-
+import { Play, Pause } from "lucide-react";
+import GlassIconButton from "./button-glass";
 
 interface FirebaseMediaProps {
     path?: string;
@@ -10,7 +12,10 @@ interface FirebaseMediaProps {
     autoplay?: boolean;
     loop?: boolean;
     muted?: boolean;
+    isActive?: boolean;
+    onActivate?: () => void;
     onLoadedMetadata?: (e: React.SyntheticEvent<HTMLVideoElement>) => void;
+    actions?: React.ReactNode;
 
 }
 
@@ -22,11 +27,42 @@ export default function FirebaseMedia({
     autoplay = false,
     loop = false,
     muted = false,
+    isActive = false,
+    onActivate,
     onLoadedMetadata,
+    actions,
 
 }: FirebaseMediaProps) {
     const { url, loading, error } = useImageUrl(path);
-    console.log({ path, url, loading, error });
+    const videoRef = useRef<HTMLVideoElement>(null);
+    const [isPlaying, setIsPlaying] = useState(autoplay);
+
+    useEffect(() => {
+        if (!videoRef.current) return;
+
+        if (isActive) {
+            videoRef.current.play().catch(() => { });
+            setIsPlaying(true);
+        } else {
+            videoRef.current.pause();
+            setIsPlaying(false);
+        }
+    }, [isActive]);
+
+    const togglePlay = () => {
+        if (videoRef.current) {
+            if (isPlaying) {
+                videoRef.current.pause();
+                setIsPlaying(false);
+            } else {
+                onActivate?.();
+                videoRef.current.play();
+                setIsPlaying(true);
+            }
+        }
+    };
+
+
 
 
     if (!path) return null;
@@ -46,17 +82,42 @@ export default function FirebaseMedia({
 
     if (isVideo) {
         return (
-            <video
-                src={url}
-                className={`object-cover ${className}`}
-                controls
-                autoPlay={autoplay}
-                loop={loop}
-                muted={true}
-                onLoadedMetadata={onLoadedMetadata}
-                playsInline
-            />
-        )
+            <div className={cn("relative group overflow-hidden", className)}>
+                <video
+                    ref={videoRef}
+                    src={url}
+                    className={`object-cover ${className}`}
+                    autoPlay={false}
+                    loop={loop}
+                    muted={muted}
+                    onLoadedMetadata={onLoadedMetadata}
+                    playsInline
+                />
+
+                <div className="absolute inset-0 flex items-center justify-center bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <div className="flex items-center gap-3">
+
+                        <GlassIconButton onClick={togglePlay}>
+                            {isPlaying ? (
+                                <Pause className="w-6 h-6 fill-white" />
+                            ) : (
+                                <Play className="w-6 h-6 fill-white" />
+                            )}
+                        </GlassIconButton>
+
+                        {actions && (
+                            <div
+                                onClick={(e) => e.stopPropagation()}
+                                className="flex items-center gap-3"
+                            >
+                                {actions}
+                            </div>
+                        )}
+                    </div>
+                </div>
+            </div>
+
+        );
     }
 
 
