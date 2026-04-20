@@ -8,6 +8,8 @@ import { useProjectByIdWithPointsAndProse } from "@/hooks/useProjects"
 import { EllipsisMenu } from "@/components/ui/ellipsis-menu";
 import { useAddPoint } from "@/hooks/useProjectPoint";
 import UpdatePointForm from "../../forms/update/UpdatePointForm";
+import { useDeletePoint } from "@/hooks/useProjectPoint";
+import DeleteDialog from "@/components/layout/DeleteDialog";
 import type { Point } from "@/data/types";
 
 
@@ -19,6 +21,7 @@ interface BulletProps {
 
 export default function Bullet({ projectId, onSuccess }: BulletProps) {
     const [editingPoint, setEditingPoint] = useState<Point | null>(null);
+    const [deletingPoint, setDeletingPoint] = useState<Point | null>(null);
     const [openUpdate, setOpenUpdate] = useState(false);
     const form = useForm({
         defaultValues: {
@@ -31,6 +34,7 @@ export default function Bullet({ projectId, onSuccess }: BulletProps) {
     });
 
     const { mutate } = useAddPoint();
+    const { mutate: deletePoint } = useDeletePoint();
 
     const { data: project, isLoading } = useProjectByIdWithPointsAndProse(projectId);
 
@@ -98,6 +102,12 @@ export default function Bullet({ projectId, onSuccess }: BulletProps) {
                                                             setEditingPoint(p);
                                                             setOpenUpdate(true);
                                                         },
+
+                                                    },
+                                                    {
+                                                        label: "Delete",
+                                                        variant: "destructive",
+                                                        onClick: () => setDeletingPoint(p),
                                                     },
                                                 ]}
                                             />
@@ -211,6 +221,19 @@ export default function Bullet({ projectId, onSuccess }: BulletProps) {
                     </FormCardContent>
                 </div>
             </div>
+
+
+            <DeleteDialog
+                open={!!deletingPoint}
+                onOpenChange={(open) => !open && setDeletingPoint(null)}
+                handleConfirm={() => {
+                    if (deletingPoint?.point_id) {
+                        deletePoint(deletingPoint.point_id);
+                        setDeletingPoint(null);
+                    }
+                }}
+            />
+
         </Form>
     );
 }

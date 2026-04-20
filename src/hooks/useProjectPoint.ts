@@ -49,7 +49,7 @@ export const useUpdatePoint = <TData extends {}>() => {
             return res.data;
         },
         onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: [POINTS] });
+            queryClient.invalidateQueries({ queryKey: [PROJECTS] });
             toast.success("Point updated successfully");
         },
         onError: (err: any) => {
@@ -58,3 +58,22 @@ export const useUpdatePoint = <TData extends {}>() => {
     });
 };
 
+
+export const useDeletePoint = () => {
+    const queryClient = useQueryClient();
+
+    return useMutation({
+        mutationFn: async (id: number) => {
+            const res = await api.delete(`index.php?resource=${POINTS}&id=${id}`);
+            return res.data;
+        },
+        onSuccess: () => {
+            queryClient.invalidateQueries({queryKey: [PROJECTS]});
+            toast.success("Point deleted successfully");
+        },
+        onError: (err: any) => {
+            console.error("Failed to delete point", err);
+            toast.error("Failed to delete point");
+        }
+    })
+}
