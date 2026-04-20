@@ -60,3 +60,23 @@ export const useUpdateGallery = <TData extends {}>() => {
         },
     });
 };
+
+
+export const useDeleteGallery = () => {
+    const queryClient = useQueryClient();
+
+    return useMutation({
+        mutationFn: async (id: number) => {
+            const res = await api.delete(`index.php?resource=${GALLERY}&id=${id}`);
+            return res.data;
+        },
+        onSuccess: () => {
+            queryClient.invalidateQueries({queryKey: [GALLERY]});
+            toast.success("Gallery deleted successfully");
+        },
+        onError: (err: any) => {
+            console.error("Failed to delete gallery", err);
+            toast.error("Failed to delete gallery")
+        },
+    });
+};
