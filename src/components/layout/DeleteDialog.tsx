@@ -23,7 +23,7 @@ function DeleteDialog({ handleConfirm, open, onOpenChange }: DeleteDialogProps) 
         <AlertDialogHeader>
           <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
           <AlertDialogDescription>
-            This action cannot be undone. This will permanently delete the and
+            This action cannot be undone. This will permanently delete and
             remove from our servers.
           </AlertDialogDescription>
         </AlertDialogHeader>
