@@ -7,6 +7,7 @@ import { ContactForm } from "../components/pages/forms/contact";
 import { useProjects } from "@/hooks/useProjects";
 import { Clients } from "../components/layout/home/Clients";
 import Hero from "../components/ui/hero";
+import { InnovateSection } from "@/components/layout/InnovateSection";
 
 
 interface StatCardProps {
@@ -31,8 +32,8 @@ function StatCard({ value, label }: StatCardProps) {
       <div className="absolute top-0 right-0 w-44 h-44 bg-red-400/25 rounded-full blur-2xl "></div>
       <div className="absolute inset-0 bg-linear-to-br from-white/10 via-transparent to-transparent rounded-[100%]"></div>
       <div className="absolute bottom-4 left-1/4 w-72 h-28 bg-linear-to-r from-yellow-300/20 via-transparent to-transparent -rotate-12 blur-2xl rounded-full "></div>
-      <h1 className="text-center text-9xl font-bold">{value}</h1>
-      <h2 className="text-center p-2 mb-4">{label}</h2>
+      <h1 className="text-center text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold">{value}</h1>
+      <h2 className="text-center text-sm sm:text-base md:text-lg p-2 mb-4">{label}</h2>
     </div>
 
   )
@@ -69,7 +70,7 @@ function Home() {
             pt-10 sm:pt-16 md:pt-20
             font-hero uppercase text-primary font-bold
             mt-15 lg:mt-5
-            text-[140px] sm:text-[120px] md:text-[15vw] lg:text-[19vw]
+            text-[140px] sm:text-[160px] md:text-[15vw] lg:text-[19vw]
             leading-none tracking-wider
             px-2
           ">
@@ -77,19 +78,15 @@ function Home() {
           </p>
         </div>
 
-        <div className="absolute left-1/2 bottom-0 translate-y-1/2 -translate-x-1/2 w-full max-w-6xl">
-
-          {/* <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="translate-y-1/2 left-0 right-0 px-4 sm:px-6 lg:px-12">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 md:gap-6 max-w-6xl mx-auto">
             {stats.map((stat) => (
               <StatCard key={stat.label} value={stat.value} label={stat.label} />
             ))}
-          </div> */}
-
+          </div>
         </div>
-
-
       </div>
-      <div className="w-full overflow-x-hidden px-2 lg:px-25 flex flex-col space-y-12 lg:space-y-42">
+      <div className="w-full overflow-x-hidden space-y-12 lg:space-y-42">
         <div>
           {/* <Hero
           isHome
@@ -125,18 +122,23 @@ function Home() {
         {/* <Experience /> */}
 
         {/* <FeaturedImage section="home_bottom" /> */}
-        <div className="rounded-lg overflow-hidden">
+        <div className="rounded-lg overflow-hidden w-full max-w-sm sm:max-w-xl md:max-w-3xl lg:max-w-5xl xl:max-w-screen-xl mx-auto">
           <video
             src="hero.mp4"
             autoPlay
             loop
             muted
-            className="brightness-70 h-180 w-full object-cover"
+            playsInline
+            className="brightness-[0.7] w-full block"
           />
         </div>
+        <div className="mb-10">
         <Clients />
-        <CaseStudyCarousel />
-        {/* <ContactForm /> */}
+        </div>
+        {/*<CaseStudyCarousel />
+         <ContactForm /> */}
+         <InnovateSection />
+         
       </div>
     </div>
   )
