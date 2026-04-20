@@ -32,3 +32,31 @@ export const useAddGallery = <TData=unknown>() => {
         onError: catchError,
     });
 }
+
+export const useUpdateGallery = <TData extends {}>() => {
+    const queryClient = useQueryClient();
+
+    return useMutation({
+        mutationFn: async ({ id, data}: { id: number, data: TData}) => {
+            const res = await api.put(`index.php?resource=${GALLERY}&id=${id}`, data,
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                }
+            );
+
+            return res.data;
+
+        },
+        onSuccess: () => {
+            queryClient.invalidateQueries({queryKey: [GALLERY]});
+            toast.success("Gallery updated successfully");
+        },
+        onError: (err: any) => {
+            console.error("Failed to update gallery", err);
+
+            toast.error("Failed to update gallery", err);
+        },
+    });
+};

@@ -5,16 +5,23 @@ import FormCardContent from "@/components/layout/FormCardContent";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { useUploadImage } from "@/hooks/useImageUrl";
-import { useAddGallery } from "@/hooks/useGallery";
+import { useAddGallery, useUpdateGallery } from "@/hooks/useGallery";
+import { ref, deleteObject } from "firebase/storage";
+import { storage } from "@/firebase";
 
 
 interface GalleryFormProps {
     projectId?: number;
+    galleryId?: number;
+    defaultFile?: string;
     onSuccess?: () => void;
 }
 
-function GalleryForm({ onSuccess, projectId }: GalleryFormProps) {
+function GalleryForm({ onSuccess, projectId, galleryId, defaultFile }: GalleryFormProps) {
 
+
+
+    const isEditing = !!galleryId;
     const form = useForm({
         defaultValues: {
             file: undefined
@@ -25,31 +32,57 @@ function GalleryForm({ onSuccess, projectId }: GalleryFormProps) {
     const [files, setFiles] = useState<File[]>([]);
     const { upload, loading } = useUploadImage();
 
-    const { mutate } = useAddGallery();
+    const { mutate: addGallery } = useAddGallery();
+    const { mutate: updateGallery } = useUpdateGallery();
 
 
     const onSubmit = async (values: any) => {
         try {
-            const imageUrl = await upload(files[0], "gallery")
-            console.log(values);
+            let imageUrl: string | undefined = defaultFile;
 
-            mutate(
-                {
-                    project_id: projectId,
-                    file: imageUrl,
-                },
 
-                {
-                    onSuccess: () => {
-                        form.reset();
-                        setFiles([]);
-                        onSuccess?.();
-                    },
-                    onError: (err) => {
-                        console.error("Failed to save gallery image", err);
-                    },
+            if (files[0]) {
+                if (defaultFile) {
+                    const oldRef = ref(storage, defaultFile);
+                    await deleteObject(oldRef).catch((err) => {
+                        console.warn("Old image not found or already deleted", err);
+                    });
                 }
-            )
+                imageUrl = (await upload(files[0], "gallery")) ?? undefined;
+            }
+
+            if (!imageUrl) return;
+
+
+            if (isEditing) {
+                updateGallery(
+                    { id: galleryId, data: { file: imageUrl } },
+                    {
+                        onSuccess: () => {
+                            form.reset();
+                            setFiles([]);
+                            onSuccess?.();
+                        },
+                        onError: (err) => {
+                            console.error("Failed to update gallery image", err);
+                        },
+                    }
+                );
+            } else {
+                addGallery(
+                    { project_id: projectId, file: imageUrl },
+                    {
+                        onSuccess: () => {
+                            form.reset();
+                            setFiles([]);
+                            onSuccess?.();
+                        },
+                        onError: (err) => {
+                            console.error("Failed to save gallery image", err);
+                        },
+                    }
+                );
+            }
         } catch (err) {
             console.error("Submit failed", err);
         }
@@ -65,7 +98,7 @@ function GalleryForm({ onSuccess, projectId }: GalleryFormProps) {
                 encType="multipart/form-data"
             >
 
-                <FormCardContent title="Add new Image">
+                <FormCardContent title={isEditing ? "Update Image" : "Add New Image"}>
                     <FormFieldFile
                         multiple={false}
                         control={form.control}
@@ -81,8 +114,10 @@ function GalleryForm({ onSuccess, projectId }: GalleryFormProps) {
                     <Button
                         className="w-full flex items-center justify-center rounded-xl p-6"
                         type="submit"
+                        disabled={loading}
                     >
-                        Save Gallery
+                        {isEditing ? "Update Gallery" : "Save Gallery"}
+
                     </Button>
                 </div>
             </form>
