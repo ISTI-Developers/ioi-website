@@ -4,10 +4,12 @@ import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import FormCardContent from "@/components/layout/FormCardContent";
 import FormFieldTextArea from "../../forms/fields/FormFieldTextArea";
+import DeleteDialog from "@/components/layout/DeleteDialog";
 import { useProjectByIdWithPointsAndProse } from "@/hooks/useProjects"
 import { useAddProse } from "@/hooks/useProjectProse";
 import { EllipsisMenu } from "@/components/ui/ellipsis-menu";
 import UpdateProseForm from "../../forms/update/UpdateProseForm";
+import { useDeleteProse } from "@/hooks/useProjectProse";
 import type { Prose } from "@/data/types";
 
 interface ProseProps {
@@ -18,6 +20,8 @@ interface ProseProps {
 export default function Prose({ projectId, onSuccess }: ProseProps) {
 
     const [editingProse, setEditingProse] = useState<Prose | null>(null);
+    const [deletingPoint, setDeletingPoint] = useState<Prose | null>(null);
+
     const [openUpdate, setOpenUpdate] = useState(false);
 
     const form = useForm({
@@ -28,6 +32,8 @@ export default function Prose({ projectId, onSuccess }: ProseProps) {
     });
 
     const { mutate } = useAddProse();
+    const { mutate: deleteProse } = useDeleteProse();
+
     const { data: project, isLoading } = useProjectByIdWithPointsAndProse(projectId);
     const prose = project?.prose || [];
 
@@ -78,6 +84,11 @@ export default function Prose({ projectId, onSuccess }: ProseProps) {
                                                                 setOpenUpdate(true);
                                                             },
                                                         },
+                                                        {
+                                                            label: "Delete",
+                                                            variant: "destructive",
+                                                            onClick: () => setDeletingPoint(p),
+                                                        },
                                                     ]}
                                                 />
                                             </span>
@@ -114,6 +125,17 @@ export default function Prose({ projectId, onSuccess }: ProseProps) {
                     </div>
                 </div>
             </form>
+
+              <DeleteDialog
+                open={!!deletingPoint}
+                onOpenChange={(open) => !open && setDeletingPoint(null)}
+                handleConfirm={() => {
+                    if (deletingPoint?.prose_id) {
+                        deleteProse(deletingPoint.prose_id);
+                        setDeletingPoint(null);
+                    }
+                }}
+            />
         </Form>
     )
 }
