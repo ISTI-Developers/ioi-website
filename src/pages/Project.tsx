@@ -6,6 +6,7 @@ import ProjectCard from "../components/ui/project-card";
 import ButtonPortfolio from "@/components/ui/button-portfolio";
 import { FeaturedImage } from "@/components/ui/featured-image";
 import Hero from "@/components/ui/hero";
+import { InnovateSection } from "@/components/layout/InnovateSection";
 
 
 function Projects() {
@@ -62,6 +63,7 @@ function Projects() {
         <Clients />
       </div>
       <CaseStudyCarousel /> */}
+      <InnovateSection />
     </div>
   )
 }

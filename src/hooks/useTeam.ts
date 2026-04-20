@@ -110,7 +110,7 @@ export const useUpdateTeam = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: async ({ id, data, oldFiles, }: { id: number; data: Partial<Team>; oldFiles?: string[]}) => {
+    mutationFn: async ({ id, data, }: { id: number; data: Partial<Team>; oldFiles?: string[]}) => {
       const res = await api.put(`index.php?resource=${TEAM}&id=${id}`, data, {
         headers: { "Content-Type": "application/json" },
       });
