@@ -5,15 +5,21 @@ import FormCardContent from "@/components/layout/FormCardContent";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { useUploadImage } from "@/hooks/useImageUrl";
-import { useAddVideo } from "@/hooks/useVideo";
+import { useAddVideo, useUpdateVideo } from "@/hooks/useVideo";
+import { ref, deleteObject } from "firebase/storage";
+import { storage } from "@/firebase";
 
 
 interface VideoFormProps {
     onSuccess?: () => void;
     projectId?: number;
+    videoId?: number;
+    defaultFile?: string;
 }
 
-function VideoForm({ onSuccess, projectId }: VideoFormProps) {
+function VideoForm({ onSuccess, projectId, videoId, defaultFile }: VideoFormProps) {
+
+    const isEditing = !!videoId;
 
     const form = useForm({
         defaultValues: {
@@ -26,33 +32,54 @@ function VideoForm({ onSuccess, projectId }: VideoFormProps) {
     const [files, setFiles] = useState<File[]>([]);
     const { upload, loading } = useUploadImage();
 
-    const { mutate } = useAddVideo();
+    const { mutate: addVideo } = useAddVideo();
+    const { mutate: updateVideo } = useUpdateVideo();
 
     const onSubmit = async (values: any) => {
-        if (!files[0]) return;
-
         try {
-            const videoUrl = await upload(files[0], "videos");
-            console.log(values);
+            let videoUrl: string | undefined = defaultFile;
 
-            mutate(
-                {
-                    project_id: projectId,
-                    file: videoUrl,
-                },
-
-                {
-                    onSuccess: () => {
-                        form.reset();
-                        setFiles([]);
-                        onSuccess?.();
-                    },
-                    onError: (err) => {
-                        console.error("Failed to save video", err);
-                    },
+            if (files[0]) {
+                if (defaultFile) {
+                    const oldRef = ref(storage, defaultFile);
+                    await deleteObject(oldRef).catch((err) => {
+                        console.warn("Old image not found or already deleted", err);
+                    });
                 }
-            );
+                videoUrl = (await upload(files[0], "gallery")) ?? undefined;
+            }
 
+            if (!videoUrl) return;
+
+               if (isEditing) {
+                updateVideo(
+                    { id: videoId, data: { file: videoUrl } },
+                    {
+                        onSuccess: () => {
+                            form.reset();
+                            setFiles([]);
+                            onSuccess?.();
+                        },
+                        onError: (err) => {
+                            console.error("Failed to update video ", err);
+                        },
+                    }
+                );
+            } else {
+                addVideo(
+                    { project_id: projectId, file: videoUrl },
+                    {
+                        onSuccess: () => {
+                            form.reset();
+                            setFiles([]);
+                            onSuccess?.();
+                        },
+                        onError: (err) => {
+                            console.error("Failed to save video image", err);
+                        },
+                    }
+                );
+            }
         } catch (err) {
             console.error("Submit failed", err);
         }
@@ -68,8 +95,7 @@ function VideoForm({ onSuccess, projectId }: VideoFormProps) {
                 encType="multipart/form-data"
 
             >
-                <FormCardContent title="Add a new video">
-
+                <FormCardContent title={isEditing ? "Update Video" : "Add New video"}>
                     <FormFieldFile
                         multiple={false}
                         control={form.control}
@@ -88,7 +114,7 @@ function VideoForm({ onSuccess, projectId }: VideoFormProps) {
                         className="w-full flex items-center justify-center rounded-xl p-6"
                         type="submit"
                     >
-                        Save Video
+                        {isEditing ? "Update Video" : "Save Video"}
                     </Button>
                 </div>
 
