@@ -50,34 +50,37 @@ export default function LoginForm({ onSuccess }: LoginFormProps) {
                     <FormFieldText
                         control={form.control}
                         name="username"
-                        label="Username*"
+                        label="Username"
                         placeholder="Enter your username"
+                        showIcon={false}
                     />
                     <FormFieldText
                         control={form.control}
                         name="password"
-                        label="Password*"
+                        label="Password"
                         placeholder="Enter your password"
                         type="password"
+                        showIcon={false}
                     />
                     {form.formState.errors.root && (
                         <p className="text-sm text-red-500">
                             {form.formState.errors.root.message}
                         </p>
                     )}
+                    <div>
+                        <Button
+                            className="w-full flex items-center justify-center rounded-xl p-6"
+                            type="submit"
+                            form="login-form"
+                            disabled={isPending}
+                        >
+                            {isPending ? "SIGNING IN..." : "SIGN IN"}
+                        </Button>
+                    </div>
                 </FormCardContent>
 
 
-                <div className="pb-6">
-                    <Button
-                        className="w-full flex items-center justify-center rounded-xl p-6"
-                        type="submit"
-                        form="login-form"
-                        disabled={isPending}
-                    >
-                        {isPending ? "SIGNING IN..." : "SIGN IN"}
-                    </Button>
-                </div>
+
 
             </form>
 
