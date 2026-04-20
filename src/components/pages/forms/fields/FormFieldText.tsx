@@ -16,6 +16,7 @@ interface FormFieldTextProps {
   placeholder?: string;
   className?: string;
   type?: string; 
+  showIcon?: boolean; 
 }
 
 function FormFieldText({
@@ -25,6 +26,7 @@ function FormFieldText({
   placeholder,
   className,
   type,
+  showIcon = true, 
 }: FormFieldTextProps) {
   const IconComponent = getColumnIcon(name);
 
@@ -35,7 +37,7 @@ function FormFieldText({
       render={({ field }) => (
         <FormItem className = {className}>
           <FormLabel>
-            <IconComponent className="h-4 w-4" />
+          {showIcon && <IconComponent className="h-4 w-4" />} 
             {label}
           </FormLabel>
           <FormControl>
