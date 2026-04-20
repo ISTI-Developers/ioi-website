@@ -12,26 +12,28 @@ export const useMe = () => {
   return useQuery({
     queryKey: [AUTH],
     enabled: !!token,
-    queryFn: async () => {
-      const token = localStorage.getItem("token");
+ queryFn: async () => {
+  const token = localStorage.getItem("token");
+  if (!token) throw new Error("No token");
 
-      if (!token) throw new Error("No token found");
+  setSession(token);
+  const res = await api.get("index.php?resource=auth");
+  console.log("RAW /auth response:", JSON.stringify(res.data, null, 2));
 
-      setSession(token);
+  const result = AuthResponseSchema.safeParse(res.data);
+  if (!result.success) {
+    console.error("Schema mismatch:", result.error.flatten());
+    throw new Error("Invalid auth response shape");
+  }
 
-      try {
-        const res = await api.get("index.php?resource=auth");
-        return AuthResponseSchema.parse(res.data);
-      } catch (err: any) {
-        // ✅ If token is expired or invalid, clear it immediately
-        const status = err?.response?.status;
-        if (status === 401 || status === 403) {
-          localStorage.removeItem("token");
-          setSession(null);
-        }
-        throw err;
-      }
-    },
+  // if server rotates the token on /auth, save the new one
+  if (result.data.accessToken) {
+    localStorage.setItem("token", result.data.accessToken);
+    setSession(result.data.accessToken);
+  }
+
+  return result.data;
+},
     retry: false,
     staleTime: 1000 * 60 * 5,
     gcTime: 1000 * 60 * 10,
