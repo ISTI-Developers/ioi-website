@@ -58,3 +58,23 @@ export const useUpdateVideo = <TData extends {}>() => {
         },
     });
 };
+
+
+export const useDeleteVideo = () => {
+    const queryClient = useQueryClient();
+
+    return useMutation({
+        mutationFn: async (id: number) => {
+            const res = await api.delete(`index.php?resource=${VIDEO}&id=${id}`);
+            return res.data;
+        },
+        onSuccess: () => {
+            queryClient.invalidateQueries({queryKey: [VIDEO]});
+            toast.success("Video deleted successfully");
+        },
+        onError: (err: any) => {
+            console.error("Failed to delete video", err);
+            toast.error("Failed to delete video");
+        },
+    });
+};
