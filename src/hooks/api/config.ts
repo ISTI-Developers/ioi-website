@@ -15,6 +15,10 @@ const api = axios.create({
 api.interceptors.response.use(
   (res) => res,
   (error: AxiosError) => {
+    if (error.response?.status === 401) {
+      return Promise.reject(error);
+    }
+
     toast.error(
       error.message === "Network Error"
         ? "Cannot connect to the server."
