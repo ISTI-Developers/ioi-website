@@ -137,7 +137,7 @@ export default function ProjectLayout() {
 
                                 {/* Left side: Problem & Solution */}
                                 <div className="space-y-8 max-w-3xl">
-                                    <h1 className="font-semibold mb-4 sm:text-xl lg:text-4xl uppercase">Problem</h1>
+                                    <h1 className="font-semibold mb-4 sm:text-xl lg:text-4xl uppercase">Opportunity</h1>
                                     <ul className="list-disc ml-5 lg:text-2xl text-lightgray">
                                         {problems.map(p => <li key={p.point_id}>{p.content}</li>)}
                                     </ul>
@@ -151,9 +151,9 @@ export default function ProjectLayout() {
                                 {/* Right side: Services */}
                                 <div>
                                     <h1 className="sm:text-2xl lg:text-4xl font-semibold uppercase">Key Results</h1>
-                                    {/* <ul className="list-decimal ml-12 text-2xl">
+                                    <ul className="list-decimal ml-12 text-2xl">
                             {results.map(p => <li key={p.point_id}>{p.content}</li>)}
-                        </ul> */}
+                        </ul> 
                                 </div>
                             </div>
 
