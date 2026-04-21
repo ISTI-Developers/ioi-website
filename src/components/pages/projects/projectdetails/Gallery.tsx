@@ -78,7 +78,7 @@ export default function Gallery({ projectId, onSuccess, showAdd = true }: Galler
         </div>
       )}
 
-      <div className="columns-2 md:columns-3 lg:columns-4 gap-2">
+      <div className="columns-2 md:columns-3 lg:columns-3 gap-2">
         {gallery.map((item) => (
           <div
             key={item.gallery_id}
