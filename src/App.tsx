@@ -6,7 +6,7 @@ import PublicLayout from "./components/layout/PublicLayout";
 import AdminLayout from "./components/layout/AdminLayout";
 import { lazy, Suspense } from "react";
 import { cn } from "./lib/utils";
-import { ProtectedRoute } from "./components/pages/auth/ProtectedRoute";
+  import { ProtectedRoute } from "./components/pages/auth/ProtectedRoute";
 
 
 
