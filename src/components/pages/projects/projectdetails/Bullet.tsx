@@ -145,48 +145,11 @@ export default function Bullet({ projectId, onSuccess }: BulletProps) {
                     </FormCardContent>
 
                     <FormCardContent title="Solutions">
-                        <div>
-                            <ul className="space-y-1 list-disc list-inside">
-                                {solutions.map((p) => (
-                                    <li
-                                        key={p.point_id}
-                                        className="group relative pr-8"
-                                    >
-                                        {p.content}
-
-                                        <span className="absolute right-0 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100">
-                                            <EllipsisMenu
-                                                hoverable
-                                                items={[
-                                                    {
-                                                        label: "Edit",
-                                                        onClick: () => {
-                                                            setEditingPoint(p);
-                                                            setOpenUpdate(true);
-                                                        },
-
-                                                    },
-                                                    {
-                                                        label: "Delete",
-                                                        variant: "destructive",
-                                                        onClick: () => setDeletingPoint(p),
-                                                    },
-                                                ]}
-                                            />
-                                        </span>
-                                    </li>
-                                ))}
-                            </ul>
-
-                            {openUpdate && editingPoint && (
-                                <UpdatePointForm
-                                    point={editingPoint}
-                                    open={openUpdate}
-                                    setOpen={setOpenUpdate}
-                                />
-                            )}
-
-                        </div>
+                        <ul className="list-disc list-inside">
+                            {solutions.map((p) => (
+                                <li key={p.point_id}>{p.content}</li>
+                            ))}
+                        </ul>
                         <FormFieldTextArea
                             control={form.control}
                             name="solution"
@@ -209,48 +172,11 @@ export default function Bullet({ projectId, onSuccess }: BulletProps) {
 
                 <div className="flex gap-2">
                     <FormCardContent title="Service Rendered">
-                        <div>
-                            <ul className="space-y-1 list-disc list-inside">
-                                {services.map((p) => (
-                                    <li
-                                        key={p.point_id}
-                                        className="group relative pr-8"
-                                    >
-                                        {p.content}
-
-                                        <span className="absolute right-0 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100">
-                                            <EllipsisMenu
-                                                hoverable
-                                                items={[
-                                                    {
-                                                        label: "Edit",
-                                                        onClick: () => {
-                                                            setEditingPoint(p);
-                                                            setOpenUpdate(true);
-                                                        },
-
-                                                    },
-                                                    {
-                                                        label: "Delete",
-                                                        variant: "destructive",
-                                                        onClick: () => setDeletingPoint(p),
-                                                    },
-                                                ]}
-                                            />
-                                        </span>
-                                    </li>
-                                ))}
-                            </ul>
-
-                            {openUpdate && editingPoint && (
-                                <UpdatePointForm
-                                    point={editingPoint}
-                                    open={openUpdate}
-                                    setOpen={setOpenUpdate}
-                                />
-                            )}
-
-                        </div>
+                        <ol className=" list-decimal list-inside">
+                            {services.map((p) => (
+                                <li key={p.point_id}>{p.content}</li>
+                            ))}
+                        </ol>
                         <FormFieldTextArea
                             control={form.control}
                             name="service"
@@ -266,53 +192,15 @@ export default function Bullet({ projectId, onSuccess }: BulletProps) {
 
                             >
                                 Add
-                            </Button>
-                        </div>
+                            </Button>                        </div>
                     </FormCardContent>
 
                     <FormCardContent title="Key Results">
-                        <div>
-                            <ul className="space-y-1 list-disc list-inside">
-                                {results.map((p) => (
-                                    <li
-                                        key={p.point_id}
-                                        className="group relative pr-8"
-                                    >
-                                        {p.content}
-
-                                        <span className="absolute right-0 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100">
-                                            <EllipsisMenu
-                                                hoverable
-                                                items={[
-                                                    {
-                                                        label: "Edit",
-                                                        onClick: () => {
-                                                            setEditingPoint(p);
-                                                            setOpenUpdate(true);
-                                                        },
-
-                                                    },
-                                                    {
-                                                        label: "Delete",
-                                                        variant: "destructive",
-                                                        onClick: () => setDeletingPoint(p),
-                                                    },
-                                                ]}
-                                            />
-                                        </span>
-                                    </li>
-                                ))}
-                            </ul>
-
-                            {openUpdate && editingPoint && (
-                                <UpdatePointForm
-                                    point={editingPoint}
-                                    open={openUpdate}
-                                    setOpen={setOpenUpdate}
-                                />
-                            )}
-
-                        </div>
+                        <ul className="list-decimal list-inside">
+                            {results.map((p) => (
+                                <li key={p.point_id}>{p.content}</li>
+                            ))}
+                        </ul>
                         <FormFieldTextArea
                             control={form.control}
                             name="result"

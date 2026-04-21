@@ -151,7 +151,7 @@ export default function ProjectLayout() {
                                 {/* Right side: Services */}
                                 <div>
                                     <h1 className="sm:text-2xl lg:text-4xl font-semibold uppercase">Key Results</h1>
-                                    <ul className="list-decimal ml-12 text-2xl">
+                                    <ul className="list-decimal mt-4 ml-12 text-2xl">
                             {results.map(p => <li key={p.point_id}>{p.content}</li>)}
                         </ul> 
                                 </div>
