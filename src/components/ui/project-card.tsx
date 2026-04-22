@@ -2,19 +2,17 @@
 import { Link } from "react-router-dom";
 import FirebaseMedia from "./firebase-media";
 import { formatMonthYear } from "@/lib/dateUtils";
-
 export interface ProjectCardProps {
   project: {
     project_id?: number;
     project_name: string;
     project_type: string;
-    start_date: string;
+    start_date?: string;
     end_date?: string;
     project_category: string;
     company_description: string;
     brand_positioning: string;
-    file?: string | string[];
-
+    file?: string | string[] | null; 
   };
   linkPrefix?: string;
   className?: string;
@@ -27,8 +25,8 @@ export default function ProjectCard({ project, linkPrefix = "/", className = "" 
       to={`${linkPrefix}${project.project_id}`}
       className={`relative rounded-2xl lg:rounded-3xl overflow-hidden group cursor-pointer ${className}`}
     >
-        <FirebaseMedia
-        path={Array.isArray(project.file) ? project.file[0] : project.file}
+      <FirebaseMedia
+        path={Array.isArray(project.file) ? project.file[0] : project.file ?? undefined}
         alt={project.project_name}
         className="w-full h-100 object-cover"
       />
