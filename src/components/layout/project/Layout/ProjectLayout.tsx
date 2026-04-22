@@ -102,13 +102,13 @@ export default function ProjectLayout() {
                                     /
                                     <h2>{project.project_type}</h2>
                                 </div>
-                                <h1 className="text-4xl font-semibold uppercase">About</h1>
-                                <p className="text-2xl text-lightgray">{project.company_description}</p>
-                                <p className="text-2xl text-lightgray">{project.brand_positioning}</p>
+                                <h1 className="font-semibold mb-4 text-2xl lg:text-4xl uppercase">About</h1>
+                                <p className="text-lg lg:text-2xl text-lightgray">{project.company_description}</p>
+                                <p className="text-lg lg:text-2xl text-lightgray">{project.brand_positioning}</p>
                             </div>
 
                             <div className="mt-14">
-                                <h1 className="sm:text-2xl lg:text-4xl font-semibold mb-8 uppercase">Services Rendered</h1>
+                                <h1 className="text-2xl lg:text-4xl font-semibold mb-8 uppercase">Services Rendered</h1>
                                 <div className="flex flex-wrap gap-3 text-xl leading-relaxed">
                                     {services.map((p) => (
                                         <span key={p.point_id} className="inline-block text-center text-white bg-primary rounded-lg px-3 py-1">
@@ -123,18 +123,18 @@ export default function ProjectLayout() {
 
                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-50">
                             <div className="space-y-8 max-w-3xl">
-                                <h1 className="font-semibold mb-4 sm:text-xl lg:text-4xl uppercase">Opportunity</h1>
-                                <ul className="list-disc ml-5 lg:text-2xl text-lightgray">
+                                <h1 className="font-semibold mb-4 text-2xl lg:text-4xl uppercase">Opportunity</h1>
+                                <ul className="list-disc ml-5 text-lg lg:text-2xl text-lightgray">
                                     {problems.map(p => <li key={p.point_id}>{p.content}</li>)}
                                 </ul>
-                                <h1 className="font-semibold mb-4 sm:text-xl lg:text-4xl uppercase">Solution</h1>
-                                <ul className="list-disc ml-5 lg:text-2xl text-lightgray">
+                                <h1 className="font-semibold mb-4 text-2xl lg:text-4xl uppercase">Solution</h1>
+                                <ul className="list-disc ml-5 text-lg lg:text-2xl text-lightgray">
                                     {solutions.map(p => <li key={p.point_id}>{p.content}</li>)}
                                 </ul>
                             </div>
                             <div>
-                                <h1 className="sm:text-2xl lg:text-4xl font-semibold uppercase">Key Results</h1>
-                                <ul className="list-decimal ml-5 lg:text-2xl text-lightgray">
+                                <h1 className="text-2xl lg:text-4xl font-semibold uppercase">Key Results</h1>
+                                <ul className="list-decimal ml-5 mt-4 text-lg lg:text-2xl text-lightgray">
                                     {results.map(p => <li key={p.point_id}>{p.content}</li>)}
                                 </ul>
                             </div>
