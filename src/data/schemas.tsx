@@ -7,14 +7,14 @@ export const LoginSchema = z.object({
 });
 
 export const AdminSchema = z.object({
-  user_id: z.coerce.number(), 
-  username: z.string(),
-  role: z.string(),
+    user_id: z.coerce.number(),
+    username: z.string(),
+    role: z.string(),
 });
 
 export const AuthResponseSchema = z.object({
-  accessToken: z.string(),
-  user: AdminSchema,
+    accessToken: z.string(),
+    user: AdminSchema,
 });
 
 export const TeamSchema = z.object({
@@ -48,7 +48,10 @@ export const ProjectSchema = z.object({
     project_category: z.string({ message: "Project category is required" }),
     company_description: z.string({ message: "Company description is required" }),
     brand_positioning: z.string({ message: "Brand positioning is required" }),
-    file: z.string().optional(),
+    file: z.union([
+        z.string(),
+        z.array(z.string()),
+    ]).nullable().optional(),
 });
 
 

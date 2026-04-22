@@ -36,16 +36,20 @@ function UpdateProjectForm({ project, onSuccess }: UpdateProjectFormProps) {
     });
 
     const [files, setFiles] = useState<File[]>([]);
-    const [keptFiles, setKeptFiles] = useState<string[]>(
-        project.file ? [project.file] : []
-        
+    const [keptFiles, setKeptFiles] = useState<string | string[] | null>(
+        project.file ?? null
     );
+
+
     const { upload, loading } = useUploadImage();
 
     const { mutate } = useUpdateProject();
 
     const handleRemoveExisting = (url: string) => {
-        setKeptFiles((prev) => prev.filter((f) => f !== url));
+        setKeptFiles((prev) => {
+            if (Array.isArray(prev)) return prev.filter((f) => f !== url);
+            return null;
+        });
     };
 
     const onSubmit = async (values: Project) => {
@@ -64,7 +68,7 @@ function UpdateProjectForm({ project, onSuccess }: UpdateProjectFormProps) {
                 imageUrl = result ?? undefined;
             }
 
-           mutate(
+            mutate(
                 {
                     id: values.project_id as number,
                     data: {
@@ -75,7 +79,7 @@ function UpdateProjectForm({ project, onSuccess }: UpdateProjectFormProps) {
                 {
                     onSuccess: () => {
                         toast.success("Successfully updated project.");
-                        onSuccess?.(); 
+                        onSuccess?.();
                     },
                 }
             );
@@ -142,28 +146,27 @@ function UpdateProjectForm({ project, onSuccess }: UpdateProjectFormProps) {
                     />
                 </FormCardContent>
 
-              
+
                 <FormCardContent title="Project Images">
-                    {keptFiles.length > 0 && (
+                    {keptFiles && (Array.isArray(keptFiles) ? keptFiles : [keptFiles]).map((url) => (
                         <div className="flex flex-wrap gap-2 mb-2">
-                            {keptFiles.map((url) => (
-                                <div key={url} className="relative group">
-                                    <img
-                                        src={url}
-                                        alt="existing"
-                                        className="w-16 h-16 object-cover rounded-md border"
-                                    />
-                                    <button
-                                        type="button"
-                                        onClick={() => handleRemoveExisting(url)}
-                                        className="absolute -top-2 -right-2 bg-destructive text-destructive-foreground rounded-full p-0.5 opacity-0 group-hover:opacity-100 transition-opacity"
-                                    >
-                                        <X className="w-3 h-3" />
-                                    </button>
-                                </div>
-                            ))}
+
+                            <div key={url} className="relative group">
+                                <img
+                                    src={url}
+                                    alt="existing"
+                                    className="w-16 h-16 object-cover rounded-md border"
+                                />
+                                <button
+                                    type="button"
+                                    onClick={() => handleRemoveExisting(url)}
+                                    className="absolute -top-2 -right-2 bg-destructive text-destructive-foreground rounded-full p-0.5 opacity-0 group-hover:opacity-100 transition-opacity"
+                                >
+                                    <X className="w-3 h-3" />
+                                </button>
+                            </div>
                         </div>
-                    )}
+                    ))}
 
                     <FormFieldFile
                         control={form.control}
