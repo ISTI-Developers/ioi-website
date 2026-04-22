@@ -10,7 +10,7 @@ export function Clients() {
 
     return (
         <div className="w-full px-4 sm:px-6 lg:px-24 space-y-12 ">
-            <h1 className="text-white text-2xl lg:text-4xl font-bold w-120">
+            <h1 className="text-white text-2xl lg:text-4xl mt-2 font-bold w-120">
                 Empowering Visionaries: Stories of Collaboration and Transformation
             </h1>
 
