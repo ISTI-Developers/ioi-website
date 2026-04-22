@@ -43,7 +43,7 @@ export const ProjectSchema = z.object({
     project_id: z.number().optional(),
     project_name: z.string({ message: "Project name is required" }),
     project_type: z.string({ message: "Campaign type is required" }),
-    start_date: z.string({ message: "Start date is required" }),
+    start_date: z.string().optional(),
     end_date: z.string().optional(),
     project_category: z.string({ message: "Project category is required" }),
     company_description: z.string({ message: "Company description is required" }),
