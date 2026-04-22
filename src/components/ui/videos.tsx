@@ -34,14 +34,18 @@ export default function VideoCarousel({ videos, height = "120", renderActions }:
 
 
     return (
-        <Carousel className="w-full">
+        <Carousel className="w-full relative">
             <CarouselContent>
                 {videos.map((video) => {
                     const isPortrait = video.video_id !== undefined && ratios[video.video_id!];
                     return (
                         <CarouselItem
                             key={video.video_id}
-                            className={isPortrait ? "basis-1/3" : "basis-full"}
+                            className={
+                                isPortrait
+                                    ? "basis-full sm:basis-1/2 md:basis-1/3"
+                                    : "basis-full"
+                            }
                         >
                             <FirebaseMedia
                                 path={video.file}
@@ -55,8 +59,12 @@ export default function VideoCarousel({ videos, height = "120", renderActions }:
                     );
                 })}
             </CarouselContent>
-            <CarouselPrevious />
-            <CarouselNext />
+            {videos.length > 1 && (
+                <>
+                    <CarouselPrevious className="absolute left-2 top-1/2 -translate-y-1/2 " />
+                    <CarouselNext className="absolute right-2 top-1/2 -translate-y-1/2" />
+                </>
+            )}
         </Carousel>
     );
 }
