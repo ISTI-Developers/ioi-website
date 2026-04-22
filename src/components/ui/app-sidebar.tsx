@@ -49,11 +49,11 @@ const items = [
   },
 ];
 
-const settings = {
-  title: "Settings",
-  url: "settings",
-  icon: Settings,
-};
+// const settings = {
+//   title: "Settings",
+//   url: "settings",
+//   icon: Settings,
+// };
 
 export function AppSidebar() {
   const { state } = useSidebar();
@@ -120,7 +120,7 @@ export function AppSidebar() {
                 ))}
               </div>
               <Separator className="my-2" />
-              <SidebarMenuItem key={settings.title}>
+              {/* <SidebarMenuItem key={settings.title}>
                 <SidebarMenuButton
                   asChild
                   isActive={isActiveItem(settings.url)}
@@ -136,7 +136,7 @@ export function AppSidebar() {
                     <span>{settings.title}</span>
                   </Link>
                 </SidebarMenuButton>
-              </SidebarMenuItem>
+              </SidebarMenuItem> */}
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
