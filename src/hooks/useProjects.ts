@@ -103,3 +103,23 @@ export const useUpdateProject = <TData extends {}>() => {
 
     });
 };
+
+
+export const useDeleteProject = () => {
+    const queryClient = useQueryClient();
+
+    return useMutation({
+        mutationFn: async (id: number) => {
+            const res = await api.delete(`index.php?resource=${PROJECTS}&id=${id}`);
+            return res.data;
+        },
+        onSuccess: () => {
+            queryClient.invalidateQueries({queryKey: [PROJECTS]});
+            toast.success("Project deleted successfully");
+        },
+        onError: (err: any) => {
+            console.error("Failed to delete project", err);
+            toast.error("Failed to delete project");
+        },
+    });
+}

@@ -39,7 +39,7 @@ function ProjectForm({ onSuccess }: ProjectFormProps) {
     const onSubmit = async (values: any) => {
         try {
 
-            const imageUrl = await upload(files[0], "projects")
+            const imageUrl = files[0] ? await upload(files[0], "projects") : null; 
             console.log(values);
             const { file, ...rest } = values;
 
