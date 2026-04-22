@@ -77,7 +77,7 @@ export default function ProjectLayout() {
                     key={project.project_id}
                     path={project.file ? (Array.isArray(project.file) ? project.file[0] : project.file) : undefined}
                     alt="Banner"
-                    className="w-full h-full object-top rounded-md mt-10"
+                    className="w-full h-full     object-top rounded-md mt-10"
 
                 />
             </div>
@@ -94,62 +94,44 @@ export default function ProjectLayout() {
             </div> */}
 
                 {hasPoints ? (
-                    <div className="grid grid-rows-1 lg:grid-cols-2 gap-x-50">
-                        <div className="space-y-8 max-w-3xl">
-                            <div className="flex gap-2 text-primary">
-                                <h2>{project.project_category}</h2>
-                                /
-                                <h2>{project.project_type}</h2>
-                            </div>
-                            <h1 className="text-4xl font-semibold uppercase">About</h1>
-                            <p className="text-2xl text-lightgray">{project.company_description}</p>
-                            <p className="text-2xl text-lightgray">{project.brand_positioning}</p>
-                        </div>
-
-                        <div className="mt-14">
-                            <h1 className="sm:text-2xl lg:text-4xl font-semibold mb-8 uppercase">
-                                Services Rendered
-                            </h1>
-                            <div className="flex flex-wrap gap-3 text-xl leading-relaxed">
-                                {services.map((p) => (
-                                    <span key={p.point_id} className="inline-block text-center text-white bg-primary rounded-lg px-3 py-1">
-                                        {p.content}
-                                    </span>
-                                ))}
-                            </div>
-                        </div>
-                        <div></div>
-                    </div>
-                ) : (
-                    // ← prose replaces the whole grid when no points
-                    <div className="space-y-8">
-                        {proseList.map(p => (
-                            <p key={p.prose_id} className="whitespace-pre-wrap text-lg lg:text-xl">
-                                {p.content}
-                            </p>
-                        ))}
-                    </div>
-                )}
-                <Video projectId={projectId} height="h-160" showAdd={false} />
-
-                {hasPoints ? (
                     <>
-                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-50 ">
+                        <div className="grid grid-rows-1 lg:grid-cols-2 gap-x-50">
+                            <div className="space-y-8 max-w-3xl">
+                                <div className="flex gap-2 text-primary">
+                                    <h2>{project.project_category}</h2>
+                                    /
+                                    <h2>{project.project_type}</h2>
+                                </div>
+                                <h1 className="text-4xl font-semibold uppercase">About</h1>
+                                <p className="text-2xl text-lightgray">{project.company_description}</p>
+                                <p className="text-2xl text-lightgray">{project.brand_positioning}</p>
+                            </div>
 
-                            {/* Left side: Problem & Solution */}
+                            <div className="mt-14">
+                                <h1 className="sm:text-2xl lg:text-4xl font-semibold mb-8 uppercase">Services Rendered</h1>
+                                <div className="flex flex-wrap gap-3 text-xl leading-relaxed">
+                                    {services.map((p) => (
+                                        <span key={p.point_id} className="inline-block text-center text-white bg-primary rounded-lg px-3 py-1">
+                                            {p.content}
+                                        </span>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+
+                        <Video projectId={projectId} height="h-160" showAdd={false} />
+
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-50">
                             <div className="space-y-8 max-w-3xl">
                                 <h1 className="font-semibold mb-4 sm:text-xl lg:text-4xl uppercase">Opportunity</h1>
                                 <ul className="list-disc ml-5 lg:text-2xl text-lightgray">
                                     {problems.map(p => <li key={p.point_id}>{p.content}</li>)}
                                 </ul>
-
                                 <h1 className="font-semibold mb-4 sm:text-xl lg:text-4xl uppercase">Solution</h1>
                                 <ul className="list-disc ml-5 lg:text-2xl text-lightgray">
                                     {solutions.map(p => <li key={p.point_id}>{p.content}</li>)}
                                 </ul>
                             </div>
-
-                            {/* Right side: Services */}
                             <div>
                                 <h1 className="sm:text-2xl lg:text-4xl font-semibold uppercase">Key Results</h1>
                                 <ul className="list-decimal mt-4 ml-12 text-2xl">
@@ -157,11 +139,10 @@ export default function ProjectLayout() {
                                 </ul>
                             </div>
                         </div>
-
                     </>
                 ) : (
-                    // If no points, render prose as section
-                    <div className=" space-y-8">
+                    <div className="space-y-8">
+                        <Video projectId={projectId} height="h-160" showAdd={false} />
                         {proseList.map(p => (
                             <p key={p.prose_id} className="whitespace-pre-wrap text-lg lg:text-xl">
                                 {p.content}
@@ -169,7 +150,6 @@ export default function ProjectLayout() {
                         ))}
                     </div>
                 )}
-
                 <div className="mb-30">
                     <Gallery projectId={projectId} showAdd={false} />
                 </div>
