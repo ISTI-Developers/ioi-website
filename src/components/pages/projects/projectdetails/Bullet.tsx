@@ -94,36 +94,16 @@ export default function Bullet({ projectId, onSuccess }: BulletProps) {
 
                                         <span className="absolute right-0 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100">
                                             <EllipsisMenu
-                                                hoverable
-                                                items={[
-                                                    {
-                                                        label: "Edit",
-                                                        onClick: () => {
-                                                            setEditingPoint(p);
-                                                            setOpenUpdate(true);
-                                                        },
-
-                                                    },
-                                                    {
-                                                        label: "Delete",
-                                                        variant: "destructive",
-                                                        onClick: () => setDeletingPoint(p),
-                                                    },
-                                                ]}
-                                            />
+                                            hoverable
+                                            items={[
+                                                { label: "Edit", onClick: () => { setEditingPoint(p); setOpenUpdate(true); } },
+                                                { label: "Delete", variant: "destructive", onClick: () => setDeletingPoint(p) },
+                                            ]}
+                                        />
                                         </span>
                                     </li>
                                 ))}
                             </ul>
-
-                            {openUpdate && editingPoint && (
-                                <UpdatePointForm
-                                    point={editingPoint}
-                                    open={openUpdate}
-                                    setOpen={setOpenUpdate}
-                                />
-                            )}
-
                         </div>
                         <FormFieldTextArea
                             control={form.control}
@@ -147,7 +127,18 @@ export default function Bullet({ projectId, onSuccess }: BulletProps) {
                     <FormCardContent title="Solutions">
                         <ul className="list-disc list-inside">
                             {solutions.map((p) => (
-                                <li key={p.point_id}>{p.content}</li>
+                                <li key={p.point_id} className="group relative pr-8">
+                                    {p.content}
+                                    <span className="absolute right-0 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100">
+                                        <EllipsisMenu
+                                            hoverable
+                                            items={[
+                                                { label: "Edit", onClick: () => { setEditingPoint(p); setOpenUpdate(true); } },
+                                                { label: "Delete", variant: "destructive", onClick: () => setDeletingPoint(p) },
+                                            ]}
+                                        />
+                                    </span>
+                                </li>
                             ))}
                         </ul>
                         <FormFieldTextArea
@@ -173,8 +164,19 @@ export default function Bullet({ projectId, onSuccess }: BulletProps) {
                 <div className="flex gap-2">
                     <FormCardContent title="Service Rendered">
                         <ol className=" list-decimal list-inside">
-                            {services.map((p) => (
-                                <li key={p.point_id}>{p.content}</li>
+                          {services.map((p) => (
+                                <li key={p.point_id} className="group relative pr-8">
+                                    {p.content}
+                                    <span className="absolute right-0 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100">
+                                        <EllipsisMenu
+                                            hoverable
+                                            items={[
+                                                { label: "Edit", onClick: () => { setEditingPoint(p); setOpenUpdate(true); } },
+                                                { label: "Delete", variant: "destructive", onClick: () => setDeletingPoint(p) },
+                                            ]}
+                                        />
+                                    </span>
+                                </li>
                             ))}
                         </ol>
                         <FormFieldTextArea
@@ -192,13 +194,25 @@ export default function Bullet({ projectId, onSuccess }: BulletProps) {
 
                             >
                                 Add
-                            </Button>                        </div>
+                            </Button>
+                        </div>
                     </FormCardContent>
 
                     <FormCardContent title="Key Results">
                         <ul className="list-decimal list-inside">
-                            {results.map((p) => (
-                                <li key={p.point_id}>{p.content}</li>
+                           {results.map((p) => (
+                                <li key={p.point_id} className="group relative pr-8">
+                                    {p.content}
+                                    <span className="absolute right-0 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100">
+                                        <EllipsisMenu
+                                            hoverable
+                                            items={[
+                                                { label: "Edit", onClick: () => { setEditingPoint(p); setOpenUpdate(true); } },
+                                                { label: "Delete", variant: "destructive", onClick: () => setDeletingPoint(p) },
+                                            ]}
+                                        />
+                                    </span>
+                                </li>
                             ))}
                         </ul>
                         <FormFieldTextArea
@@ -222,6 +236,13 @@ export default function Bullet({ projectId, onSuccess }: BulletProps) {
                 </div>
             </div>
 
+            {openUpdate && editingPoint && (
+                <UpdatePointForm
+                    point={editingPoint}
+                    open={openUpdate}
+                    setOpen={setOpenUpdate}
+                />
+            )}
 
             <DeleteDialog
                 open={!!deletingPoint}
