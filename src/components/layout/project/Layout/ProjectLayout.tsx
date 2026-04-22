@@ -77,12 +77,12 @@ export default function ProjectLayout() {
                     key={project.project_id}
                     path={project.file ? (Array.isArray(project.file) ? project.file[0] : project.file) : undefined}
                     alt="Banner"
-                    className="w-full h-full     object-top rounded-md mt-10"
+                    className="w-full h-full object-top rounded-2xl mt-10 "
 
                 />
             </div>
 
-            <div className="space-y-40">
+            <div className="space-y-24 lg:space-y-40">
 
 
                 {/* <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm lg:text-lg text-primary mb-12 sm:mb-16 mt-10">
@@ -121,7 +121,7 @@ export default function ProjectLayout() {
 
                         <Video projectId={projectId} height="h-160" showAdd={false} />
 
-                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-50">
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-50">
                             <div className="space-y-8 max-w-3xl">
                                 <h1 className="font-semibold mb-4 sm:text-xl lg:text-4xl uppercase">Opportunity</h1>
                                 <ul className="list-disc ml-5 lg:text-2xl text-lightgray">
@@ -134,7 +134,7 @@ export default function ProjectLayout() {
                             </div>
                             <div>
                                 <h1 className="sm:text-2xl lg:text-4xl font-semibold uppercase">Key Results</h1>
-                                <ul className="list-decimal mt-4 ml-12 text-2xl">
+                                <ul className="list-decimal ml-5 lg:text-2xl text-lightgray">
                                     {results.map(p => <li key={p.point_id}>{p.content}</li>)}
                                 </ul>
                             </div>
