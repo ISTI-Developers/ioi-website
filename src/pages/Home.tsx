@@ -58,7 +58,7 @@ function Home() {
 
   return (
     <div>
-      <div className="relative ">
+      <div className="relative">
         <div className="relative w-full overflow-hidden">
           <img
             src="IOI_WEBSITE BANNER_1920x800 no text.jpg"
@@ -132,13 +132,16 @@ function Home() {
             className="brightness-[0.7] w-full block"
           />
         </div>
-        <div className="mb-10">
-        <Clients />
+        <div>
+          <Clients />
         </div>
         {/*<CaseStudyCarousel />
          <ContactForm /> */}
-         <InnovateSection />
-         
+
+        <div className="mb-20">
+          <InnovateSection />
+        </div>
+
       </div>
     </div>
   )
