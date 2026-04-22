@@ -13,14 +13,13 @@ const services = [
 
 function ServiceCard({ item, index }: { item: typeof services[0]; index: number }) {
   return (
-    <div className="flex flex-col gap-4 w-full">
+    <div className="flex flex-col gap-2 lg:gap-4 w-full">
       <div>
-        <span className="text-2xl text-gray">/{(index + 1).toString().padStart(2, "0")}</span>
-        <h2 className="text-5xl text-white mb-10 lg:mb-20 font-bold">{item.category}</h2>
+        <span className="text-base lg:text-2xl text-gray">/{(index + 1).toString().padStart(2, "0")}</span>
+        <h2 className="text-2xl lg:text-5xl text-white mb-5 lg:mb-20 font-bold">{item.category}</h2>
       </div>
-      <h3 className="text-2xl text-white font-semibold">{item.title}</h3>
-      <p className="text-xl text-[#777777] leading-relaxed sm:w-full lg:w-68 font-semibold">{item.desc}</p>
-      <hr className="border-t border-white/20 sm:hidden w-full" />
+      <h3 className="text-base lg:text-2xl text-white font-semibold">{item.title}</h3>
+      <p className="text-sm lg:text-xl text-[#777777] leading-relaxed lg:w-68 font-semibold">{item.desc}</p>
     </div>
   );
 }
@@ -52,19 +51,11 @@ export default function Services() {
     <div className="w-full">
       <section className="text-white py-10 lg:py-20 w-full">
 
-        {/* GRID — mobile only */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:hidden gap-x-12 gap-y-10 px-4 sm:px-6">
-          {services.map((item, index) => (
-            <ServiceCard key={item.id} item={item} index={index} />
-          ))}
-        </div>
-
-        {/* CAROUSEL — desktop only */}
-        <div className="hidden lg:block relative w-screen left-1/2 -ml-[50vw] overflow-hidden">
+        <div className="relative w-screen left-1/2 -ml-[50vw] overflow-hidden">
           <div className="overflow-hidden" ref={emblaRef}>
-            <div className="flex gap-x-12">
+            <div className="flex gap-x-6 lg:gap-x-12">
               {services.map((item, index) => (
-                <div key={item.id} className="flex-[0_0_auto] w-[340px] pr-8">
+                <div key={item.id} className="flex-[0_0_auto] w-[180px] lg:w-[340px] pr-4 lg:pr-8">
                   <ServiceCard item={item} index={index} />
                 </div>
               ))}
