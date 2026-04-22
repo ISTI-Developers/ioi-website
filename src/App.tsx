@@ -1,12 +1,8 @@
-import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
-import Navbar from "./components/layout/NavBar";
-import Footer from "./components/layout/Footer";
+import { Route, Routes } from "react-router-dom";
 import Sidebar from "./components/layout/Sidebar";
 import PublicLayout from "./components/layout/PublicLayout";
-import AdminLayout from "./components/layout/AdminLayout";
 import { lazy, Suspense } from "react";
-import { cn } from "./lib/utils";
-  import { ProtectedRoute } from "./components/pages/auth/ProtectedRoute";
+import { ProtectedRoute } from "./components/pages/auth/ProtectedRoute";
 
 
 
@@ -25,6 +21,7 @@ const Client = lazy(() => import("./pages/Admin/Client"));
 const Project = lazy(() => import("./pages/Admin/Project"));
 const Career = lazy(() => import("./pages/Admin/Career"));
 const Banner = lazy(() => import("./pages/Admin/Banner"));
+const Settings = lazy(() => import ("./pages/Admin/Settings"));
 
 
 
@@ -34,10 +31,8 @@ function App() {
     <Suspense fallback={<div className="p-10 text-center">Loading...</div>}>
       <Routes>
 
-
         <Route path="login" element={<Login />} />
 
-        
         {/* Public */}
         <Route element={<PublicLayout />} >
           <Route path="/" element={<Home />} />
@@ -56,12 +51,11 @@ function App() {
             <Route path="projects" element={<Project />} />
             <Route path="careers" element={<Career />} />
             <Route path="banners" element={<Banner />} />
+            <Route path="settings" element={<Settings />} />
           </Route>
         </Route>
 
-
         <Route path="*" element={<>Error 404</>} />
-
       </Routes>
 
 
