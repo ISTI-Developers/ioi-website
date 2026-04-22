@@ -4,7 +4,7 @@ import { FeaturedImage } from "../components/ui/featured-image";
 function About() {
     return (
         <div className="w-full overflow-x-hidden px-4 md:px-10 lg:px-20 flex flex-col space-y-10 md:space-y-16 lg:space-y-24">
-           <img src="/abouts.gif" alt="About us Gif" className="w-250 mx-auto block mt-15" />
+           <img src="https://firebasestorage.googleapis.com/v0/b/innovation-one-4de73.firebasestorage.app/o/gif%2Fabouts.gif?alt=media&token=d516d999-67d3-4110-837e-1870a8ddcbf7" alt="About us Gif" className="w-250 mx-auto block mt-15" />
             <section className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start p-8">
                 <div className="space-y-4">
                     <p className="text-base md:text-lg lg:text-xl text-gray-300 text-justify">

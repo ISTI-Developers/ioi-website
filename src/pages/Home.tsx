@@ -61,7 +61,7 @@ function Home() {
       <div className="relative">
         <div className="relative w-full overflow-hidden">
           <img
-            src="IOI_WEBSITE BANNER_1920x800 no text.jpg"
+            src="https://firebasestorage.googleapis.com/v0/b/innovation-one-4de73.firebasestorage.app/o/home%2Fhero.jpg?alt=media&token=f329aa40-c72d-4951-b391-1985d248f21b"
             className="w-full h-90 lg:h-full object-cover object-center sm:object-left lg:object-bottom mt-100 lg:mt-5"
           />
 
@@ -124,7 +124,7 @@ function Home() {
         {/* <FeaturedImage section="home_bottom" /> */}
         <div className="rounded-lg overflow-hidden w-full max-w-sm sm:max-w-xl md:max-w-3xl lg:max-w-5xl xl:max-w-screen-xl mx-auto">
           <video
-            src="hero.mp4"
+            src="https://firebasestorage.googleapis.com/v0/b/innovation-one-4de73.firebasestorage.app/o/home%2Fhome_video.mp4?alt=media&token=327bc4a1-6b8e-432b-99c9-c14375e0a761"
             autoPlay
             loop
             muted

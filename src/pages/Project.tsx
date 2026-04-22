@@ -39,7 +39,7 @@ function Projects() {
         </div>
       </div> */}
 
-      <img src="/projects.gif" alt="Project Gif" className="w-250 mx-auto block mt-15" />
+      <img src="https://firebasestorage.googleapis.com/v0/b/innovation-one-4de73.firebasestorage.app/o/gif%2Fprojects.gif?alt=media&token=fe1726a9-369a-45d8-b52d-977edeeeb8e3" alt="Project Gif" className="w-250 mx-auto block mt-15" />
 
 
 
