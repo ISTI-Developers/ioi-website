@@ -175,7 +175,6 @@ function UpdateProjectForm({ project, onSuccess }: UpdateProjectFormProps) {
                         placeholder="Upload profile images"
                         files={files}
                         setFiles={setFiles}
-                        multiple
                     />
                 </FormCardContent>
 

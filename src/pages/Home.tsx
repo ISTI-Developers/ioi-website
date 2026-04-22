@@ -115,7 +115,7 @@ function Home() {
           </div>
         </div> */}
 
-        <div className="mt-50">
+        <div className="mt-30">
           <Services />
         </div>
 
