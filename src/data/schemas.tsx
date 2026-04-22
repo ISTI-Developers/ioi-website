@@ -2,20 +2,28 @@ import { z } from "zod";
 
 
 export const LoginSchema = z.object({
-    username: z.string(),
-    password: z.string()
+  username: z.string(),
+  password: z.string().min(1),
 });
 
-export const AdminSchema = z.object({
-    user_id: z.coerce.number(),
-    username: z.string(),
-    role: z.string(),
+
+export const UserSchema = z.object({
+  user_id: z.number(),
+  username: z.string(),
+  role: z.string(),
+  created_at: z.string().optional(),
 });
 
-export const AuthResponseSchema = z.object({
-    accessToken: z.string(),
-    user: AdminSchema,
+export const LoginResponseSchema = z.object({
+   message: z.string(),
+   user: UserSchema,
 });
+
+export const MeResponseSchema = z.object({
+  user: UserSchema,
+});
+
+
 
 export const TeamSchema = z.object({
     team_id: z.number().optional(),

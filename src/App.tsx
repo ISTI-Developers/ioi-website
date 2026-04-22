@@ -1,4 +1,5 @@
 import { Route, Routes } from "react-router-dom";
+import { useAutoLogout } from "./hooks/useAuth";
 import Sidebar from "./components/layout/Sidebar";
 import PublicLayout from "./components/layout/PublicLayout";
 import { lazy, Suspense } from "react";
@@ -21,11 +22,12 @@ const Client = lazy(() => import("./pages/Admin/Client"));
 const Project = lazy(() => import("./pages/Admin/Project"));
 const Career = lazy(() => import("./pages/Admin/Career"));
 const Banner = lazy(() => import("./pages/Admin/Banner"));
-const Settings = lazy(() => import ("./pages/Admin/Settings"));
+const Settings = lazy(() => import("./pages/Admin/Settings"));
 
 
 
 function App() {
+  useAutoLogout();
 
   return (
     <Suspense fallback={<div className="p-10 text-center">Loading...</div>}>

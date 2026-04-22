@@ -10,6 +10,7 @@ if (!API_BASE_URL) {
 const api = axios.create({
   baseURL: API_BASE_URL,
   timeout: 60000,
+  withCredentials: true 
 });
 
 api.interceptors.response.use(
@@ -29,12 +30,5 @@ api.interceptors.response.use(
   }
 );
 
-export const setSession = (token: string | null) => {
-  if(token) {
-    api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-  } else {
-    delete api.defaults.headers.common["Authorization"];
-  }
-};
 
 export default api;

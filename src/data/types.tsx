@@ -2,13 +2,15 @@ import type z from "zod";
 import type { 
   TeamSchema, ClientSchema, ProjectSchema, PointSchema, GallerySchema, ProseSchema,
   CareerSchema, BannerSchema, VideoSchema,
-  LoginSchema, AdminSchema,AuthResponseSchema
+  LoginSchema, UserSchema, LoginResponseSchema, MeResponseSchema
 
 } from "./schemas";
 
-export type Login = z.infer<typeof LoginSchema>;
-export type AdminUser = z.infer<typeof AdminSchema>;
-export type AuthResponse = z.infer<typeof AuthResponseSchema>;
+export type Login = z.infer<typeof LoginSchema>
+export type User = z.infer<typeof UserSchema>
+export type LoginResponse = z.infer<typeof LoginResponseSchema>
+export type MeResponse = z.infer<typeof MeResponseSchema>
+
 
 
 export type TeamMember = z.infer<typeof TeamSchema>;
