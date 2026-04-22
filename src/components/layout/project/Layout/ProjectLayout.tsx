@@ -69,7 +69,7 @@ export default function ProjectLayout() {
                         </>
                     }
 
-                    description={"We're located in Makati City, \n Philippines"}
+                    // description={"We're located in Makati City, \n Philippines"}
                 />
 
             
