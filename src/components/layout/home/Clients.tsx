@@ -1,5 +1,7 @@
 import { LogoCarousel } from "../../ui/logo-carousel";
 import { useClients } from "@/hooks/useClients";
+import { ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export function Clients() {
     const { data: clients, isLoading } = useClients();
@@ -13,13 +15,16 @@ export function Clients() {
             </h1>
 
 
-            <div className="flex justify-between mt-4">
+            <div className="flex flex-col sm:flex-row justify-between mt-4 gap-4">
 
-                <div>
+
+                <div className="flex items-center gap-2">
+                    <Link to= "/projects" className="flex items-center gap-2 text-white lg-text-lg">
                     <span className="text-white lg:text-lg">
                         All Projects
                     </span>
-                    {/* <img src = "arm21.svg" className="h-20 w-20 inline-block ml-2" alt="Arrow pointing right" /> */}
+                    <ArrowRight className="text-white h-4 w-4 mt-1" />
+                    </Link>
                 </div>
 
 
