@@ -10,7 +10,6 @@ export const LoginSchema = z.object({
 export const UserSchema = z.object({
   user_id: z.number(),
   username: z.string(),
-  role: z.string(),
   created_at: z.string().optional(),
 });
 
