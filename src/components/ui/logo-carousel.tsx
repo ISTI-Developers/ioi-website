@@ -38,21 +38,8 @@ export function LogoCarousel({ clients }: ClientCardProps) {
 
   return (
     <>
-      {/* GRID — mobile only (hidden on lg and above) */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 gap-6 lg:hidden">
-        {filteredClients.map((client) => (
-          <div key={client.client_id} className="flex items-center justify-center h-[90px]">
-            <img
-              src={client.file}
-              alt={client.client_name}
-              className="w-full h-full object-contain"
-            />
-          </div>
-        ))}
-      </div>
 
-      {/* CAROUSEL — desktop only (hidden on mobile) */}
-      <div className="hidden lg:block relative w-screen left-1/2 -ml-[50vw] overflow-hidden">
+      <div className="lg:block relative w-screen left-1/2 -ml-[50vw] overflow-hidden">
         <div className="overflow-hidden" ref={emblaRef}>
           <div className="flex">
             {filteredClients.map((client) => (
