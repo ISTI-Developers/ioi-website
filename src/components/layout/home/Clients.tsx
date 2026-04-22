@@ -7,7 +7,7 @@ export function Clients() {
     if (isLoading) return <p>Loading clients...</p>;
 
     return (
-        <div className="w-full">
+        <div className="w-full px-4 sm:px-6 lg:px-24 space-y-12 ">
             <h1 className="text-white text-2xl lg:text-4xl font-bold w-120">
                 Empowering Visionaries: Stories of Collaboration and Transformation
             </h1>
@@ -28,7 +28,7 @@ export function Clients() {
                 </p>
 
             </div>
-            <div className="mt-30 w-full">
+            <div className="mt-32 w-full">
                 <LogoCarousel clients={clients ?? []} />
             </div>
         </div>
