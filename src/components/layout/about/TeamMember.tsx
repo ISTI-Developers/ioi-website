@@ -52,7 +52,7 @@ export default function TeamMembers() {
             <div className="flex items-center justify-center gap-3 flex-wrap">
               The 
               <img 
-                src="/team.gif" 
+                src="https://firebasestorage.googleapis.com/v0/b/innovation-one-4de73.firebasestorage.app/o/gif%2Fteam.gif?alt=media&token=32c86f97-2a4d-4fc2-bf17-8678aebeda74" 
                 alt="Team"
                 className="inline-block h-23 lg:h-35 object-contain"
               />
