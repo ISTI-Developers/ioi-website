@@ -7,15 +7,20 @@ export default function ProjectDetails() {
   const { id } = useParams<{ id: string }>();
   const projectId = Number(id);
 
-  const { data : project, isLoading } = useProjectByIdWithPointsAndProse(projectId);
+  const { data: project, isLoading } =
+    useProjectByIdWithPointsAndProse(projectId);
 
-  if(isLoading) return <p className="text-white p-10">Loading....</p>;
+  if (isLoading) {
+    return <p className="text-white p-10">Loading....</p>;
+  }
 
-
+  if (!project) {
+    return <p className="text-white p-10">Project not found.</p>;
+  }
 
   return (
     <div className="w-full overflow-x-hidden text-white px-2 lg:px-25 flex flex-col space-y-10 lg:space-y-42">
-      <ProjectLayout />
+      <ProjectLayout project={project} />
     </div>
   );
 }

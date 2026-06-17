@@ -12,13 +12,19 @@ import { Button } from "../ui/button";
 
 interface DeleteDialogProps {
   handleConfirm: () => void;
-  open: boolean;                         
-  onOpenChange: (open: boolean) => void; 
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+  loading?: boolean;
 }
 
-function DeleteDialog({ handleConfirm, open, onOpenChange }: DeleteDialogProps) {
+function DeleteDialog({
+  handleConfirm,
+  open,
+  onOpenChange,
+  loading = false,
+}: DeleteDialogProps) {
   return (
-    <AlertDialog open={open} onOpenChange={onOpenChange}>      
+    <AlertDialog open={open} onOpenChange={onOpenChange}>
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
@@ -27,11 +33,19 @@ function DeleteDialog({ handleConfirm, open, onOpenChange }: DeleteDialogProps) 
             remove from our servers.
           </AlertDialogDescription>
         </AlertDialogHeader>
+
         <AlertDialogFooter>
-          <AlertDialogCancel>Cancel</AlertDialogCancel>
+          <AlertDialogCancel disabled={loading}>
+            Cancel
+          </AlertDialogCancel>
+
           <AlertDialogAction asChild>
-            <Button className="bg-red-700" onClick={handleConfirm}>
-              Delete
+            <Button
+              className="bg-red-700"
+              onClick={handleConfirm}
+              disabled={loading}
+            >
+              {loading ? "Deleting..." : "Delete"}
             </Button>
           </AlertDialogAction>
         </AlertDialogFooter>

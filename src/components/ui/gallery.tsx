@@ -3,7 +3,6 @@ import FormSheetTrigger from "@/components/ui/form-sheet-trigger";
 import GalleryForm from "../pages/forms/create/GalleryForm";
 import FirebaseMedia from "@/components/ui/firebase-media";
 import type { Gallery } from "@/data/types";
-import { useGallery } from "@/hooks/useGallery";
 import { Plus } from "lucide-react";
 
 import { getBentoClass } from "@/lib/galleryUtils";

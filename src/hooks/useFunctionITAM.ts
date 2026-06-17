@@ -1,6 +1,10 @@
-import type { FunctionITAM } from "@/data/types";
 import { useQuery } from "@tanstack/react-query";
 import { getAll, getOne } from "./controller";
+
+type FunctionITAM = {
+  function_id: number;
+  function_name: string;
+};
 
 const FUNCTIONITAM = "function";
 

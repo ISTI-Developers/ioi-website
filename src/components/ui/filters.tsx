@@ -30,6 +30,7 @@ function Filters({ filterableColumns, data, onFiltersChange }: FiltersProps) {
             selectedColumn={selectedColumn}
             setCurrentScreen={setCurrentScreen}
             onFiltersChange={onFiltersChange}
+            teamId={1}
           />
         )}
       </PopoverContent>

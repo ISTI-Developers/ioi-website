@@ -1,12 +1,25 @@
-import {
-  type Asset_Sub_Category,
-  type Asset_Category,
-  type Asset_Type,
-} from "@/data/types";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { catchError, getAll, getOne } from "./controller";
 import api from "./api/config";
 import { toast } from "sonner";
+
+type Asset_Category = {
+  category_id: number;
+  category_name: string;
+};
+
+type Asset_Sub_Category = {
+  sub_category_id: number;
+  sub_category_name: string;
+  category_id: number;
+};
+
+type Asset_Type = {
+  type_id: number;
+  type_name: string;
+  category_id: number;
+  sub_category_id: number;
+};
 
 const CATEGORY = "category";
 const SUB_CATEGORY = "subcategory";
@@ -89,7 +102,10 @@ export const useAddSubCategory = <TData = unknown>() => {
     mutationFn: async (data: TData) => {
       const formdata = new FormData();
       formdata.append("data", JSON.stringify(data));
-      const response = await api.post(`index.php?resource=subcategory`, formdata);
+      const response = await api.post(
+        `index.php?resource=subcategory`,
+        formdata,
+      );
 
       return response.data;
     },

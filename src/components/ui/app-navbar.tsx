@@ -9,7 +9,7 @@ const links = [
     { name: "Contact", path: "/contact" },
 ];
 
-export function AppNavbar({open, setOpen }: { open: boolean; setOpen: (open:boolean) => void}) {
+export function AppNavbar({setOpen }: { open: boolean; setOpen: (open:boolean) => void}) {
 
     return (
         <>

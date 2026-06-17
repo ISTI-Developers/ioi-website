@@ -35,7 +35,7 @@ export default function Footer() {
                         </p>
                         <Link to="https://unmg.com.ph/" target="_blank" className="mt-15">
                             <img
-                                src="https://firebasestorage.googleapis.com/v0/b/innovation-one-4de73.firebasestorage.app/o/InnovationOneLogo%2FUNMG_Logo.png?alt=media&token=ab4b0ced-6b11-493a-81a0-29d995d553b3"
+                                src="https://firebasestorage.googleapis.com/v0/b/innovation-one-4de73.firebasestorage.app/o/InnovationOneLogo%2FUNMG_Logo-White.png?alt=media&token=https://firebasestorage.googleapis.com/v0/b/innovation-one-4de73.firebasestorage.app/o/InnovationOneLogo%2FUNMG_Logo-White.png?alt=media&token=71657259-0d46-4713-aa91-dcedd76cd61a"
                                 className="h-10 w-auto object-contain cursor-pointer"
                                 alt="UNMG Logo"
                             />
@@ -82,7 +82,7 @@ export default function Footer() {
                 </div>
 
                 <div className="flex flex-col sm:flex-row justify-between items-center gap-y-4 sm:gap-y-0 border-t border-black/20 py-5 text-xs sm:text-sm lg:text-base">
-                    <span className="text-black/80 text-center sm:text-left">© 2024 InnovationOne. All rights reserved.</span>
+                    <span className="text-black/80 text-center sm:text-left">© 2026 InnovationOne. All rights reserved.</span>
                     <div className="flex gap-x-6 sm:gap-x-8">
                         {legalLinks.map((link) => (
                             <Link

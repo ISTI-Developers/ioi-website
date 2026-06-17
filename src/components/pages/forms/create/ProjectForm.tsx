@@ -32,7 +32,7 @@ function ProjectForm({ onSuccess }: ProjectFormProps) {
     });
 
     const [files, setFiles] = useState<File[]>([]);
-    const { upload, loading } = useUploadImage();
+    const { upload } = useUploadImage();
 
     const { mutate } = useAddProject();
 

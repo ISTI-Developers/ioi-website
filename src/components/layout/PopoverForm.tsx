@@ -1,10 +1,10 @@
-import { useState } from "react";
-import { Popover, PopoverContent, PopoverTrigger, PopoverAnchor } from "../ui/popover";
+// import { useState } from "react";
+import { Popover, PopoverContent, PopoverAnchor } from "../ui/popover";
 import { Form } from "@/components/ui/form";
 import { Button } from "../ui/button";
 import type { UseFormReturn, FieldValues } from "react-hook-form";
 import { X } from "lucide-react";
-import type FormPopoverTrigger from "../ui/form-popover-trigger";
+// import type FormPopoverTrigger from "../ui/form-popover-trigger";
 
 interface PopoverFormProps<T extends FieldValues> {
   // triggerButton: React.ReactElement<typeof FormPopoverTrigger>;
@@ -14,7 +14,7 @@ interface PopoverFormProps<T extends FieldValues> {
   description?: string;
   subtitle?: React.ReactNode;
   form: UseFormReturn<T>;
-  onSubmit: (values: T) => boolean | void;
+  onSubmit: (values: T) => boolean;
   children: React.ReactNode;
   submitButtonText: string;
   submitButtonIcon?: React.ReactNode;
@@ -111,11 +111,7 @@ function PopoverForm<T extends FieldValues>({
           <div className="grid gap-2">
             <Form {...form}>
               <form
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  e.stopPropagation();
-                  form.handleSubmit(handleSubmit)(e);
-                }}
+              onSubmit={form.handleSubmit(handleSubmit)}
                 className="space-y-4"
                 id={formId}
               >

@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
-import { getAll, catchError } from "./controller";
+import { catchError } from "./controller";
 import type { Settings } from "@/data/types";
 import api from "./api/config";
 

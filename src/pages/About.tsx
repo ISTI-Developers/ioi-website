@@ -2,36 +2,43 @@ import TeamMembers from "../components/layout/about/TeamMember";
 import { FeaturedImage } from "../components/ui/featured-image";
 
 function About() {
-    return (
-        <div className="w-full overflow-x-hidden px-4 md:px-10 lg:px-20 flex flex-col space-y-10 md:space-y-16 lg:space-y-24">
-           <img src="https://firebasestorage.googleapis.com/v0/b/innovation-one-4de73.firebasestorage.app/o/gif%2Fabouts.gif?alt=media&token=d516d999-67d3-4110-837e-1870a8ddcbf7" alt="About us Gif" className="w-250 mx-auto block mt-15" />
-            <section className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start p-8">
-                <div className="space-y-4">
-                    <p className="text-base md:text-lg lg:text-xl text-gray-300 text-justify">
-                        <span
-                            className="text-2xl md:text-4xl lg:text-6xl font-extrabold"
-                            style={{ color: "#C8391A" }}
-                        >
-                            InnovationOne Inc.{" "}
-                        </span>
-                        Operating right out of Makati, we’re a digital marketing agency that takes your brand’s online growth
-                        as seriously as we take securing a table in Poblacion on a payday Friday. We navigate the wild,
-                        ever-changing algorithms of the internet with the exact same street-smarts required to survive
-                        rush hour on Edsa—fast, strategic, and occasionally relying on sheer willpower.
-
-                        Forget the tired corporate jargon and copy-paste campaigns; we’re a heavily caffeinated crew of
-                        data nerds and creatives who specialize in stopping the doomscroll and making your audience actually
-                        pay attention. We turn clicks into clients, likes into loyalty, and your marketing budget into the
-                        smartest investment you’ve made since deciding to carry an emergency umbrella in July.
-
-                    </p>
-                </div>
-                    <FeaturedImage section="about_top"/>
-            </section>
-                    <TeamMembers />
+  return (
+    <div className="w-full overflow-x-hidden px-4 md:px-10 lg:px-20 flex flex-col space-y-10 md:space-y-16 lg:space-y-24">
+      <img
+        src="https://firebasestorage.googleapis.com/v0/b/innovation-one-4de73.firebasestorage.app/o/gif%2Fabouts.gif?alt=media&token=d516d999-67d3-4110-837e-1870a8ddcbf7"
+        alt="About us Gif"
+        className="w-250 mx-auto block mt-15"
+      />
+      <section className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start p-8">
+        <div className="space-y-4">
+          <p className="text-base md:text-lg lg:text-xl text-gray-300 text-justify">
+            <span
+              className="text-2xl md:text-4xl lg:text-6xl font-extrabold"
+              style={{ color: "#C8391A" }}
+            >
+              InnovationOne Inc.{" "}
+            </span>
+            Operating right out of Makati, we’re a digital marketing agency that
+            takes your brand’s online growth as seriously as we take securing a
+            table in Poblacion on a payday Friday. We navigate the wild,
+            ever-changing algorithms of the internet with the exact same
+            street-smarts required to survive rush hour on Edsa—fast, strategic,
+            and occasionally relying on sheer willpower.
+            <br />
+            <br />
+            Forget the tired corporate jargon and copy-paste campaigns; we’re a
+            heavily caffeinated crew of data nerds and creatives who specialize
+            in stopping the doomscroll and making your audience actually pay
+            attention. We turn clicks into clients, likes into loyalty, and your
+            marketing budget into the smartest investment you’ve made since
+            deciding to carry an emergency umbrella in July.
+          </p>
         </div>
-    )
+        <FeaturedImage section="about_top" />
+      </section>
+      <TeamMembers />
+    </div>
+  );
 }
-
 
 export default About;

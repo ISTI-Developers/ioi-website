@@ -1,6 +1,10 @@
-import type { Status } from "@/data/types";
 import { useQuery } from "@tanstack/react-query";
 import { getAll, getOne } from "./controller";
+
+type Status = {
+  status_id: number;
+  status_name: string;
+};
 
 const STATUS = "status";
 

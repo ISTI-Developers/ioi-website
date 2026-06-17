@@ -1,7 +1,6 @@
 import { useState } from "react";
 import type { ColumnDef } from "@tanstack/react-table";
 import FormSheet from "@/components/layout/FormSheet";
-import FormSheetTrigger from "@/components/ui/form-sheet-trigger";
 import UpdateProjectForm from "@/components/pages/forms/update/UpdateProjectForm";
 import { EllipsisMenu } from "@/components/ui/ellipsis-menu";
 
@@ -16,12 +15,9 @@ export type Project = {
   brand_positioning: string;
 };
 
-
 export function useProjectColumns(
-  onEdit?: (row: Project) => void,
   onDelete?: (row: Project) => void,
   onProjectClick?: (row: Project) => void,
-
 ): ColumnDef<Project>[] {
   return [
     {
@@ -33,9 +29,8 @@ export function useProjectColumns(
           onClick={() => onProjectClick?.(row.original)}
         >
           {row.original.project_name}
-
         </button>
-      )
+      ),
     },
     {
       accessorKey: "project_type",
@@ -113,7 +108,7 @@ export function useProjectColumns(
           </>
         );
       },
-    }
+    },
   ];
 }
 

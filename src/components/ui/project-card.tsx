@@ -28,7 +28,7 @@ export default function ProjectCard({ project, linkPrefix = "/", className = "" 
       <FirebaseMedia
         path={Array.isArray(project.file) ? project.file[0] : project.file ?? undefined}
         alt={project.project_name}
-        className="w-full h-100 object-cover"
+        className="w-full h-100 object-cover brightness-75"
       />
 
       <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 bg-linear-to-t from-black/40 to-transparent">

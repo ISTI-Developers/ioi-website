@@ -1,9 +1,17 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { catchError, getAll, getOne } from "./controller";
-import type { Borrow } from "@/data/types";
 import api from "./api/config";
 import { format, isDate } from "date-fns";
 import { toast } from "sonner";
+type Borrow = {
+  borrow_id?: number;
+  asset_id: number;
+  borrower_id: number;
+
+  date_borrowed: string | Date;
+  due_date: string | Date;
+  return_date?: string | Date | null;
+};
 
 const BORROW = "borrow";
 

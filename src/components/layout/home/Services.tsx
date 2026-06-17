@@ -3,23 +3,71 @@ import useEmblaCarousel from "embla-carousel-react";
 import AutoScroll from "embla-carousel-auto-scroll";
 
 const services = [
-  { id: "/01", category: "Campaigns", title: "360 Campaign Projects", desc: "Transform your website into a user-friendly and visually appealing platform with our UX design expertise." },
-  { id: "/02", category: "Content", title: "Multimedia Creation", desc: "Enhance your brand's visual appeal with our top-notch multi media design services." },
-  { id: "/03", category: "Branding", title: "Branding Communication", desc: "Elevate your brand's image, communication and identity with our comprehensive branding strategies." },
-  { id: "/04", category: "SEO/SEM", title: "Digital Advertisement", desc: "Elevate your brand's image and identity with our comprehensive branding strategies." },
-  { id: "/05", category: "UI/UX", title: "Website Development", desc: "Transform your website into a user-friendly and visually appealing platform with our UX design expertise." },
-  { id: "/06", category: "Research", title: "Marketing Strategy", desc: "Transform your website into a user-friendly and visually appealing platform with our UX design expertise." },
+  {
+    id: "/01",
+    category: "Campaigns",
+    title: "360 Campaign Projects",
+    desc: "Transform your website into a user-friendly and visually appealing platform with our UX design expertise.",
+  },
+  {
+    id: "/02",
+    category: "Content",
+    title: "Multimedia Creation",
+    desc: "Enhance your brand's visual appeal with our top-notch multi media design services.",
+  },
+  {
+    id: "/03",
+    category: "Branding",
+    title: "Branding Communication",
+    desc: "Elevate your brand's image, communication and identity with our comprehensive branding strategies.",
+  },
+  {
+    id: "/04",
+    category: "SEO/SEM",
+    title: "Digital Advertisement",
+    desc: "Elevate your brand's image and identity with our comprehensive branding strategies.",
+  },
+  {
+    id: "/05",
+    category: "UI/UX",
+    title: "Website Development",
+    desc: "Transform your website into a user-friendly and visually appealing platform with our UX design expertise.",
+  },
+  {
+    id: "/06",
+    category: "Research",
+    title: "Marketing Strategy",
+    desc: "Transform your website into a user-friendly and visually appealing platform with our UX design expertise.",
+  },
 ];
 
-function ServiceCard({ item, index }: { item: typeof services[0]; index: number }) {
+const loopedServices = [...services, ...services];
+
+function ServiceCard({
+  item,
+  index,
+}: {
+  item: typeof services[0];
+  index: number;
+}) {
   return (
     <div className="flex flex-col gap-2 lg:gap-4 w-full">
       <div>
-        <span className="text-base lg:text-2xl text-gray">/{(index + 1).toString().padStart(2, "0")}</span>
-        <h2 className="text-2xl lg:text-5xl text-white mb-5 lg:mb-20 font-bold">{item.category}</h2>
+        <span className="text-base lg:text-2xl text-gray">
+          /{(index + 1).toString().padStart(2, "0")}
+        </span>
+        <h2 className="text-2xl lg:text-5xl text-white mb-5 lg:mb-20 font-bold">
+          {item.category}
+        </h2>
       </div>
-      <h3 className="text-base lg:text-2xl text-white font-semibold">{item.title}</h3>
-      <p className="text-sm lg:text-xl text-[#777777] leading-relaxed lg:w-68 font-semibold">{item.desc}</p>
+
+      <h3 className="text-base lg:text-2xl text-white font-semibold">
+        {item.title}
+      </h3>
+
+      <p className="text-sm lg:text-xl text-[#777777] leading-relaxed lg:w-68 font-semibold">
+        {item.desc}
+      </p>
     </div>
   );
 }
@@ -29,11 +77,13 @@ export default function Services() {
     {
       loop: true,
       dragFree: true,
-      containScroll: false,
+      skipSnaps: true,
+      align: "start",
     },
     [
       AutoScroll({
-        speed: 1,
+        speed: 2,
+        playOnInit: true,
         stopOnInteraction: false,
         stopOnMouseEnter: false,
         stopOnFocusIn: false,
@@ -50,19 +100,23 @@ export default function Services() {
   return (
     <div className="w-full">
       <section className="text-white py-10 lg:py-20 w-full">
-
         <div className="relative w-screen left-1/2 -ml-[50vw] overflow-hidden">
           <div className="overflow-hidden" ref={emblaRef}>
             <div className="flex gap-x-6 lg:gap-x-12">
-              {services.map((item, index) => (
-                <div key={item.id} className="flex-[0_0_auto] w-[180px] lg:w-[340px] pr-4 lg:pr-8">
-                  <ServiceCard item={item} index={index} />
+              {loopedServices.map((item, index) => (
+                <div
+                  key={`${item.id}-${index}`}
+                  className="flex-[0_0_auto] w-[180px] lg:w-[340px] pr-4 lg:pr-8"
+                >
+                  <ServiceCard
+                    item={item}
+                    index={index % services.length}
+                  />
                 </div>
               ))}
             </div>
           </div>
         </div>
-
       </section>
     </div>
   );

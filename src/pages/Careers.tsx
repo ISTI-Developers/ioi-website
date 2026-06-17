@@ -1,7 +1,5 @@
-import Hero from "../components/ui/hero";
 import CareerList from "../components/layout/career/CareerList";
-import { FeaturedImage } from "../components/ui/featured-image";
-import { Clients } from "../components/layout/home/Clients";
+
 
 
 

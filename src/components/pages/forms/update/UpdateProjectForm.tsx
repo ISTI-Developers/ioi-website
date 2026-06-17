@@ -41,7 +41,7 @@ function UpdateProjectForm({ project, onSuccess }: UpdateProjectFormProps) {
     );
 
 
-    const { upload, loading } = useUploadImage();
+    const { upload } = useUploadImage();
 
     const { mutate } = useUpdateProject();
 

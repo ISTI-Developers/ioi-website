@@ -8,7 +8,7 @@ interface HeroProps {
 export default function Hero({
     title,
     description,
-    isHome = false
+    isHome = false 
 }: HeroProps) { 
     return (
         <div>

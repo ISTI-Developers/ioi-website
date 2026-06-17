@@ -7,7 +7,7 @@ import {
   CommandItem,
   CommandList,
 } from "@/components/ui/command";
-import DisplayAsset from "@/components/ui/display-asset";
+// import DisplayAsset from "@/components/ui/display-asset";
 import {
   FormControl,
   FormField,
@@ -20,18 +20,22 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import type { Asset } from "@/data/types";
-import { useLookupFunctions } from "@/hooks/useLookupFunctions";
-import { getColumnIcon } from "@/lib/columnNameUtils";
 import { cn } from "@/lib/utils";
 import { Check, ChevronsUpDown } from "lucide-react";
 import type { Control } from "react-hook-form";
+
+interface Asset {
+  asset_id: number;
+  asset_name: string;
+  category_id: number;
+  sub_category_id: number;
+  type_id: number;
+}
 
 interface FormFieldAssetComboboxProps {
   control: Control<any>;
   name: string;
   label: string;
-  placeholder?: string;
   assets: Asset[];
   form: any;
 }
@@ -43,103 +47,85 @@ function FormFieldAssetCombobox({
   assets,
   form,
 }: FormFieldAssetComboboxProps) {
-  const IconComponent = getColumnIcon("asset_name");
-
-  const { getCategoryName, getSubCategoryName, getTypeName } = useLookupFunctions();
-
   return (
     <FormField
       control={control}
       name={name}
       render={({ field }) => {
-        const selectedAsset = field.value
-          ? assets.find((asset) => asset.asset_id === field.value)
-          : null;
+        // const selectedAsset = field.value
+        //   ? assets.find((asset) => asset.asset_id === field.value)
+        //   : null;
 
         return (
           <FormItem>
-            <FormLabel className="flex items-center gap-2">
-              <IconComponent className="h-4 w-4" />
-              {label}
-            </FormLabel>
+            <FormLabel>{label}</FormLabel>
+
             <FormControl>
-              <Popover modal>
+              <Popover>
                 <PopoverTrigger asChild>
-                  <FormControl>
-                    <Button
-                      variant="outline"
-                      role="combobox"
-                      className={cn(
-                        "justify-between w-full h-auto min-h-[2.5rem] px-3 py-2",
-                        !field.value && "text-muted-foreground"
-                      )}
-                    >
-                      <div className="flex-1 text-left">
-                        {selectedAsset ? (
-                          <DisplayAsset
-                            asset_name={selectedAsset.asset_name as string}
-                            category={getCategoryName(
-                              selectedAsset.category_id
-                            )}
-                            sub_category={getSubCategoryName(
-                              selectedAsset.sub_category_id
-                            )}
-                            type={getTypeName(selectedAsset.type_id)}
-                          />
-                        ) : (
-                          <span className="text-muted-foreground">
-                            Select Asset
-                          </span>
-                        )}
-                      </div>
-                      <ChevronsUpDown className="ml-2 h-4 w-4 opacity-50 flex-shrink-0" />
-                    </Button>
-                  </FormControl>
+                  <Button
+                    variant="outline"
+                    role="combobox"
+                    className={cn(
+                      "justify-between w-full",
+                      !field.value && "text-muted-foreground"
+                    )}
+                  >
+                    {/* {selectedAsset ? (
+                      // <DisplayAsset
+                        asset_name={selectedAsset.asset_name}
+                        category={String(selectedAsset.category_id)}
+                        sub_category={String(selectedAsset.sub_category_id)}
+                        type={String(selectedAsset.type_id)}
+                      />
+                    ) : (
+                      <span>Select Asset</span>
+                    )} */}
+
+                    <ChevronsUpDown className="ml-2 h-4 w-4 opacity-50" />
+                  </Button>
                 </PopoverTrigger>
-                <PopoverContent className="w-[var(--radix-popover-trigger-width)] p-0">
-                  {" "}
-                  {/* Increased width for better display */}
+
+                <PopoverContent className="w-full p-0">
                   <Command>
-                    <CommandInput
-                      placeholder="Search asset..."
-                      className="h-9"
-                    />
+                    <CommandInput placeholder="Search asset..." />
                     <CommandList>
                       <CommandEmpty>No asset found.</CommandEmpty>
+
                       <CommandGroup>
                         {assets
                           .sort((a, b) =>
-                            (a.asset_name || "").localeCompare(
-                              b.asset_name || ""
-                            )
+                            a.asset_name.localeCompare(b.asset_name)
                           )
                           .map((asset) => (
                             <CommandItem
-                              value={asset.asset_name}
                               key={asset.asset_id}
+                              value={asset.asset_name}
                               onSelect={() => {
                                 field.onChange(asset.asset_id);
 
-                                form.setValue("type_id", asset.type_id, { shouldValidate: true });
-                                form.setValue("sub_category_id", asset.sub_category_id, { shouldValidate: true });
-                                form.setValue("category_id", asset.category_id, { shouldValidate: true });
-
+                                form.setValue("type_id", asset.type_id, {
+                                  shouldValidate: true,
+                                });
+                                form.setValue(
+                                  "sub_category_id",
+                                  asset.sub_category_id,
+                                  { shouldValidate: true }
+                                );
+                                form.setValue(
+                                  "category_id",
+                                  asset.category_id,
+                                  { shouldValidate: true }
+                                );
                               }}
-                              className="cursor-pointer"
                             >
-                              <div className="flex-1">
-                                <DisplayAsset
-                                  asset_name={asset.asset_name as string}
-                                  category={getCategoryName(asset.category_id)}
-                                  sub_category={getSubCategoryName(
-                                    asset.sub_category_id
-                                  )}
-                                  type={getTypeName(asset.type_id)}
-                                />
-                              </div>
+                              <span className="flex-1">
+                                {asset.asset_name}
+                              </span>
+
                               <Check
                                 className={cn(
-                                  "ml-2 h-4 w-4",
+                                  "ml-auto h-4 w-4",
                                   asset.asset_id === field.value
                                     ? "opacity-100"
                                     : "opacity-0"
@@ -153,6 +139,7 @@ function FormFieldAssetCombobox({
                 </PopoverContent>
               </Popover>
             </FormControl>
+
             <FormMessage />
           </FormItem>
         );

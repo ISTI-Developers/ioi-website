@@ -1,24 +1,17 @@
-import { CaseStudyCarousel } from "../components/ui/casestudy-carousel";
 import Services from "../components/layout/home/Services";
-import Experience from "../components/layout/home/Experience";
-import { HomeCarousel } from "../components/ui/home-carousel";
-import { FeaturedImage } from "../components/ui/featured-image";
-import { ContactForm } from "../components/pages/forms/contact";
+
 import { useProjects } from "@/hooks/useProjects";
 import { Clients } from "../components/layout/home/Clients";
-import Hero from "../components/ui/hero";
-import { InnovateSection } from "@/components/layout/InnovateSection";
 
+import { InnovateSection } from "@/components/layout/InnovateSection";
 
 interface StatCardProps {
   value: string;
   label: string;
 }
 
-
 function StatCard({ value, label }: StatCardProps) {
   return (
-
     // <div className="relative rounded-2xl bg-linear-to-br from-red-800 via-orange-600 to-yellow-400 shadow-xl text-white overflow-hidden backdrop-blur-lg border border-orange-300/40">
     //   <div className="absolute -bottom-12 -left-12 w-56 h-56 bg-yellow-400/30 rounded-full blur-3xl"></div>
     //   <div className="absolute top-0 right-0 w-44 h-44 bg-red-400/25 rounded-full blur-2xl"></div>
@@ -32,29 +25,28 @@ function StatCard({ value, label }: StatCardProps) {
       <div className="absolute top-0 right-0 w-44 h-44 bg-red-400/25 rounded-full blur-2xl "></div>
       <div className="absolute inset-0 bg-linear-to-br from-white/10 via-transparent to-transparent rounded-[100%]"></div>
       <div className="absolute bottom-4 left-1/4 w-72 h-28 bg-linear-to-r from-yellow-300/20 via-transparent to-transparent -rotate-12 blur-2xl rounded-full "></div>
-      <h1 className="text-center text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold">{value}</h1>
-      <h2 className="text-center text-sm sm:text-base md:text-lg p-2 mb-4">{label}</h2>
+      <h1 className="text-center text-5xl sm:text-6xl md:text-[150px] font-black">
+        {value}
+      </h1>
+      <h2 className="text-center text-sm sm:text-base md:text-lg p-2 mb-4 font-extrabold">
+        {label}
+      </h2>
     </div>
-
-  )
+  );
 }
 
 const stats = [
-  { value: "+15", label: "Years of Experience" },
-  { value: "+25", label: "Team Members" },
-  { value: "+50", label: "Projects" },
-  { value: "+20", label: "Clients" },
+  { value: "+15", label: "YEARS OF EXPERIENCE" },
+  { value: "+25", label: "TEAM MEMBERS" },
+  { value: "+50", label: "PROJECTS" },
+  { value: "+20", label: "CLIENTS" },
 ];
 
-
-
 function Home() {
-
   const { data: projects, isLoading } = useProjects();
 
   if (isLoading) return <p>Loading...</p>;
   if (!projects) return <p>Project not found</p>;
-
 
   return (
     <div>
@@ -65,7 +57,8 @@ function Home() {
             className="w-full h-90 lg:h-full object-cover object-center sm:object-left lg:object-bottom mt-100 lg:mt-5"
           />
 
-          <p className="
+          <p
+            className="
             absolute inset-0 flex items-start justify-center
             pt-10 sm:pt-16 md:pt-20
             font-hero uppercase text-primary font-bold
@@ -73,7 +66,8 @@ function Home() {
             text-[140px] sm:text-[160px] md:text-[15vw] lg:text-[19vw]
             leading-none tracking-wider
             px-2
-          ">
+          "
+          >
             RULE THE FEED
           </p>
         </div>
@@ -81,7 +75,11 @@ function Home() {
         <div className="translate-y-1/2 left-0 right-0 px-4 sm:px-6 lg:px-12">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 md:gap-6 max-w-6xl mx-auto">
             {stats.map((stat) => (
-              <StatCard key={stat.label} value={stat.value} label={stat.label} />
+              <StatCard
+                key={stat.label}
+                value={stat.value}
+                label={stat.label}
+              />
             ))}
           </div>
         </div>
@@ -100,8 +98,6 @@ function Home() {
           description="Located in Makati, Philippines, our Agency is dedicated to crafting robust and renowned brands."
         /> */}
         </div>
-
-
 
         {/* <div>
           <div className='flex w-full items-center justify-between text-white'>
@@ -141,10 +137,9 @@ function Home() {
         <div className="mb-20">
           <InnovateSection />
         </div>
-
       </div>
     </div>
-  )
+  );
 }
 
 export default Home;

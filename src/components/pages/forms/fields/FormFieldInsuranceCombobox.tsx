@@ -19,12 +19,16 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import type { Insurance } from "@/data/types";
 import { getColumnIcon } from "@/lib/columnNameUtils";
 import { cn } from "@/lib/utils";
 import { Check, ChevronsUpDown } from "lucide-react";
 import type { Control } from "react-hook-form";
-import { InsuranceForm } from "../sub-forms/InsurancePopoverForm";
+
+export type Insurance = {
+  insurance_id: number;
+  insurance_name: string;
+  insurance_date_to?: string | Date | null;
+};
 
 interface FormFieldInsuranceComboboxProps {
   control: Control<any>;
@@ -44,12 +48,14 @@ function FormFieldInsuranceCombobox({
 }: FormFieldInsuranceComboboxProps) {
   const IconComponent = getColumnIcon(name);
 
-  const nonExpiredInsurances = insurances?.filter((insurance) => {
-    const dateTo = insurance.insurance_date_to;
-    if (!dateTo) return true; // no end date = considered valid
-    const dt = dateTo instanceof Date ? dateTo : new Date(dateTo);
-    return !isNaN(dt.getTime()) && dt.getTime() >= Date.now();
-  }) ?? [];
+  const nonExpiredInsurances =
+    insurances?.filter((insurance) => {
+      const dateTo = insurance.insurance_date_to;
+      if (!dateTo) return true;
+
+      const dt = dateTo instanceof Date ? dateTo : new Date(dateTo);
+      return !isNaN(dt.getTime()) && dt.getTime() >= Date.now();
+    }) ?? [];
 
   return (
     <FormField
@@ -57,57 +63,65 @@ function FormFieldInsuranceCombobox({
       name={name}
       render={({ field }) => (
         <FormItem>
-          <FormLabel>
+          <FormLabel className="flex items-center gap-2">
             <IconComponent className="h-4 w-4" />
             {label}
           </FormLabel>
+
           <FormControl>
             <Popover>
               <PopoverTrigger asChild>
-                <FormControl>
-                  <Button
-                    variant="outline"
-                    role="combobox"
-                    className={cn(
-                      "justify-between w-full",
-                      !field.value && "text-muted-foreground"
-                    )}
-                  >
-                    {field.value
-                      ? insurances.find(
-                          (insurance) => insurance.insurance_id === field.value
-                        )?.insurance_name
-                      : "Select insurance provider"}
-                    <ChevronsUpDown className="opacity-50" />
-                  </Button>
-                </FormControl>
+                <Button
+                  variant="outline"
+                  role="combobox"
+                  className={cn(
+                    "justify-between w-full",
+                    !field.value && "text-muted-foreground",
+                  )}
+                >
+                  {field.value
+                    ? insurances.find(
+                        (insurance) => insurance.insurance_id === field.value,
+                      )?.insurance_name
+                    : "Select insurance provider"}
+
+                  <ChevronsUpDown className="ml-2 h-4 w-4 opacity-50" />
+                </Button>
               </PopoverTrigger>
-              <PopoverContent className="w-[var(--radix-popover-trigger-width)] p-0">
+
+              <PopoverContent className="w- [300px] p-0">
                 <Command>
-                  <CommandInput placeholder="Search insurance..." className="h-9" />
+                  <CommandInput
+                    placeholder="Search insurance..."
+                    className="h-9"
+                  />
+
                   <CommandList>
-                    <CommandEmpty className="flex justify-center p-4">
-                      <InsuranceForm />
+                    <CommandEmpty className="flex justify-center p-4 text-sm text-muted-foreground">
+                      No insurance found
                     </CommandEmpty>
+
                     <CommandGroup>
                       {nonExpiredInsurances.map((insurance) => (
                         <CommandItem
-                          value={insurance.insurance_name}
                           key={insurance.insurance_id}
+                          value={insurance.insurance_name}
                           onSelect={() => {
                             form.setValue(
                               "insurance_id",
-                              insurance.insurance_id
+                              insurance.insurance_id,
+                              { shouldValidate: true },
                             );
                           }}
                         >
                           {insurance.insurance_name}
+
                           <Check
                             className={cn(
-                              "ml-auto",
+                              "ml-auto h-4 w-4",
                               insurance.insurance_id === field.value
                                 ? "opacity-100"
-                                : "opacity-0"
+                                : "opacity-0",
                             )}
                           />
                         </CommandItem>
@@ -118,6 +132,7 @@ function FormFieldInsuranceCombobox({
               </PopoverContent>
             </Popover>
           </FormControl>
+
           <FormMessage />
         </FormItem>
       )}
@@ -126,3 +141,4 @@ function FormFieldInsuranceCombobox({
 }
 
 export default FormFieldInsuranceCombobox;
+

@@ -1,6 +1,10 @@
-import type { Condition } from "@/data/types";
 import { useQuery } from "@tanstack/react-query";
 import { getAll, getOne } from "./controller";
+
+type Condition = {
+  condition_id: number;
+  condition_name: string;
+};
 
 const CONDITION = "condition";
 

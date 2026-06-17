@@ -12,9 +12,7 @@ import {
 import {
   Boxes,
   CalendarSync,
-  LayoutDashboard,
   MonitorUp,
-  Settings,
   Wrench,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -68,8 +66,8 @@ export function AppSidebar() {
   };
 
   return (
-    <Sidebar collapsible="icon" className="!bg-orange-200">
-      <SidebarContent className={cn(state === "collapsed" ? "" : "p-2", "!bg-zinc-100")}>
+    <Sidebar collapsible="icon" className="bg-orange-200">
+      <SidebarContent className={cn(state === "collapsed" ? "" : "p-2", "bg-zinc-100")}>
         <SidebarHeader>
           <div
             className={cn(
@@ -107,7 +105,7 @@ export function AppSidebar() {
                       className={cn(
                         "hover:bg-zinc-200 hover:text-zinc-950 transition-all active:bg-zinc-200",
                         isActiveItem(item.url)
-                          ? "!text-zinc-50 !bg-zinc-950"
+                          ? "text-zinc-50 bg-zinc-950"
                           : "text-zinc-950"
                       )}
                     >

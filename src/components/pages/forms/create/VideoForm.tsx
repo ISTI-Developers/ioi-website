@@ -30,12 +30,12 @@ function VideoForm({ onSuccess, projectId, videoId, defaultFile }: VideoFormProp
 
 
     const [files, setFiles] = useState<File[]>([]);
-    const { upload, loading } = useUploadImage();
+    const { upload } = useUploadImage();
 
     const { mutate: addVideo } = useAddVideo();
     const { mutate: updateVideo } = useUpdateVideo();
 
-    const onSubmit = async (values: any) => {
+    const onSubmit = async () => {
         try {
             let videoUrl: string | undefined = defaultFile;
 

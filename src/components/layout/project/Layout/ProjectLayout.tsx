@@ -1,159 +1,161 @@
-import { useParams } from "react-router-dom";
 import Hero from "@/components/ui/hero";
-import { useGallery } from "@/hooks/useGallery";
 import FirebaseMedia from "@/components/ui/firebase-media";
-import { useProjectByIdWithPointsAndProse } from "@/hooks/useProjects";
-import { formatMonthYear } from "@/lib/dateUtils";
 import Video from "@/components/pages/projects/projectdetails/Video";
-import { useVideo } from "@/hooks/useVideo";
 import Gallery from "@/components/pages/projects/projectdetails/Gallery";
 
+// ✅ IMPORTANT: match what your API hook actually returns
+import type { ProjectWithPointsAndProse } from "@/hooks/useProjects";
 
-export default function ProjectLayout() {
-    const { id } = useParams<{ id: string }>();
-    const projectId = Number(id);
+type Point = {
+  point_id: number;
+  type: "problem" | "solution" | "service" | "result";
+  content: string;
+};
 
-    const { data: project, isLoading } = useProjectByIdWithPointsAndProse(projectId);
-    const { data: videoData, isLoading: isLoadingVideo } = useVideo(projectId);
-    const { data: galleryData, isLoading: loadingGallery } = useGallery(projectId);
+type Prose = {
+  prose_id: number;
+  content: string;
+};
 
+interface ProjectLayoutProps {
+  project: ProjectWithPointsAndProse;
+}
 
-    if (isLoading) return <p>Loading...</p>;
-    if (!project) return <p>Project not found</p>;
+export default function ProjectLayout({ project }: ProjectLayoutProps) {
+  if (!project) return null;
 
-    if (loadingGallery) return <p>Loading gallery...</p>;
+  const points = (project.points ?? []) as Point[];
+  const proseList = (project.prose ?? []) as Prose[];
 
+  const problems = points.filter((p) => p.type === "problem");
+  const solutions = points.filter((p) => p.type === "solution");
+  const services = points.filter((p) => p.type === "service");
+  const results = points.filter((p) => p.type === "result");
 
-    const galleryArray = Array.isArray(galleryData?.gallery) ? galleryData.gallery : [];
-    // const groupedGallery = groupGalleryItems(galleryArray);
+  const hasPoints =
+    problems.length > 0 ||
+    solutions.length > 0 ||
+    services.length > 0 ||
+    results.length > 0;
 
-    const videos = videoData?.video ?? [];
+  return (
+    <>
+      <div>
+        <Hero title={<>{project.project_name}</>} />
 
+        <FirebaseMedia
+          path={
+            project.file
+              ? Array.isArray(project.file)
+                ? project.file[0]
+                : project.file
+              : undefined
+          }
+          alt="Banner"
+          className="w-full h-full object-top rounded-2xl mt-10"
+        />
+      </div>
 
+      <div className="space-y-24 lg:space-y-40">
+        {hasPoints ? (
+          <>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-50">
+              <div className="space-y-8 max-w-3xl">
+                <div className="flex gap-2 text-primary">
+                  <h2>{project.project_category}</h2> /{" "}
+                  <h2>{project.project_type}</h2>
+                </div>
 
-    const points = project.points ?? [];
-    const proseList = project.prose ?? [];
+                <h1 className="text-2xl lg:text-4xl font-semibold uppercase">
+                  About
+                </h1>
 
-    const problems = points.filter((p) => p.type === "problem");
-    const solutions = points.filter((p) => p.type === "solution");
-    const services = points.filter((p) => p.type === "service");
-    const results = points.filter((p) => p.type === "result");
+                <p className="text-lg lg:text-2xl text-lightgray">
+                  {project.company_description}
+                </p>
 
-    const hasPoints =
-        problems.length > 0 ||
-        solutions.length > 0 ||
-        services.length > 0 ||
-        results.length > 0;
-    return (
-        <>
-            <div>
-                <Hero
-                    title={
-                        <>
-                            {project.project_name?.split(" ").map((word, index, words) => {
-                                if (index === 0) {
-                                    return word + "\u00A0";
-                                }
+                <p className="text-lg lg:text-2xl text-lightgray">
+                  {project.brand_positioning}
+                </p>
+              </div>
 
-                                if (words[1] === "&") {
-                                    if (index === 1) return word + "\u00A0";
-                                    if (index === 2) return word;
-                                }
+              <div className="mt-14">
+                <h1 className="text-2xl lg:text-4xl font-semibold uppercase mb-8">
+                  Services Rendered
+                </h1>
 
-                                if (index === 1) {
-                                    return word;
-                                }
-
-                                return " " + word;
-                            }).join("")}
-                        </>
-                    }
-
-                // description={"We're located in Makati City, \n Philippines"}
-                />
-
-
-                <FirebaseMedia
-                    key={project.project_id}
-                    path={project.file ? (Array.isArray(project.file) ? project.file[0] : project.file) : undefined}
-                    alt="Banner"
-                    className="w-full h-full object-top rounded-2xl mt-10 "
-
-                />
+                <div className="flex flex-wrap gap-3 text-xl">
+                  {services.map((p) => (
+                    <span
+                      key={p.point_id}
+                      className="text-white bg-primary rounded-lg px-3 py-1"
+                    >
+                      {p.content}
+                    </span>
+                  ))}
+                </div>
+              </div>
             </div>
 
-            <div className="space-y-24 lg:space-y-40">
+            <Video
+              projectId={project.project_id ?? 0}
+              height="h-160"
+              showAdd={false}
+            />
 
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-50">
+              <div className="space-y-8 max-w-3xl">
+                <h1 className="text-2xl lg:text-4xl uppercase">Opportunity</h1>
 
-                {/* <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm lg:text-lg text-primary mb-12 sm:mb-16 mt-10">
-                <div>{project.project_category}</div>
-                <div className="sm:text-center">
-                    {formatMonthYear(project.start_date)} - {formatMonthYear(project.end_date) || "On-going"}
-                </div>
-                <div className="sm:text-right">{project.project_type}</div>
-            </div> */}
+                <ul className="list-disc ml-5">
+                  {problems.map((p) => (
+                    <li key={p.point_id}>{p.content}</li>
+                  ))}
+                </ul>
 
-                {hasPoints ? (
-                    <>
-                        <div className="grid grid-rows-1 lg:grid-cols-2 gap-x-50">
-                            <div className="space-y-8 max-w-3xl">
-                                <div className="flex gap-2 text-primary">
-                                    <h2>{project.project_category}</h2>
-                                    /
-                                    <h2>{project.project_type}</h2>
-                                </div>
-                                <h1 className="font-semibold mb-4 text-2xl lg:text-4xl uppercase">About</h1>
-                                <p className="text-lg lg:text-2xl text-lightgray">{project.company_description}</p>
-                                <p className="text-lg lg:text-2xl text-lightgray">{project.brand_positioning}</p>
-                            </div>
+                <h1 className="text-2xl lg:text-4xl uppercase">Solution</h1>
 
-                            <div className="mt-14">
-                                <h1 className="text-2xl lg:text-4xl font-semibold mb-8 uppercase">Services Rendered</h1>
-                                <div className="flex flex-wrap gap-3 text-xl leading-relaxed">
-                                    {services.map((p) => (
-                                        <span key={p.point_id} className="inline-block text-center text-white bg-primary rounded-lg px-3 py-1">
-                                            {p.content}
-                                        </span>
-                                    ))}
-                                </div>
-                            </div>
-                        </div>
+                <ul className="list-disc ml-5">
+                  {solutions.map((p) => (
+                    <li key={p.point_id}>{p.content}</li>
+                  ))}
+                </ul>
+              </div>
 
-                        <Video projectId={projectId} height="h-160" showAdd={false} />
+              <div>
+                <h1 className="text-2xl lg:text-4xl uppercase">Key Results</h1>
 
-                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-50">
-                            <div className="space-y-8 max-w-3xl">
-                                <h1 className="font-semibold mb-4 text-2xl lg:text-4xl uppercase">Opportunity</h1>
-                                <ul className="list-disc ml-5 text-lg lg:text-2xl text-lightgray">
-                                    {problems.map(p => <li key={p.point_id}>{p.content}</li>)}
-                                </ul>
-                                <h1 className="font-semibold mb-4 text-2xl lg:text-4xl uppercase">Solution</h1>
-                                <ul className="list-disc ml-5 text-lg lg:text-2xl text-lightgray">
-                                    {solutions.map(p => <li key={p.point_id}>{p.content}</li>)}
-                                </ul>
-                            </div>
-                            <div>
-                                <h1 className="text-2xl lg:text-4xl font-semibold uppercase">Key Results</h1>
-                                <ul className="list-decimal ml-5 mt-4 text-lg lg:text-2xl text-lightgray">
-                                    {results.map(p => <li key={p.point_id}>{p.content}</li>)}
-                                </ul>
-                            </div>
-                        </div>
-                    </>
-                ) : (
-                    <div className="space-y-8">
-                        <Video projectId={projectId} height="h-160" showAdd={false} />
-                        {proseList.map(p => (
-                            <p key={p.prose_id} className="whitespace-pre-wrap text-lg lg:text-xl">
-                                {p.content}
-                            </p>
-                        ))}
-                    </div>
-                )}
-                <div className="mb-30">
-                    <Gallery projectId={projectId} showAdd={false} />
-                </div>
+                <ul className="list-decimal ml-5 mt-4">
+                  {results.map((p) => (
+                    <li key={p.point_id}>{p.content}</li>
+                  ))}
+                </ul>
+              </div>
             </div>
-        </>
-    );
+          </>
+        ) : (
+          <div className="space-y-8">
+            <Video
+              projectId={project.project_id ?? 0}
+              height="h-160"
+              showAdd={false}
+            />
+
+            {proseList.map((p) => (
+              <p
+                key={p.prose_id}
+                className="text-lg lg:text-xl whitespace-pre-wrap"
+              >
+                {p.content}
+              </p>
+            ))}
+          </div>
+        )}
+
+        <div className="mb-30">
+          <Gallery projectId={project.project_id ?? 0} showAdd={false} />
+        </div>
+      </div>
+    </>
+  );
 }

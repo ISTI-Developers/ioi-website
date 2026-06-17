@@ -10,8 +10,7 @@ export type ProjectWithPointsAndProse = Project & {
     prose: Prose[];
 };
 const PROJECTS = "projects";
-const PROJECT_POINTS = "points";
-const PROJECT_PROSE = "prose";
+
 
 
 

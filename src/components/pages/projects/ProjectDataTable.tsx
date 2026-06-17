@@ -1,10 +1,14 @@
-import { useState, useMemo } from "react";
+import { useState } from "react";
 import { DataTable } from "@/components/ui/data-table";
 import ProjectDetail from "./ProjectDetail";
 import { useColumnVisibility } from "@/hooks/useColumnVisibility";
 import type { Project } from "@/data/project_columns";
 import ProjectForm from "../forms/create/ProjectForm";
-import { useProjectColumns, def_project_columns, project_filters } from "@/data/project_columns";
+import {
+  useProjectColumns,
+  def_project_columns,
+  project_filters,
+} from "@/data/project_columns";
 import { useDeleteProject } from "@/hooks/useProjects";
 import FormSheet from "@/components/layout/FormSheet";
 import UpdateProjectForm from "../forms/update/UpdateProjectForm";
@@ -20,10 +24,11 @@ export default function ProjectDataTable({ projects }: ProjectDataTableProps) {
   const [open, setOpen] = useState(false);
 
   const { mutate: deleteProject, isPending: isDeleting } = useDeleteProject();
+
   const [projectToDelete, setProjectToDelete] = useState<Project | null>(null);
   const [openDelete, setOpenDelete] = useState(false);
 
-
+  // ✅ FIX: only 2 callbacks (edit + delete)
   const columns = useProjectColumns(
     (project) => {
       setEditProject(project);
@@ -32,18 +37,17 @@ export default function ProjectDataTable({ projects }: ProjectDataTableProps) {
     (project) => {
       setProjectToDelete(project);
       setOpenDelete(true);
-    },
-    (project) => setSelectedProject(project)
+    }
   );
 
   const [columnVisibility, setColumnVisibility] = useColumnVisibility(
-    "team-column-visibility",
+    "project-column-visibility",
     columns,
     def_project_columns
   );
 
-  const dynamicDefaultColumns = useMemo(() => def_project_columns, []);
-  const filterable = useMemo(() => project_filters, []);
+  const filterable = project_filters;
+  const dynamicDefaultColumns = def_project_columns;
 
   const handleDelete = () => {
     if (!projectToDelete?.project_id) return;
@@ -91,11 +95,11 @@ export default function ProjectDataTable({ projects }: ProjectDataTableProps) {
         />
       )}
 
-
       <DeleteDialog
         open={openDelete}
         onOpenChange={setOpenDelete}
         handleConfirm={handleDelete}
+        loading={isDeleting}
       />
     </>
   );
